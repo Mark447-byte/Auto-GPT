@@ -6,27 +6,46 @@ import CartSummary from '../../components/sales/CartSummary';
 import CustomerQuickAdd from '../../components/sales/CustomerQuickAdd';
 import PaymentOptions from '../../components/sales/PaymentOptions';
 import OfflineIndicator from '../../components/sales/OfflineIndicator';
-import { useAuth } from '../../contexts/AuthContext'; // Import useAuth
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { db, bulkPutProducts, getAllProducts as dbGetAllProducts, syncOfflineSales } from '../../db'; // Import syncOfflineSales
 
-// Sample Data (migrated from vanilla JS)
-const initialSampleProducts = [
+// Sample Data (migrated from vanilla JS) - This will serve as fallback or initial seed if DB is empty
+const initialSampleProductsFallback = [
     { id: 'CEM001', name: 'Ghacem Cement 50kg', category: 'Cement', price: 85.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Cement' },
     { id: 'NAL003', name: 'Iron Nails 3-inch (Box)', category: 'Nails & Fasteners', price: 25.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Nails' },
     { id: 'PNT011', name: 'Azar Paint White (Gallon)', category: 'Paint & Finishing', price: 120.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Paint' },
     { id: 'TOL005', name: 'Pointed Shovel (Heavy Duty)', category: 'Tools', price: 60.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Shovel' },
-    { id: 'PIP004', name: 'PVC Pipe 4-inch (Length)', category: 'Pipes & Fittings', price: 45.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=PVC+Pipe' },
-    { id: 'TIL002', name: 'Floor Tiles Ceramic (sqm)', category: 'Paint & Finishing', price: 70.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Tiles' },
-    { id: 'TOL001', name: 'Claw Hammer (Wooden Handle)', category: 'Tools', price: 35.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Hammer' },
-    { id: 'SND001', name: 'River Sand (Per Trip)', category: 'Cement', price: 350.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Sand' },
-    { id: 'WRM001', name: 'Wire Mesh Roll (25m)', category: 'Nails & Fasteners', price: 180.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Wire+Mesh' },
-    { id: 'BRS002', name: 'Paint Brush Set (5pcs)', category: 'Paint & Finishing', price: 40.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Brushes' },
-    { id: 'TAP001', name: 'Water Tap Chrome', category: 'Pipes & Fittings', price: 28.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Tap' },
-    { id: 'BOL001', name: 'Bolts & Nuts M12 (Pack)', category: 'Nails & Fasteners', price: 15.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Bolts' }
+    // ... include all other sample products here if desired for fallback
 ];
 
+
+// Simulated API function (replace with actual API call later)
+const fetchProductsFromAPI = async () => {
+  console.log("[API SIM] Fetching products...");
+  return new Promise(resolve => {
+    setTimeout(() => {
+      console.log("[API SIM] Products fetched successfully.");
+      // Return a slightly different set or updated prices to see caching work
+      const apiProducts = [
+        { id: 'CEM001', name: 'Ghacem Cement 50kg (API)', category: 'Cement', price: 88.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Cement' },
+        { id: 'NAL003', name: 'Iron Nails 3-inch (Box) (API)', category: 'Nails & Fasteners', price: 27.50, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Nails' },
+        { id: 'PNT011', name: 'Azar Paint White (Gallon) (API)', category: 'Paint & Finishing', price: 125.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Paint' },
+        { id: 'TOL005', name: 'Pointed Shovel (Heavy Duty) (API)', category: 'Tools', price: 62.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Shovel' },
+        { id: 'PIP004', name: 'PVC Pipe 4-inch (Length) (API)', category: 'Pipes & Fittings', price: 48.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=PVC+Pipe' },
+        { id: 'TIL002', name: 'Floor Tiles Ceramic (sqm) (API)', category: 'Paint & Finishing', price: 75.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Tiles' },
+        { id: 'TOL001', name: 'Claw Hammer (Wooden Handle) (API)', category: 'Tools', price: 38.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Hammer' },
+        { id: 'SND001', name: 'River Sand (Per Trip) (API)', category: 'Cement', price: 360.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Sand' },
+      ];
+      resolve(apiProducts);
+    }, 1000);
+  });
+};
+
+
 function SalesPosPage() {
-  const [products, setProducts] = useState(initialSampleProducts);
+  // const [products, setProducts] = useState(initialSampleProducts); // Replaced by useLiveQuery
   const [cart, setCart] = useState([]);
   const [currentCategory, setCurrentCategory] = useState('All Products');
   const [searchTerm, setSearchTerm] = useState('');
@@ -37,9 +56,67 @@ function SalesPosPage() {
   const [subtotal, setSubtotal] = useState(0);
   const [taxAmount, setTaxAmount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [networkStatus, setNetworkStatus] = useState(navigator.onLine); // More reliable status
 
   const { logout } = useAuth();
   const navigate = useNavigate();
+
+  // Dexie useLiveQuery for products
+  const productsFromDB = useLiveQuery(
+    () => dbGetAllProducts(), // Use the renamed db function
+    [], // Dependencies
+    initialSampleProductsFallback // Fallback data if DB is empty or useLiveQuery hasn't run
+  );
+
+  const productsToDisplay = productsFromDB || initialSampleProductsFallback;
+
+
+  useEffect(() => {
+    const updateOnlineStatus = () => {
+      const newStatus = navigator.onLine;
+      console.log('Network status changed to:', newStatus ? 'Online' : 'Offline');
+      setNetworkStatus(newStatus);
+      if (newStatus) {
+        console.log("App is online, attempting to sync offline sales...");
+        syncOfflineSales().then(results => { // syncOfflineSales is imported from db.js
+          if (results.attempted > 0) {
+            alert(`Sync attempt: ${results.successful} successful, ${results.failed} failed.`);
+          }
+        });
+      }
+    };
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+
+    // Initial fetch and cache / Attempt sync on load if online
+    if (navigator.onLine) {
+      fetchProductsFromAPI().then(apiProducts => {
+        if (apiProducts && apiProducts.length > 0) {
+          console.log("Caching API products to IndexedDB");
+          bulkPutProducts(apiProducts)
+            .catch(err => console.error("Error caching products:", err));
+        }
+      }).catch(err => console.error("API fetch error:", err));
+
+      // Attempt sync on initial load if online
+      console.log("App initially online, attempting to sync offline sales...");
+      syncOfflineSales().then(results => {
+        if (results.attempted > 0) {
+            // Maybe a less intrusive notification than alert here for initial load
+            console.log(`Initial sync attempt: ${results.successful} successful, ${results.failed} failed.`);
+        }
+      });
+
+    } else {
+        console.log("Offline: Skipping initial API product fetch and sync.");
+    }
+
+    return () => {
+      window.removeEventListener('online', updateOnlineStatus);
+      window.removeEventListener('offline', updateOnlineStatus);
+    };
+  }, []); // Run once on mount to set up listeners and initial fetch
+
 
   const TAX_RATE = 0.025; // NHIL 2.5%
 
@@ -93,45 +170,72 @@ function SalesPosPage() {
     console.log("Payment method selected:", methodId);
   };
 
-  const handleGenerateReceipt = () => {
+  const handleGenerateReceipt = async () => { // Made async
     if (cart.length === 0) {
         alert("Cannot generate receipt for an empty cart.");
         return;
     }
 
-    let receiptMessage = `Receipt Generated!\n--------------------\nTotal: GHS ${totalAmount.toFixed(2)}`;
-    if (customerName) receiptMessage += `\nCustomer: ${customerName}`;
-    if (customerContact) receiptMessage += `\nContact: ${customerContact}`;
-    if (selectedPaymentMethod) receiptMessage += `\nPayment Method: ${selectedPaymentMethod}`;
+    const saleDataToSave = {
+        timestamp: new Date().toISOString(),
+        items: cart, // Store a copy of the cart items
+        customerName: customerName,
+        customerContact: customerContact,
+        paymentMethod: selectedPaymentMethod, // Store selected payment method
+        subtotal: subtotal,
+        taxAmount: taxAmount,
+        totalAmount: totalAmount,
+        status: networkStatus ? 'synced_immediately' : 'pending_sync' // Initial status
+    };
 
-    receiptMessage += "\n\nItems:\n";
-    cart.forEach(item => {
-        receiptMessage += `- ${item.name} (x${item.quantity}) @ GHS ${item.price.toFixed(2)} = GHS ${(item.price * item.quantity).toFixed(2)}\n`;
-    });
-    receiptMessage += `--------------------\nSubtotal: GHS ${subtotal.toFixed(2)}\nTax: GHS ${taxAmount.toFixed(2)}\n--------------------\nThank you!`;
+    if (networkStatus) {
+        console.log("[ONLINE] Simulating direct sale submission to backend:", saleDataToSave);
+        // In a real app, this would be:
+        // try {
+        //   const response = await api.post('/sales', saleDataToSave);
+        //   // Handle successful online submission
+        //   alert("Sale submitted successfully online!");
+        // } catch (error) {
+        //   console.error("Failed to submit sale online, saving locally:", error);
+        //   saleDataToSave.status = 'pending_sync_after_online_fail'; // Or similar
+        //   await db.addOfflineSale(saleDataToSave); // Use the correct function from db.js
+        //   alert("Online submission failed. Sale saved locally and will sync later.");
+        // }
+        alert(`ONLINE: Receipt Generated!\nTotal: GHS ${totalAmount.toFixed(2)}\nCustomer: ${customerName || 'N/A'}`);
+        console.log("--- ONLINE RECEIPT (Simulated) ---", saleDataToSave);
 
-    alert(receiptMessage);
-    console.log("--- RECEIPT ---");
-    console.log(receiptMessage.replace(/\n/g, '\n'));
-    console.log("--- END RECEIPT ---");
+    } else {
+        console.log("[OFFLINE] Saving sale to IndexedDB:", saleDataToSave);
+        try {
+            await db.addOfflineSale(saleDataToSave); // Using the imported addOfflineSale from db.js
+            alert("OFFLINE: Sale saved locally. Will sync when online.");
+            console.log("--- OFFLINE SALE SAVED (Simulated) ---", saleDataToSave);
+        } catch (error) {
+            console.error("Failed to save sale offline to IndexedDB:", error);
+            alert("Error: Could not save sale locally. Please check console.");
+            // Don't clear cart if saving failed, so user doesn't lose data
+            return;
+        }
+    }
 
-    // Clear cart, customer fields, and payment selection
+    // Clear cart, customer fields, and payment selection after successful processing (online or offline save)
     setCart([]);
     setCustomerName('');
     setCustomerContact('');
     setSelectedPaymentMethod(null);
     // Totals will auto-update due to useEffect on cart change
   };
-  const toggleOfflineStatus = () => setIsOnline(prev => !prev);
+
+  const toggleOfflineStatus = () => setNetworkStatus(prev => !prev); // For demo button
 
 
   // This will be refined when ProductGrid and CategoryButtons components are built
-  const displayedProducts = products.filter(p =>
+  const displayedProducts = productsToDisplay.filter(p =>
     (currentCategory === 'All Products' || p.category === currentCategory) &&
     (p.name.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
-  const categories = ['All Products', ...new Set(initialSampleProducts.map(p => p.category))];
+  const categories = ['All Products', ...new Set(productsToDisplay.map(p => p.category))];
 
 
   return (
@@ -143,7 +247,7 @@ function SalesPosPage() {
           <span className="text-xl font-semibold text-gray-700">POS Mode</span>
         </div>
         <div className="flex items-center space-x-4">
-          <OfflineIndicator isOnline={isOnline} onToggle={toggleOfflineStatus} />
+          <OfflineIndicator isOnline={networkStatus} onToggle={toggleOfflineStatus} /> {/* Use networkStatus */}
           <span className="text-sm text-gray-700">User: SalesRep01</span> {/* TODO: Replace with actual username from AuthContext */}
           <button
             onClick={() => {
