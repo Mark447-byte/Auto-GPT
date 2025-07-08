@@ -197,20 +197,20 @@
                 <div id="cart-totals" class="mt-4 pt-4 border-t-2 border-gray-300 space-y-1.5">
                     <div class="flex justify-between text-sm text-gray-700">
                         <span>Subtotal:</span>
-                        <span class="font-medium">GHS 195.00</span>
+                        <span id="subtotal-display" class="font-medium">GHS 0.00</span>
                     </div>
                     <div class="flex justify-between text-sm text-gray-700">
                         <span>Tax (NHIL 2.5%):</span>
-                        <span class="font-medium">GHS 4.88</span>
+                        <span id="tax-display" class="font-medium">GHS 0.00</span>
                     </div>
                      <div class="flex justify-between text-sm text-gray-700">
                         <span>Discount:</span>
-                        <a href="#" class="text-xs text-indigo-600 hover:underline">Add Discount</a>
-                        <span class="font-medium">GHS 0.00</span>
+                        <a href="#" id="add-discount-link" class="text-xs text-indigo-600 hover:underline">Add Discount</a>
+                        <span id="discount-display" class="font-medium">GHS 0.00</span>
                     </div>
                     <div class="flex justify-between text-lg font-semibold text-gray-800 pt-1.5 border-t border-dashed">
                         <span>Total:</span>
-                        <span>GHS 199.88</span>
+                        <span id="total-display" >GHS 0.00</span>
                     </div>
                 </div>
             </section>
@@ -219,8 +219,8 @@
             <section id="customer-quick-add" class="mb-5 pb-5 border-b border-gray-300">
                 <h3 class="text-lg font-medium text-gray-700 mb-2">Customer (Optional)</h3>
                 <div class="space-y-2">
-                    <input type="text" placeholder="Customer Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
-                    <input type="tel" placeholder="Customer Contact (e.g., 024xxxxxxx)" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                    <input type="text" id="customer-name" placeholder="Customer Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                    <input type="tel" id="customer-contact" placeholder="Customer Contact (e.g., 024xxxxxxx)" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
                 </div>
             </section>
 
@@ -262,6 +262,415 @@
             //         <span>Offline</span>`;
             // }, 5000); // Example: switch to offline after 5 seconds
         }
+
+        // BatiStock POS Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Sample Data ---
+            const sampleProducts = [
+                { id: 'CEM001', name: 'Ghacem Cement 50kg', category: 'Cement', price: 85.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Cement' },
+                { id: 'NAL003', name: 'Iron Nails 3-inch (Box)', category: 'Nails & Fasteners', price: 25.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Nails' },
+                { id: 'PNT011', name: 'Azar Paint White (Gallon)', category: 'Paint & Finishing', price: 120.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Paint' },
+                { id: 'TOL005', name: 'Pointed Shovel (Heavy Duty)', category: 'Tools', price: 60.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Shovel' },
+                { id: 'PIP004', name: 'PVC Pipe 4-inch (Length)', category: 'Pipes & Fittings', price: 45.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=PVC+Pipe' },
+                { id: 'TIL002', name: 'Floor Tiles Ceramic (sqm)', category: 'Paint & Finishing', price: 70.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Tiles' },
+                { id: 'TOL001', name: 'Claw Hammer (Wooden Handle)', category: 'Tools', price: 35.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Hammer' },
+                { id: 'SND001', name: 'River Sand (Per Trip)', category: 'Cement', price: 350.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Sand' },
+                { id: 'WRM001', name: 'Wire Mesh Roll (25m)', category: 'Nails & Fasteners', price: 180.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Wire+Mesh' },
+                { id: 'BRS002', name: 'Paint Brush Set (5pcs)', category: 'Paint & Finishing', price: 40.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Brushes' },
+                { id: 'TAP001', name: 'Water Tap Chrome', category: 'Pipes & Fittings', price: 28.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Tap' },
+                { id: 'BOL001', name: 'Bolts & Nuts M12 (Pack)', category: 'Nails & Fasteners', price: 15.00, image: 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Bolts' }
+            ];
+
+            let cart = [
+                // Example cart item structure:
+                // { id: 'CEM001', name: 'Ghacem Cement 50kg', price: 85.00, quantity: 2 }
+            ];
+
+            // --- DOM Element Selectors ---
+            const productGrid = document.getElementById('product-grid');
+            const categoryButtonsContainer = document.getElementById('category-buttons');
+            const cartItemsList = document.getElementById('cart-items-list');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+
+            const subtotalDisplay = document.getElementById('subtotal-display'); // Will need to add this ID
+            const taxDisplay = document.getElementById('tax-display');             // Will need to add this ID
+            const totalDisplay = document.getElementById('total-display');         // Will need to add this ID
+
+            const customerNameInput = document.getElementById('customer-name');   // Will need to add this ID
+            const customerContactInput = document.getElementById('customer-contact'); // Will need to add this ID
+
+            const paymentButtonsContainer = document.getElementById('payment-buttons');
+            const generateReceiptButton = document.getElementById('generate-receipt-btn');
+            const offlineIndicatorElement = document.getElementById('offline-indicator'); // Already exists
+
+            // --- Initial Setup ---
+            console.log("POS JavaScript Initialized");
+            // We will call functions here to render products, cart, etc. in later steps.
+
+            // Placeholder for functions to be added in subsequent steps:
+            // function renderProducts(productsToRender) {}
+            // function renderCart() {}
+            // function updateTotals() {}
+            // function handleCategoryFilter() {}
+            // function handleAddToCart() {}
+            // function handleQuantityChange() {}
+            // function handleRemoveItem() {}
+            // function toggleOfflineStatus() {}
+
+            function handlePaymentMethodSelection(event) {
+                // Reset styles for all payment buttons
+                paymentButtonsContainer.querySelectorAll('.payment-btn').forEach(btn => {
+                    btn.classList.remove('bg-indigo-600', 'text-white', 'ring-2', 'ring-indigo-500', 'ring-offset-1');
+                    btn.classList.add('bg-white', 'hover:bg-gray-50'); // Default unselected style
+                    // Re-apply original border/text colors based on content
+                    if (btn.textContent.trim().includes('Cash')) {
+                        btn.classList.add('border-blue-500', 'text-blue-600');
+                    } else if (btn.textContent.trim().includes('Card')) {
+                        btn.classList.add('border-green-500', 'text-green-600');
+                    } else if (btn.textContent.trim().includes('Mobile Money')) {
+                        btn.classList.add('border-yellow-500', 'text-yellow-600');
+                    }
+                });
+
+                // Apply selected style to the clicked button
+                const clickedButton = event.currentTarget;
+                clickedButton.classList.add('bg-indigo-600', 'text-white', 'ring-2', 'ring-indigo-500', 'ring-offset-1');
+                clickedButton.classList.remove('bg-white', 'hover:bg-gray-50');
+                // Remove specific text/border colors if they were for unselected state
+                if (clickedButton.textContent.trim().includes('Cash')) {
+                    clickedButton.classList.remove('border-blue-500', 'text-blue-600');
+                } else if (clickedButton.textContent.trim().includes('Card')) {
+                    clickedButton.classList.remove('border-green-500', 'text-green-600');
+                } else if (clickedButton.textContent.trim().includes('Mobile Money')) {
+                    clickedButton.classList.remove('border-yellow-500', 'text-yellow-600');
+                }
+                console.log("Payment method selected:", clickedButton.textContent.trim());
+            }
+
+            function handleGenerateReceipt() {
+                if (cart.length === 0) {
+                    alert("Cannot generate receipt for an empty cart.");
+                    return;
+                }
+
+                const totalAmountText = totalDisplay.textContent;
+                const customerName = customerNameInput.value.trim();
+                const customerContact = customerContactInput.value.trim();
+
+                let receiptMessage = `Receipt Generated!\n--------------------\nTotal: ${totalAmountText}`;
+                if (customerName) receiptMessage += `\nCustomer: ${customerName}`;
+                if (customerContact) receiptMessage += `\nContact: ${customerContact}`;
+
+                receiptMessage += "\nItems:\n";
+                cart.forEach(item => {
+                    receiptMessage += `- ${item.name} (x${item.quantity}) @ GHS ${item.price.toFixed(2)} = GHS ${(item.price * item.quantity).toFixed(2)}\n`;
+                });
+                receiptMessage += `--------------------\nThank you!`;
+
+                alert(receiptMessage);
+                console.log("--- RECEIPT ---");
+                console.log(receiptMessage.replace(/\n/g, '\n')); // For better console formatting
+                console.log("--- END RECEIPT ---");
+
+                // Clear cart and customer fields
+                cart = [];
+                renderCart(); // This will also call updateTotals and show empty cart message
+                customerNameInput.value = '';
+                customerContactInput.value = '';
+
+                // Reset payment method selection
+                paymentButtonsContainer.querySelectorAll('.payment-btn').forEach(btn => {
+                    btn.classList.remove('bg-indigo-600', 'text-white', 'ring-2', 'ring-indigo-500', 'ring-offset-1');
+                    btn.classList.add('bg-white', 'hover:bg-gray-50');
+                     if (btn.textContent.trim().includes('Cash')) {
+                        btn.classList.add('border-blue-500', 'text-blue-600');
+                    } else if (btn.textContent.trim().includes('Card')) {
+                        btn.classList.add('border-green-500', 'text-green-600');
+                    } else if (btn.textContent.trim().includes('Mobile Money')) {
+                        btn.classList.add('border-yellow-500', 'text-yellow-600');
+                    }
+                });
+            }
+
+            function toggleOfflineStatus(forceOnline = null) {
+                const indicator = offlineIndicatorElement;
+                const iconSvg = indicator.querySelector('svg');
+                const textSpan = indicator.querySelector('span');
+
+                let currentlyOnline = textSpan.textContent === 'Online';
+                let newIsOnline;
+
+                if (forceOnline !== null) {
+                    newIsOnline = forceOnline;
+                } else {
+                    newIsOnline = !currentlyOnline; // Toggle
+                }
+
+                if (newIsOnline) {
+                    textSpan.textContent = 'Online';
+                    iconSvg.classList.remove('text-red-500');
+                    iconSvg.classList.add('text-green-500');
+                    iconSvg.innerHTML = `<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>`;
+                    console.log("Status changed to: Online");
+                } else {
+                    textSpan.textContent = 'Offline';
+                    iconSvg.classList.remove('text-green-500');
+                    iconSvg.classList.add('text-red-500');
+                    // Using a different icon for offline (e.g., an X in a circle or a cloud-off icon if available)
+                    // For simplicity, using an X mark in a circle for now.
+                    iconSvg.innerHTML = `<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>`;
+                    console.log("Status changed to: Offline");
+                }
+            }
+
+            // --- Cart Management ---
+            let cart = [];
+
+            function renderCart() {
+                cartItemsList.innerHTML = ''; // Clear existing cart items
+                emptyCartMessage.classList.toggle('hidden', cart.length > 0);
+
+                if (cart.length === 0) {
+                    updateTotals(); // Ensure totals are zeroed out if cart is empty
+                    return;
+                }
+
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    const cartItemHTML = `
+                        <div class="cart-item flex items-center justify-between p-2.5 bg-white rounded-lg shadow-sm" data-product-id="${item.id}">
+                            <div class="flex-grow w-2/5">
+                                <p class="text-sm font-medium text-gray-800 truncate" title="${item.name}">${item.name}</p>
+                                <p class="text-xs text-gray-500">GHS ${item.price.toFixed(2)} x ${item.quantity}</p>
+                            </div>
+                            <div class="flex items-center space-x-1.5 ml-2">
+                                <button class="quantity-change text-indigo-500 hover:text-indigo-700 font-bold p-1" data-action="decrease">-</button>
+                                <input type="number" value="${item.quantity}" min="1" class="quantity-input w-10 text-center border border-gray-300 rounded-md text-sm py-0.5">
+                                <button class="quantity-change text-indigo-500 hover:text-indigo-700 font-bold p-1" data-action="increase">+</button>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-800 w-20 text-right ml-2">GHS ${itemTotal.toFixed(2)}</p>
+                            <button class="remove-item-btn text-red-500 hover:text-red-700 ml-2 p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                    cartItemsList.insertAdjacentHTML('beforeend', cartItemHTML);
+                });
+                attachCartItemListeners();
+                updateTotals(); // Update totals whenever cart is re-rendered
+            }
+
+            function updateTotals() {
+                let subtotal = 0;
+                cart.forEach(item => {
+                    subtotal += item.price * item.quantity;
+                });
+
+                const taxRate = 0.025; // NHIL 2.5%
+                const taxAmount = subtotal * taxRate;
+                const totalAmount = subtotal + taxAmount; // Assuming no discount for now
+
+                // Update DOM elements
+                // Ensure these IDs exist on your span elements for totals
+                if (subtotalDisplay) subtotalDisplay.textContent = `GHS ${subtotal.toFixed(2)}`;
+                if (taxDisplay) taxDisplay.textContent = `GHS ${taxAmount.toFixed(2)}`;
+                if (totalDisplay) totalDisplay.textContent = `GHS ${totalAmount.toFixed(2)}`;
+
+                // Discount display remains GHS 0.00 for now as per plan
+                const discountDisplayElement = document.getElementById('discount-display');
+                if (discountDisplayElement) discountDisplayElement.textContent = `GHS 0.00`;
+
+                console.log(`Totals updated: Subtotal=${subtotal.toFixed(2)}, Tax=${taxAmount.toFixed(2)}, Total=${totalAmount.toFixed(2)}`);
+            }
+
+            function handleQuantityChange(productId, action, directValue = null) {
+                const cartItem = cart.find(item => item.id === productId);
+                if (!cartItem) return;
+
+                if (directValue !== null) {
+                    const newQuantity = parseInt(directValue, 10);
+                    if (newQuantity >= 1) {
+                        cartItem.quantity = newQuantity;
+                    } else if (newQuantity <= 0) {
+                        // If user types 0 or less, remove item or set to 1 (here, remove)
+                        cart = cart.filter(item => item.id !== productId);
+                    }
+                } else if (action === 'increase') {
+                    cartItem.quantity += 1;
+                } else if (action === 'decrease') {
+                    cartItem.quantity -= 1;
+                    if (cartItem.quantity <= 0) {
+                        cart = cart.filter(item => item.id !== productId);
+                    }
+                }
+                renderCart(); // Re-render cart and totals
+            }
+
+            function handleRemoveItem(productId) {
+                cart = cart.filter(item => item.id !== productId);
+                renderCart(); // Re-render cart and totals
+            }
+
+            function attachCartItemListeners() {
+                cartItemsList.querySelectorAll('.cart-item').forEach(itemElement => {
+                    const productId = itemElement.dataset.productId;
+
+                    itemElement.querySelectorAll('.quantity-change').forEach(button => {
+                        // Remove existing listeners to prevent duplication if any (safer)
+                        const newButton = button.cloneNode(true); // Clone to easily remove listeners
+                        button.parentNode.replaceChild(newButton, button);
+                        newButton.addEventListener('click', (e) => {
+                            handleQuantityChange(productId, e.target.dataset.action);
+                        });
+                    });
+
+                    const quantityInput = itemElement.querySelector('.quantity-input');
+                    if (quantityInput) {
+                        const newQuantityInput = quantityInput.cloneNode(true);
+                        quantityInput.parentNode.replaceChild(newQuantityInput, quantityInput);
+                        newQuantityInput.addEventListener('change', (e) => { // Or 'input' for more real-time
+                            handleQuantityChange(productId, null, e.target.value);
+                        });
+                    }
+
+                    const removeButton = itemElement.querySelector('.remove-item-btn');
+                    if (removeButton) {
+                         const newRemoveButton = removeButton.cloneNode(true);
+                         removeButton.parentNode.replaceChild(newRemoveButton, removeButton);
+                         newRemoveButton.addEventListener('click', () => {
+                            handleRemoveItem(productId);
+                        });
+                    }
+                });
+            }
+
+
+            function handleAddToCart(event) {
+                const productId = event.target.closest('.product-card').dataset.productId;
+                const productToAdd = sampleProducts.find(p => p.id === productId);
+
+                if (!productToAdd) {
+                    console.error("Product not found:", productId);
+                    return;
+                }
+
+                const existingCartItem = cart.find(item => item.id === productId);
+
+                if (existingCartItem) {
+                    existingCartItem.quantity += 1;
+                } else {
+                    cart.push({ ...productToAdd, quantity: 1 });
+                }
+
+                console.log("Product added/updated in cart:", productToAdd.name);
+                renderCart(); // Re-render the cart display
+                updateTotals(); // Update cart totals
+            }
+
+            function attachAddToCartListeners() {
+                const addToCartButtons = productGrid.querySelectorAll('.add-to-cart-btn');
+                addToCartButtons.forEach(button => {
+                    // Remove existing listener to prevent duplicates if re-attaching
+                    button.removeEventListener('click', handleAddToCart);
+                    button.addEventListener('click', handleAddToCart);
+                });
+            }
+
+            // --- Product Listing & Filtering ---
+            function renderProducts(productsToRender = sampleProducts) {
+                productGrid.innerHTML = ''; // Clear existing products
+
+                if (productsToRender.length === 0) {
+                    productGrid.innerHTML = '<p class="col-span-full text-center text-gray-500">No products found for this category.</p>';
+                    return;
+                }
+
+                productsToRender.forEach(product => {
+                    const productCard = `
+                        <div class="product-card bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 cursor-pointer flex flex-col justify-between" data-product-id="${product.id}">
+                            <div class="p-3">
+                                <img src="${product.image}" alt="${product.name}" class="w-full h-24 object-contain rounded-md mb-2">
+                                <h4 class="text-sm font-semibold text-gray-800 truncate" title="${product.name}">${product.name}</h4>
+                                <p class="text-xs text-gray-500">SKU: ${product.id}</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 border-t border-gray-200">
+                                 <p class="text-md font-bold text-indigo-600 text-center">GHS ${product.price.toFixed(2)}</p>
+                                <button class="add-to-cart-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white text-xs px-3 py-1.5 rounded-md mt-2 font-medium">Add to Cart</button>
+                            </div>
+                        </div>
+                    `;
+                    productGrid.insertAdjacentHTML('beforeend', productCard);
+                });
+                // Add event listeners to new "Add to Cart" buttons after rendering (will be done in a later step)
+            }
+
+            function handleCategoryFilter(event) {
+                const selectedCategory = event.target.dataset.category;
+
+                // Update active state for category buttons
+                categoryButtonsContainer.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('bg-indigo-500', 'text-white');
+                    btn.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                event.target.classList.add('bg-indigo-500', 'text-white');
+                event.target.classList.remove('bg-gray-200', 'text-gray-700');
+
+                if (selectedCategory === 'All Products') {
+                    renderProducts(sampleProducts);
+                } else {
+                    const filteredProducts = sampleProducts.filter(product => product.category === selectedCategory);
+                    renderProducts(filteredProducts);
+                }
+                 // Re-attach event listeners for add-to-cart after re-rendering products
+                attachAddToCartListeners();
+            }
+
+            function setupCategoryButtons() {
+                // Create unique category list including "All Products"
+                const categories = ['All Products', ...new Set(sampleProducts.map(p => p.category))];
+                categoryButtonsContainer.innerHTML = ''; // Clear existing buttons (if any from HTML)
+
+                categories.forEach(category => {
+                    const button = document.createElement('button');
+                    button.textContent = category;
+                    button.dataset.category = category;
+                    button.classList.add('category-btn', 'px-4', 'py-2', 'rounded-md', 'text-sm', 'font-medium', 'whitespace-nowrap', 'transition-colors');
+                    if (category === 'All Products') {
+                        button.classList.add('bg-indigo-500', 'hover:bg-indigo-600', 'text-white');
+                    } else {
+                        button.classList.add('bg-gray-200', 'hover:bg-gray-300', 'text-gray-700');
+                    }
+                    button.addEventListener('click', handleCategoryFilter);
+                    categoryButtonsContainer.appendChild(button);
+                });
+            }
+
+
+            // --- Initial Setup Calls ---
+            setupCategoryButtons();
+            renderProducts();
+            renderCart(); // Initial call to show empty cart message and set totals to 0
+            // updateTotals(); // renderCart calls updateTotals, so this direct call might be redundant if cart is initially empty.
+            toggleOfflineStatus(true); // Ensure it's initially online
+
+            // Attach event listeners for payment and receipt generation
+            paymentButtonsContainer.querySelectorAll('.payment-btn').forEach(button => {
+                button.addEventListener('click', handlePaymentMethodSelection);
+            });
+            generateReceiptButton.addEventListener('click', handleGenerateReceipt);
+
+            // Temporary: Simulate offline status change for demonstration
+            // setTimeout(() => {
+            //     toggleOfflineStatus(false); // Go offline
+            //     setTimeout(() => {
+            //         toggleOfflineStatus(true); // Go back online
+            //     }, 5000);
+            // }, 7000);
+
+
+        });
     </script>
 </body>
 </html>
