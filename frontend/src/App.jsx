@@ -62,14 +62,9 @@ const adminNavItems = [
 ];
 
 // pmNavItems and pmSidebarSubtitle are now imported from PmDashboardPage.jsx
+import AccountantDashboardPage, { accountantNavItems, accountantSidebarSubtitle } from './pages/accountant/AccountantDashboardPage'; // Import new page and its nav config
 
-const accountantNavItems = [
-  { name: 'Financial Summary', path: '/accountant/dashboard' }, // Or use '#'
-  { name: 'Reports Hub', path: '#' },
-  { name: 'Transaction Explorer', path: '#' },
-  { name: 'Logout', path: '/select-role' },
-];
-
+// accountantNavItems and accountantSidebarSubtitle are now imported
 
 // Fallback for unmatched routes
 const NotFoundPage = () => (
@@ -114,8 +109,8 @@ function App() {
         <Route
           path="/accountant/dashboard"
           element={
-            <DashboardLayout sidebarNavItems={accountantNavItems} sidebarSubtitle="Accountant Portal">
-              <AccountantDashboardContent /> {/* This will be replaced later */}
+            <DashboardLayout sidebarNavItems={accountantNavItems} sidebarSubtitle={accountantSidebarSubtitle}>
+              <AccountantDashboardPage />
             </DashboardLayout>
           }
         />
