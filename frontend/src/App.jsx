@@ -62,7 +62,8 @@ const adminNavItems = [
 ];
 
 // pmNavItems and pmSidebarSubtitle are now imported from PmDashboardPage.jsx
-import AccountantDashboardPage, { accountantNavItems, accountantSidebarSubtitle } from './pages/accountant/AccountantDashboardPage'; // Import new page and its nav config
+import AccountantDashboardPage, { accountantNavItems, accountantSidebarSubtitle } from './pages/accountant/AccountantDashboardPage';
+import SalesPosPage from './pages/sales/SalesPosPage'; // Import new page
 
 // accountantNavItems and accountantSidebarSubtitle are now imported
 
@@ -116,7 +117,7 @@ function App() {
         />
 
         {/* Sales POS does not use the DashboardLayout */}
-        <Route path="/sales/pos" element={<SalesPosPage />} />
+        <Route path="/sales/pos" element={<SalesPosPage />} /> {/* Updated to use the new component */}
 
         <Route path="*" element={<NotFoundPage />} /> {/* Catch-all for 404 */}
       </Routes>
