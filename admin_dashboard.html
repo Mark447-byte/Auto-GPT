@@ -73,26 +73,26 @@
                     <!-- Card: Total Revenue -->
                     <div class="bg-white p-6 rounded-lg shadow-lg">
                         <h3 class="text-lg font-medium text-gray-600">Total Revenue</h3>
-                        <p class="text-3xl font-bold text-green-500 mt-2">GHS 125,670.50</p> <!-- Placeholder value -->
-                        <p class="text-sm text-gray-500 mt-1">+5% from last month</p>
+                        <p id="total-revenue" class="text-3xl font-bold text-green-500 mt-2">GHS 0.00</p>
+                        <p class="text-sm text-gray-500 mt-1" id="total-revenue-change">+0% from last month</p> <!-- Assuming this might also be dynamic -->
                     </div>
                     <!-- Card: Active Projects -->
                     <div class="bg-white p-6 rounded-lg shadow-lg">
                         <h3 class="text-lg font-medium text-gray-600">Active Projects</h3>
-                        <p class="text-3xl font-bold text-blue-500 mt-2">12</p> <!-- Placeholder value -->
-                        <p class="text-sm text-gray-500 mt-1">2 needing attention</p>
+                        <p id="active-projects" class="text-3xl font-bold text-blue-500 mt-2">0</p>
+                        <p class="text-sm text-gray-500 mt-1" id="active-projects-info">0 needing attention</p>
                     </div>
                     <!-- Card: Inventory Status -->
                     <div class="bg-white p-6 rounded-lg shadow-lg">
                         <h3 class="text-lg font-medium text-gray-600">Inventory Status</h3>
-                        <p class="text-3xl font-bold text-yellow-500 mt-2">5 Items Low</p> <!-- Placeholder value -->
-                        <p class="text-sm text-gray-500 mt-1">Total Items: 340</p>
+                        <p id="low-stock-items" class="text-3xl font-bold text-yellow-500 mt-2">0 Items Low</p>
+                        <p id="total-stock-items-info" class="text-sm text-gray-500 mt-1">Total Items: 0</p>
                     </div>
                     <!-- Card: Staff Activity -->
                     <div class="bg-white p-6 rounded-lg shadow-lg">
                         <h3 class="text-lg font-medium text-gray-600">Staff Activity</h3>
-                        <p class="text-3xl font-bold text-purple-500 mt-2">8 Active Users</p> <!-- Placeholder value -->
-                        <p class="text-sm text-gray-500 mt-1">Last login: 5 mins ago</p>
+                        <p id="active-users" class="text-3xl font-bold text-purple-500 mt-2">0 Active Users</p>
+                        <p id="last-user-login-info" class="text-sm text-gray-500 mt-1">Last login: N/A</p>
                     </div>
                 </div>
             </section>
@@ -101,9 +101,9 @@
             <section id="quick-access" class="mb-8">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">Quick Access</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg shadow transition duration-150 ease-in-out">Add New Branch</button>
-                    <button class="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-4 rounded-lg shadow transition duration-150 ease-in-out">Sync Data</button>
-                    <button class="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-3 px-4 rounded-lg shadow transition duration-150 ease-in-out">Export Full Report</button>
+                    <button id="add-new-branch-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg shadow transition duration-150 ease-in-out">Add New Branch</button>
+                    <button id="sync-data-btn" class="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-4 rounded-lg shadow transition duration-150 ease-in-out">Sync Data</button>
+                    <button id="export-report-btn" class="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-3 px-4 rounded-lg shadow transition duration-150 ease-in-out">Export Full Report</button>
                 </div>
             </section>
 
@@ -112,7 +112,7 @@
                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">Staff Management</h2>
                 <div class="flex justify-between items-center mb-4">
                     <p class="text-gray-600">Create, assign roles, and monitor staff activity.</p>
-                    <button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow">Add New Staff</button>
+                    <button id="add-new-staff-btn" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow">Add New Staff</button>
                 </div>
                 <!-- Placeholder for staff table -->
                 <div class="overflow-x-auto">
@@ -125,17 +125,14 @@
                                 <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200">
+                        <tbody id="staff-table-body" class="divide-y divide-gray-200">
+                            <!-- Sample Row (will be replaced by JS) -->
                             <tr>
-                                <td class="py-3 px-4 whitespace-nowrap">Amina Kante</td>
-                                <td class="py-3 px-4 whitespace-nowrap">Salesperson</td>
-                                <td class="py-3 px-4 whitespace-nowrap">2 hours ago</td>
-                                <td class="py-3 px-4 whitespace-nowrap">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a> |
-                                    <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
-                                </td>
+                                <td class="py-3 px-4 whitespace-nowrap">Loading staff...</td>
+                                <td class="py-3 px-4 whitespace-nowrap"></td>
+                                <td class="py-3 px-4 whitespace-nowrap"></td>
+                                <td class="py-3 px-4 whitespace-nowrap"></td>
                             </tr>
-                            <!-- More staff rows -->
                         </tbody>
                     </table>
                 </div>
@@ -179,12 +176,8 @@
             <section id="logs" class="mb-8 p-6 bg-white rounded-lg shadow-lg">
                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">System Logs</h2>
                 <p class="text-gray-600 mb-4">View transaction history, sync issues, and backup logs.</p>
-                {/* Placeholder for logs display area */}
-                <div class="bg-gray-50 p-4 rounded-md h-48 overflow-y-scroll border border-gray-200">
-                    <p class="text-sm text-gray-500">[Timestamp] User 'admin' logged in.</p>
-                    <p class="text-sm text-gray-500">[Timestamp] New sale #INV00123 created by 'amina_k'.</p>
-                    <p class="text-sm text-gray-500">[Timestamp] Data sync completed successfully.</p>
-                    <p class="text-sm text-red-500">[Timestamp] ERROR: Failed to sync branch 'Kumasi'.</p>
+                <div id="system-logs-display" class="bg-gray-50 p-4 rounded-md h-48 overflow-y-scroll border border-gray-200 space-y-1">
+                    <p class="text-sm text-gray-500">Loading logs...</p>
                 </div>
             </section>
 
@@ -218,6 +211,294 @@
                 });
             });
         }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Admin Dashboard JS Initialized");
+
+            // --- Sample Data ---
+            let overviewData = {
+                totalRevenue: "GHS 125,670.50",
+                activeProjects: 12,
+                lowStockItems: 5,
+                totalStockItems: 340,
+                activeUsers: 8,
+                lastUserLogin: "5 mins ago"
+            };
+
+            let staffMembers = [
+                { id: 1, name: 'Amina Kante', role: 'Salesperson', lastActive: '2 hours ago', email: 'amina@example.com' },
+                { id: 2, name: 'John Mensah', role: 'Inventory Manager', lastActive: '30 mins ago', email: 'john.m@example.com' },
+                { id: 3, name: 'Fatima Diallo', role: 'Accountant', lastActive: '1 day ago', email: 'fatima.d@example.com' }
+            ];
+
+            let systemLogs = [
+                { timestamp: '2023-10-27 10:05:15', message: "User 'admin' logged in." },
+                { timestamp: '2023-10-27 10:00:00', message: "New sale #INV00123 created by 'amina_k'." },
+                { timestamp: '2023-10-26 18:30:00', message: "Data sync completed successfully." },
+                { timestamp: '2023-10-26 17:00:00', message: "ERROR: Failed to sync branch 'Kumasi'." }
+            ];
+
+            // --- DOM Element Selectors ---
+            // Overview Panels
+            const totalRevenueDisplay = document.getElementById('total-revenue'); // Need to add this ID
+            const activeProjectsDisplay = document.getElementById('active-projects'); // Need to add this ID
+            const lowStockItemsDisplay = document.getElementById('low-stock-items'); // Need to add this ID
+            const totalStockItemsDisplay = document.getElementById('total-stock-items-info'); // Need to add this ID
+            const activeUsersDisplay = document.getElementById('active-users'); // Need to add this ID
+            const lastUserLoginDisplay = document.getElementById('last-user-login-info'); // Need to add this ID
+
+            // Quick Access Buttons
+            const addNewBranchBtn = document.getElementById('add-new-branch-btn'); // Need to add this ID
+            const syncDataBtn = document.getElementById('sync-data-btn'); // Need to add this ID
+            const exportReportBtn = document.getElementById('export-report-btn'); // Need to add this ID
+
+            // Staff Management
+            const staffTableBody = document.getElementById('staff-table-body'); // Need to add this ID
+            const addNewStaffBtn = document.getElementById('add-new-staff-btn'); // Need to add this ID
+
+            // App Settings
+            const languageSelect = document.getElementById('language'); // Already exists
+            const currencySelect = document.getElementById('currency'); // Already exists
+            const taxRateInput = document.getElementById('tax-rate');   // Already exists
+
+            // System Logs
+            const systemLogsContainer = document.getElementById('system-logs-display'); // Need to add this ID
+
+            // --- Placeholder for Functions (to be implemented in next steps) ---
+            function renderOverview() {
+                if (totalRevenueDisplay) totalRevenueDisplay.textContent = overviewData.totalRevenue;
+                // Assuming overviewData might also provide the change % text directly or it could be calculated
+                // For now, if it has a specific field for change, use it:
+                // if (document.getElementById('total-revenue-change')) document.getElementById('total-revenue-change').textContent = overviewData.totalRevenueChange || "+0% from last month";
+
+
+                if (activeProjectsDisplay) activeProjectsDisplay.textContent = overviewData.activeProjects;
+                // Similar for active projects info
+                // if (document.getElementById('active-projects-info')) document.getElementById('active-projects-info').textContent = overviewData.activeProjectsInfo || "0 needing attention";
+
+
+                if (lowStockItemsDisplay) lowStockItemsDisplay.textContent = `${overviewData.lowStockItems} Items Low`;
+                if (totalStockItemsDisplay) totalStockItemsDisplay.textContent = `Total Items: ${overviewData.totalStockItems}`;
+
+                if (activeUsersDisplay) activeUsersDisplay.textContent = `${overviewData.activeUsers} Active Users`;
+                if (lastUserLoginDisplay) lastUserLoginDisplay.textContent = `Last login: ${overviewData.lastUserLogin}`;
+
+                console.log("Overview panels updated.");
+            }
+
+            function renderStaffTable() {
+                if (!staffTableBody) return;
+                staffTableBody.innerHTML = ''; // Clear existing rows
+
+                if (staffMembers.length === 0) {
+                    staffTableBody.innerHTML = '<tr><td colspan="4" class="py-3 px-4 text-center text-gray-500">No staff members found.</td></tr>';
+                    return;
+                }
+
+                staffMembers.forEach(staff => {
+                    const row = `
+                        <tr data-staff-id="${staff.id}">
+                            <td class="py-3 px-4 whitespace-nowrap text-sm text-gray-700">${staff.name}</td>
+                            <td class="py-3 px-4 whitespace-nowrap text-sm text-gray-500">${staff.role}</td>
+                            <td class="py-3 px-4 whitespace-nowrap text-sm text-gray-500">${staff.lastActive}</td>
+                            <td class="py-3 px-4 whitespace-nowrap text-sm space-x-2">
+                                <button class="edit-staff-btn text-indigo-600 hover:text-indigo-900" data-id="${staff.id}">Edit</button>
+                                <button class="delete-staff-btn text-red-600 hover:text-red-900" data-id="${staff.id}">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                    staffTableBody.insertAdjacentHTML('beforeend', row);
+                });
+                attachStaffActionListeners();
+                console.log("Staff table rendered.");
+            }
+
+            function handleAddNewStaff() {
+                const name = prompt("Enter new staff member's name:");
+                if (!name) return;
+                const role = prompt("Enter role:", "Salesperson");
+                if (!role) return;
+                const email = prompt("Enter email:");
+                if (!email) return; // Basic validation
+
+                const newStaff = {
+                    id: staffMembers.length > 0 ? Math.max(...staffMembers.map(s => s.id)) + 1 : 1,
+                    name,
+                    role,
+                    lastActive: 'Just now',
+                    email
+                };
+                staffMembers.push(newStaff);
+                renderStaffTable();
+                // In a real app, you might add a system log here too.
+                // addSystemLog(`New staff member '${name}' added.`);
+                alert(`Staff member '${name}' added.`);
+            }
+
+            function handleEditStaff(staffId) {
+                const staff = staffMembers.find(s => s.id === parseInt(staffId));
+                if (!staff) {
+                    alert("Staff member not found.");
+                    return;
+                }
+                const newName = prompt(`Editing ${staff.name}. New name:`, staff.name);
+                if (newName) staff.name = newName;
+                const newRole = prompt(`New role for ${staff.name}:`, staff.role);
+                if (newRole) staff.role = newRole;
+
+                renderStaffTable();
+                alert(`${staff.name}'s details updated.`);
+            }
+
+            function handleDeleteStaff(staffId) {
+                const staffIndex = staffMembers.findIndex(s => s.id === parseInt(staffId));
+                if (staffIndex === -1) {
+                    alert("Staff member not found.");
+                    return;
+                }
+                const staffName = staffMembers[staffIndex].name;
+                if (confirm(`Are you sure you want to delete ${staffName}?`)) {
+                    staffMembers.splice(staffIndex, 1);
+                    renderStaffTable();
+                    alert(`${staffName} has been deleted.`);
+                }
+            }
+
+            function attachStaffActionListeners() {
+                staffTableBody.querySelectorAll('.edit-staff-btn').forEach(button => {
+                    const newButton = button.cloneNode(true);
+                    button.parentNode.replaceChild(newButton, button);
+                    newButton.addEventListener('click', (e) => handleEditStaff(e.target.dataset.id));
+                });
+                staffTableBody.querySelectorAll('.delete-staff-btn').forEach(button => {
+                    const newButton = button.cloneNode(true);
+                    button.parentNode.replaceChild(newButton, button);
+                    newButton.addEventListener('click', (e) => handleDeleteStaff(e.target.dataset.id));
+                });
+            }
+
+
+            function renderSystemLogs() {
+                if (!systemLogsContainer) return;
+                systemLogsContainer.innerHTML = ''; // Clear existing logs
+
+                if (systemLogs.length === 0) {
+                    systemLogsContainer.innerHTML = '<p class="text-sm text-gray-500">No system logs available.</p>';
+                    return;
+                }
+
+                // Display latest logs first
+                const logsToDisplay = [...systemLogs].reverse();
+
+                logsToDisplay.forEach(log => {
+                    const logClass = log.message.toLowerCase().includes('error') ? 'text-red-500' : 'text-gray-500';
+                    const logEntry = `<p class="text-sm ${logClass} font-mono">[${log.timestamp}] ${log.message}</p>`;
+                    systemLogsContainer.insertAdjacentHTML('beforeend', logEntry);
+                });
+                console.log("System logs rendered.");
+            }
+
+            function addSystemLog(messageContent) {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                const timestamp = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+                systemLogs.push({ timestamp, message: messageContent });
+                // To keep the array from growing indefinitely in a long session (optional for simulation)
+                // if (systemLogs.length > 100) { systemLogs.shift(); }
+                renderSystemLogs(); // Re-render to show the new log at the top (due to reverse in render)
+            }
+
+            function handleAppSettingChange(event) {
+                const settingName = event.target.name;
+                const settingValue = event.target.value;
+
+                let feedbackMessage = "";
+                switch(settingName) {
+                    case "language":
+                        feedbackMessage = `Language setting changed to: ${settingValue}`;
+                        break;
+                    case "currency":
+                        feedbackMessage = `Currency setting changed to: ${settingValue}`;
+                        break;
+                    case "tax-rate":
+                        feedbackMessage = `Default Tax Rate changed to: ${settingValue}%`;
+                        break;
+                    default:
+                        feedbackMessage = `Setting ${settingName} changed to ${settingValue}`;
+                }
+                console.log(feedbackMessage);
+                alert(feedbackMessage); // Simple visual feedback
+            }
+
+            function handleQuickAccessAction(action) {
+                let message = "";
+                switch(action) {
+                    case "addBranch":
+                        message = "Simulating: Add New Branch process initiated...";
+                        // Potentially, this could also call addSystemLog()
+                        // addSystemLog("Admin initiated 'Add New Branch'.");
+                        break;
+                    case "syncData":
+                        message = "Simulating: Data synchronization started...";
+                        // addSystemLog("Admin initiated 'Sync Data'.");
+                        break;
+                    case "exportReport":
+                        message = "Simulating: Full report export is being generated...";
+                        // addSystemLog("Admin initiated 'Export Full Report'.");
+                        break;
+                    default:
+                        message = "Unknown quick access action.";
+                }
+                console.log(message);
+                alert(message);
+            }
+
+            // --- Initial Calls ---
+            renderOverview();
+            renderStaffTable();
+            renderSystemLogs();
+
+            // Simulate an admin login log entry shortly after page load
+            setTimeout(() => {
+                addSystemLog(`Admin user 'admin_test' logged in successfully.`);
+            }, 2000);
+
+            // --- Setup Event Listeners ---
+            function setupEventListeners(){
+                if(addNewStaffBtn) {
+                    addNewStaffBtn.addEventListener('click', handleAddNewStaff);
+                }
+                if(languageSelect) {
+                    languageSelect.addEventListener('change', handleAppSettingChange);
+                }
+                if(currencySelect) {
+                    currencySelect.addEventListener('change', handleAppSettingChange);
+                }
+                if(taxRateInput) {
+                    taxRateInput.addEventListener('change', handleAppSettingChange);
+                }
+
+                // Quick Access Button Listeners
+                if(addNewBranchBtn) {
+                    addNewBranchBtn.addEventListener('click', () => handleQuickAccessAction('addBranch'));
+                }
+                if(syncDataBtn) {
+                    syncDataBtn.addEventListener('click', () => handleQuickAccessAction('syncData'));
+                }
+                if(exportReportBtn) {
+                    exportReportBtn.addEventListener('click', () => handleQuickAccessAction('exportReport'));
+                }
+            }
+            setupEventListeners();
+        });
     </script>
 </body>
 </html>
