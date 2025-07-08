@@ -6,34 +6,262 @@
     <title>Sales Dashboard - BatiStock</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 h-screen">
-    <nav class="bg-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <h1 class="text-xl font-bold text-indigo-600">BatiStock</h1>
+<body class="bg-gray-200 flex flex-col h-screen">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md w-full p-3 flex justify-between items-center">
+        <div class="flex items-center">
+            <img src="https://via.placeholder.com/100x40?text=BatiStock" alt="BatiStock Logo" class="h-8 mr-3">
+            <span class="text-xl font-semibold text-gray-700">POS Mode</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <!-- Offline Alert Toggle (Visual Placeholder) -->
+            <div id="offline-indicator" class="flex items-center text-sm text-gray-500">
+                <svg class="w-4 h-4 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20"> <!-- Online state -->
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Online</span>
+                <!-- Offline state example:
+                <svg class="w-4 h-4 text-red-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4.586l-1.707-1.707a1 1 0 00-1.414 1.414l2.5 2.5a1 1 0 001.414 0l2.5-2.5a1 1 0 00-1.414-1.414L11 9.586V5z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Offline</span>
+                -->
+            </div>
+            <span class="text-sm text-gray-700">User: SalesRep01</span>
+            <a href="role_selection.html" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">Logout</a>
+        </div>
+    </header>
+
+    <!-- Main POS Interface (2-column layout) -->
+    <div class="flex-1 flex overflow-hidden">
+
+        <!-- Left Column: Product Selection & Categories -->
+        <aside id="product-selection-area" class="w-3/5 bg-white p-5 overflow-y-auto border-r border-gray-300">
+            <div class="mb-4">
+                <input type="search" placeholder="Search products by name or barcode..." class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-lg">
+            </div>
+            <div id="category-buttons" class="mb-5 flex space-x-2 overflow-x-auto pb-2">
+                <button class="category-btn bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">All Products</button>
+                <button class="category-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">Cement</button>
+                <button class="category-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">Nails & Fasteners</button>
+                <button class="category-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">Paint & Finishing</button>
+                <button class="category-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">Tools</button>
+                <button class="category-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">Pipes & Fittings</button>
+            </div>
+            <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                <!-- Product Card Example -->
+                <div class="product-card bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 cursor-pointer flex flex-col justify-between">
+                    <div class="p-3">
+                        <img src="https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Cement" alt="Product Image" class="w-full h-24 object-contain rounded-md mb-2">
+                        <h4 class="text-sm font-semibold text-gray-800 truncate">Ghacem Cement 50kg</h4>
+                        <p class="text-xs text-gray-500">SKU: CEM001</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 border-t border-gray-200">
+                         <p class="text-md font-bold text-indigo-600 text-center">GHS 85.00</p>
+                        <button class="add-to-cart-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white text-xs px-3 py-1.5 rounded-md mt-2 font-medium">Add to Cart</button>
                     </div>
                 </div>
-                <div class="text-gray-700">Salesperson POS Interface</div>
+                <div class="product-card bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 cursor-pointer flex flex-col justify-between">
+                    <div class="p-3">
+                        <img src="https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Nails" alt="Product Image" class="w-full h-24 object-contain rounded-md mb-2">
+                        <h4 class="text-sm font-semibold text-gray-800 truncate">Iron Nails 3-inch (Box)</h4>
+                        <p class="text-xs text-gray-500">SKU: NAL003</p>
+                    </div>
+                     <div class="p-3 bg-gray-50 border-t border-gray-200">
+                         <p class="text-md font-bold text-indigo-600 text-center">GHS 25.00</p>
+                        <button class="add-to-cart-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white text-xs px-3 py-1.5 rounded-md mt-2 font-medium">Add to Cart</button>
+                    </div>
+                </div>
+                 <div class="product-card bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 cursor-pointer flex flex-col justify-between">
+                    <div class="p-3">
+                        <img src="https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Paint" alt="Product Image" class="w-full h-24 object-contain rounded-md mb-2">
+                        <h4 class="text-sm font-semibold text-gray-800 truncate">Azar Paint White (Gallon)</h4>
+                        <p class="text-xs text-gray-500">SKU: PNT011</p>
+                    </div>
+                     <div class="p-3 bg-gray-50 border-t border-gray-200">
+                         <p class="text-md font-bold text-indigo-600 text-center">GHS 120.00</p>
+                        <button class="add-to-cart-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white text-xs px-3 py-1.5 rounded-md mt-2 font-medium">Add to Cart</button>
+                    </div>
+                </div>
+                 <div class="product-card bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 cursor-pointer flex flex-col justify-between">
+                    <div class="p-3">
+                        <img src="https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Shovel" alt="Product Image" class="w-full h-24 object-contain rounded-md mb-2">
+                        <h4 class="text-sm font-semibold text-gray-800 truncate">Pointed Shovel (Heavy Duty)</h4>
+                        <p class="text-xs text-gray-500">SKU: TOL005</p>
+                    </div>
+                     <div class="p-3 bg-gray-50 border-t border-gray-200">
+                         <p class="text-md font-bold text-indigo-600 text-center">GHS 60.00</p>
+                        <button class="add-to-cart-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white text-xs px-3 py-1.5 rounded-md mt-2 font-medium">Add to Cart</button>
+                    </div>
+                </div>
+                <!-- Add 4 more distinct product cards -->
+                <div class="product-card bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 cursor-pointer flex flex-col justify-between">
+                    <div class="p-3">
+                        <img src="https://via.placeholder.com/150/CCCCCC/FFFFFF?text=PVC+Pipe" alt="Product Image" class="w-full h-24 object-contain rounded-md mb-2">
+                        <h4 class="text-sm font-semibold text-gray-800 truncate">PVC Pipe 4-inch (Length)</h4>
+                        <p class="text-xs text-gray-500">SKU: PIP004</p>
+                    </div>
+                     <div class="p-3 bg-gray-50 border-t border-gray-200">
+                         <p class="text-md font-bold text-indigo-600 text-center">GHS 45.00</p>
+                        <button class="add-to-cart-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white text-xs px-3 py-1.5 rounded-md mt-2 font-medium">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 cursor-pointer flex flex-col justify-between">
+                    <div class="p-3">
+                        <img src="https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Tiles" alt="Product Image" class="w-full h-24 object-contain rounded-md mb-2">
+                        <h4 class="text-sm font-semibold text-gray-800 truncate">Floor Tiles Ceramic (sqm)</h4>
+                        <p class="text-xs text-gray-500">SKU: TIL002</p>
+                    </div>
+                     <div class="p-3 bg-gray-50 border-t border-gray-200">
+                         <p class="text-md font-bold text-indigo-600 text-center">GHS 70.00</p>
+                        <button class="add-to-cart-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white text-xs px-3 py-1.5 rounded-md mt-2 font-medium">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 cursor-pointer flex flex-col justify-between">
+                    <div class="p-3">
+                        <img src="https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Hammer" alt="Product Image" class="w-full h-24 object-contain rounded-md mb-2">
+                        <h4 class="text-sm font-semibold text-gray-800 truncate">Claw Hammer (Wooden Handle)</h4>
+                        <p class="text-xs text-gray-500">SKU: TOL001</p>
+                    </div>
+                     <div class="p-3 bg-gray-50 border-t border-gray-200">
+                         <p class="text-md font-bold text-indigo-600 text-center">GHS 35.00</p>
+                        <button class="add-to-cart-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white text-xs px-3 py-1.5 rounded-md mt-2 font-medium">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-200 cursor-pointer flex flex-col justify-between">
+                    <div class="p-3">
+                        <img src="https://via.placeholder.com/150/CCCCCC/FFFFFF?text=Sand" alt="Product Image" class="w-full h-24 object-contain rounded-md mb-2">
+                        <h4 class="text-sm font-semibold text-gray-800 truncate">River Sand (Per Trip)</h4>
+                        <p class="text-xs text-gray-500">SKU: SND001</p>
+                    </div>
+                     <div class="p-3 bg-gray-50 border-t border-gray-200">
+                         <p class="text-md font-bold text-indigo-600 text-center">GHS 350.00</p>
+                        <button class="add-to-cart-btn w-full bg-indigo-500 hover:bg-indigo-600 text-white text-xs px-3 py-1.5 rounded-md mt-2 font-medium">Add to Cart</button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
-    <div class="container mx-auto p-4">
-        <h1 class="text-3xl font-bold text-gray-800">Salesperson Dashboard (POS Mode)</h1>
-        <p class="text-gray-600 mt-2">Welcome, Salesperson! Process sales quickly and efficiently.</p>
-        <!-- Placeholder for Salesperson specific content -->
-        <div class="mt-6 p-6 bg-white rounded-lg shadow">
-            <h2 class="text-xl font-semibold text-gray-700">New Sale</h2>
-            <p class="text-gray-600">Interface for starting a new sale, product search, category buttons.</p>
-        </div>
-        <div class="mt-4 p-6 bg-white rounded-lg shadow">
-            <h2 class="text-xl font-semibold text-gray-700">Customer Quick Add</h2>
-            <p class="text-gray-600">Form to quickly add new customer details.</p>
-        </div>
-        <p class="mt-8">
-            <a href="role_selection.html" class="text-indigo-600 hover:text-indigo-500">&larr; Change Role (Logout simulation)</a>
-        </p>
+        </aside>
+
+        <!-- Right Column: Cart Summary, Customer, Payment -->
+        <main id="cart-area" class="w-2/5 bg-gray-50 p-5 flex flex-col overflow-y-auto">
+
+            <!-- Current Sale/Cart Summary Section -->
+            <section id="current-sale-summary" class="flex-grow mb-5">
+                <h2 class="text-xl font-semibold text-gray-700 mb-3 border-b pb-2">Current Sale</h2>
+                <div id="cart-items-list" class="space-y-3 overflow-y-auto max-h-60 md:max-h-72 lg:max-h-80 pr-1">
+                    <!-- Cart Item Example -->
+                    <div class="cart-item flex items-center justify-between p-2.5 bg-white rounded-lg shadow-sm">
+                        <div class="flex-grow">
+                            <p class="text-sm font-medium text-gray-800">Ghacem Cement 50kg</p>
+                            <p class="text-xs text-gray-500">GHS 85.00 x 2</p>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-2">
+                            <button class="text-indigo-500 hover:text-indigo-700 font-bold">-</button>
+                            <input type="number" value="2" class="w-10 text-center border border-gray-300 rounded-md text-sm py-0.5">
+                            <button class="text-indigo-500 hover:text-indigo-700 font-bold">+</button>
+                        </div>
+                        <p class="text-sm font-semibold text-gray-800 w-20 text-right ml-2">GHS 170.00</p>
+                        <button class="text-red-500 hover:text-red-700 ml-2 p-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </div>
+                     <div class="cart-item flex items-center justify-between p-2.5 bg-white rounded-lg shadow-sm">
+                        <div class="flex-grow">
+                            <p class="text-sm font-medium text-gray-800">Iron Nails 3-inch (Box)</p>
+                            <p class="text-xs text-gray-500">GHS 25.00 x 1</p>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-2">
+                            <button class="text-indigo-500 hover:text-indigo-700 font-bold">-</button>
+                            <input type="number" value="1" class="w-10 text-center border border-gray-300 rounded-md text-sm py-0.5">
+                            <button class="text-indigo-500 hover:text-indigo-700 font-bold">+</button>
+                        </div>
+                        <p class="text-sm font-semibold text-gray-800 w-20 text-right ml-2">GHS 25.00</p>
+                        <button class="text-red-500 hover:text-red-700 ml-2 p-1">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </div>
+                     <!-- Empty Cart Message -->
+                    <div id="empty-cart-message" class="text-center text-gray-500 py-10 hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <p>Your cart is empty.</p>
+                        <p class="text-xs">Add products from the left panel.</p>
+                    </div>
+                </div>
+                <div id="cart-totals" class="mt-4 pt-4 border-t-2 border-gray-300 space-y-1.5">
+                    <div class="flex justify-between text-sm text-gray-700">
+                        <span>Subtotal:</span>
+                        <span class="font-medium">GHS 195.00</span>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-700">
+                        <span>Tax (NHIL 2.5%):</span>
+                        <span class="font-medium">GHS 4.88</span>
+                    </div>
+                     <div class="flex justify-between text-sm text-gray-700">
+                        <span>Discount:</span>
+                        <a href="#" class="text-xs text-indigo-600 hover:underline">Add Discount</a>
+                        <span class="font-medium">GHS 0.00</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-semibold text-gray-800 pt-1.5 border-t border-dashed">
+                        <span>Total:</span>
+                        <span>GHS 199.88</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Customer Quick Add Section -->
+            <section id="customer-quick-add" class="mb-5 pb-5 border-b border-gray-300">
+                <h3 class="text-lg font-medium text-gray-700 mb-2">Customer (Optional)</h3>
+                <div class="space-y-2">
+                    <input type="text" placeholder="Customer Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                    <input type="tel" placeholder="Customer Contact (e.g., 024xxxxxxx)" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                </div>
+            </section>
+
+            <!-- Payment Options Section -->
+            <section id="payment-options">
+                <h3 class="text-lg font-medium text-gray-700 mb-3">Payment</h3>
+                <div id="payment-buttons" class="grid grid-cols-2 gap-3 mb-3">
+                    <button class="payment-btn bg-white hover:bg-blue-50 border-2 border-blue-500 text-blue-600 font-medium py-2.5 px-4 rounded-lg shadow-sm flex items-center justify-center text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                        Cash
+                    </button>
+                    <button class="payment-btn bg-white hover:bg-green-50 border-2 border-green-500 text-green-600 font-medium py-2.5 px-4 rounded-lg shadow-sm flex items-center justify-center text-sm">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+                        Card
+                    </button>
+                    <button class="payment-btn bg-white hover:bg-yellow-50 border-2 border-yellow-500 text-yellow-600 font-medium py-2.5 px-4 rounded-lg shadow-sm flex items-center justify-center text-sm col-span-2">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                        Mobile Money
+                    </button>
+                </div>
+                <button id="generate-receipt-btn" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg shadow-lg mt-4 text-lg transition-colors duration-150">
+                    Generate Receipt
+                </button>
+            </section>
+
+        </main>
     </div>
+    <script>
+        // Basic script for offline indicator toggle (example)
+        // In a real app, this would be driven by service worker status or network checks.
+        const offlineIndicator = document.getElementById('offline-indicator');
+        if (offlineIndicator) {
+            // To simulate toggling:
+            // setTimeout(() => {
+            //     offlineIndicator.innerHTML = `
+            //         <svg class="w-4 h-4 text-red-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            //             <path fill-rule="evenodd" d="M10 0a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 100-16 8 8 0 000 16zm-1-5a1 1 0 102 0v-2.586l1.707 1.707a1 1 0 001.414-1.414l-2.5-2.5a1 1 0 00-1.414 0l-2.5 2.5a1 1 0 101.414 1.414L9 10.414V13z" clip-rule="evenodd"></path>
+            //         </svg>
+            //         <span>Offline</span>`;
+            // }, 5000); // Example: switch to offline after 5 seconds
+        }
+    </script>
 </body>
 </html>
