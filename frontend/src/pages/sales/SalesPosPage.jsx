@@ -5,7 +5,9 @@ import ProductGrid from '../../components/sales/ProductGrid';
 import CartSummary from '../../components/sales/CartSummary';
 import CustomerQuickAdd from '../../components/sales/CustomerQuickAdd';
 import PaymentOptions from '../../components/sales/PaymentOptions';
-import OfflineIndicator from '../../components/sales/OfflineIndicator'; // Import new component
+import OfflineIndicator from '../../components/sales/OfflineIndicator';
+import { useAuth } from '../../contexts/AuthContext'; // Import useAuth
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 // Sample Data (migrated from vanilla JS)
 const initialSampleProducts = [
@@ -35,6 +37,9 @@ function SalesPosPage() {
   const [subtotal, setSubtotal] = useState(0);
   const [taxAmount, setTaxAmount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
+
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const TAX_RATE = 0.025; // NHIL 2.5%
 
@@ -139,10 +144,16 @@ function SalesPosPage() {
         </div>
         <div className="flex items-center space-x-4">
           <OfflineIndicator isOnline={isOnline} onToggle={toggleOfflineStatus} />
-          <span className="text-sm text-gray-700">User: SalesRep01</span>
-          {/* In React, use Link from react-router-dom for navigation */}
-          {/* For now, a simple href or a button that uses useNavigate */}
-          <a href="/select-role" className="text-sm text-indigo-600 hover:text-indigo-800 font-medium">Logout</a>
+          <span className="text-sm text-gray-700">User: SalesRep01</span> {/* TODO: Replace with actual username from AuthContext */}
+          <button
+            onClick={() => {
+              logout();
+              navigate('/login');
+            }}
+            className="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+          >
+            Logout
+          </button>
         </div>
       </header>
 

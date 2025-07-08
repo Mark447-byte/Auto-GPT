@@ -1,28 +1,41 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // For BatiStock logo link
+import { Link, useNavigate } from 'react-router-dom'; // For BatiStock logo link & navigate
+import { useAuth } from '../contexts/AuthContext'; // Import useAuth
 
 // Reusable Sidebar component that can be part of DashboardLayout or imported
-const Sidebar = ({ title, subtitle, navItems, onLinkClick }) => (
+const Sidebar = ({ title, subtitle, navItems, onLinkClick, onLogout }) => ( // Added onLogout
   <aside className="w-64 bg-gray-800 text-white p-6 space-y-2 hidden md:block print:hidden"> {/* print:hidden to hide on print */}
     <Link to="/" className="text-2xl font-bold text-white block mb-1">BatiStock</Link>
     {subtitle && <span className="text-sm text-gray-400 block mb-3">{subtitle}</span>}
     <nav>
-      {navItems.map((item) => (
-        <Link
-          key={item.name}
-          to={item.path}
-          onClick={onLinkClick} // For closing mobile menu if needed
-          className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"
-        >
-          {item.name}
-        </Link>
-      ))}
+      {navItems.map((item) =>
+        item.name === 'Logout' ? (
+          <button
+            key={item.name}
+            onClick={onLogout}
+            className="w-full text-left block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"
+          >
+            {item.name}
+          </button>
+        ) : (
+          <Link
+            key={item.name}
+            to={item.path}
+            onClick={onLinkClick} // For closing mobile menu if needed
+            className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"
+          >
+            {item.name}
+          </Link>
+        )
+      )}
     </nav>
   </aside>
 );
 
 function DashboardLayout({ children, sidebarNavItems, sidebarSubtitle }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -32,6 +45,12 @@ function DashboardLayout({ children, sidebarNavItems, sidebarSubtitle }) {
     setIsMobileMenuOpen(false);
   };
 
+  const handleLogout = () => {
+    logout(); // Clears context and localStorage
+    navigate('/login'); // Redirect to login page
+    if(isMobileMenuOpen) closeMobileMenu(); // Close mobile menu if open
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Desktop Sidebar */}
@@ -39,6 +58,7 @@ function DashboardLayout({ children, sidebarNavItems, sidebarSubtitle }) {
         title="BatiStock"
         subtitle={sidebarSubtitle}
         navItems={sidebarNavItems}
+        onLogout={handleLogout}
       />
 
       {/* Main Content Area */}
@@ -89,16 +109,26 @@ function DashboardLayout({ children, sidebarNavItems, sidebarSubtitle }) {
             </div>
             {subtitle && <span className="text-sm text-gray-400 block mb-3">{sidebarSubtitle}</span>}
             <nav>
-              {sidebarNavItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  onClick={closeMobileMenu} // Close menu on link click
-                  className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {sidebarNavItems.map((item) =>
+                item.name === 'Logout' ? (
+                  <button
+                    key={item.name}
+                    onClick={handleLogout} // Use the main handleLogout which also closes menu
+                    className="w-full text-left block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"
+                  >
+                    {item.name}
+                  </button>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    onClick={closeMobileMenu} // Close menu on regular link click
+                    className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"
+                  >
+                    {item.name}
+                  </Link>
+                )
+              )}
             </nav>
           </aside>
         </div>

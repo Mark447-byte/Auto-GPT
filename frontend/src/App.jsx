@@ -63,9 +63,8 @@ const adminNavItems = [
 
 // pmNavItems and pmSidebarSubtitle are now imported from PmDashboardPage.jsx
 import AccountantDashboardPage, { accountantNavItems, accountantSidebarSubtitle } from './pages/accountant/AccountantDashboardPage';
-import SalesPosPage from './pages/sales/SalesPosPage'; // Import new page
-
-// accountantNavItems and accountantSidebarSubtitle are now imported
+import SalesPosPage from './pages/sales/SalesPosPage';
+import ProtectedRoute from './components/auth/ProtectedRoute'; // Import ProtectedRoute
 
 // Fallback for unmatched routes
 const NotFoundPage = () => (
@@ -89,35 +88,36 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/select-role" element={<RoleSelectionPage />} />
 
-        <Route
-          path="/admin/dashboard"
-          element={
-            <DashboardLayout sidebarNavItems={adminNavItems} sidebarSubtitle="Admin Panel">
-              <AdminDashboardPage />
-            </DashboardLayout>
-          }
-        />
-        <Route
-          path="/pm/dashboard"
-          element={
-            <DashboardLayout sidebarNavItems={pmNavItems} sidebarSubtitle={pmSidebarSubtitle}>
-              <PmDashboardPage />
-            </DashboardLayout>
-          }
-        />
-        <Route
-          path="/accountant/dashboard"
-          element={
-            <DashboardLayout sidebarNavItems={accountantNavItems} sidebarSubtitle={accountantSidebarSubtitle}>
-              <AccountantDashboardPage />
-            </DashboardLayout>
-          }
-        />
-
-        {/* Sales POS does not use the DashboardLayout */}
-        <Route path="/sales/pos" element={<SalesPosPage />} /> {/* Updated to use the new component */}
+        {/* Protected Routes */}
+        <Route element={<ProtectedRoute />}> {/* Wrap protected routes */}
+          <Route path="/select-role" element={<RoleSelectionPage />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <DashboardLayout sidebarNavItems={adminNavItems} sidebarSubtitle="Admin Panel">
+                <AdminDashboardPage />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/pm/dashboard"
+            element={
+              <DashboardLayout sidebarNavItems={pmNavItems} sidebarSubtitle={pmSidebarSubtitle}>
+                <PmDashboardPage />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/accountant/dashboard"
+            element={
+              <DashboardLayout sidebarNavItems={accountantNavItems} sidebarSubtitle={accountantSidebarSubtitle}>
+                <AccountantDashboardPage />
+              </DashboardLayout>
+            }
+          />
+          <Route path="/sales/pos" element={<SalesPosPage />} /> {/* Sales POS is also protected */}
+        </Route>
 
         <Route path="*" element={<NotFoundPage />} /> {/* Catch-all for 404 */}
       </Routes>

@@ -1,24 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 
 function SignupPage() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const { signup, loading, error, setError, isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
+  const [signupSuccess, setSignupSuccess] = useState(false);
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    // If user is already authenticated (e.g. after successful signup which also logs in), redirect.
+    if (isAuthenticated && user) {
+      // No 'from' location state on signup, so directly go to default dashboard or select-role
+      const defaultDashboard = getDefaultDashboardByRole(user.role);
+      navigate(defaultDashboard, { replace: true });
+    }
+  }, [isAuthenticated, user, navigate]);
+
+  // Helper function to determine default dashboard based on role
+  const getDefaultDashboardByRole = (role) => {
+    switch (role) {
+      case 'Admin':
+        return '/admin/dashboard';
+      case 'Project Manager':
+        return '/pm/dashboard';
+      case 'Accountant':
+        return '/accountant/dashboard';
+      case 'Salesperson':
+        return '/sales/pos'; // Assuming Salesperson is a role handled by AuthContext
+      default:
+        return '/select-role'; // Fallback if role is undefined or not matched
+    }
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setError(null); // Clear previous errors
+    setSignupSuccess(false);
+
     if (password !== confirmPassword) {
-      alert("Passwords don't match!");
+      setError("Passwords don't match!");
       return;
     }
-    // Simulate successful signup for now
-    console.log('Signup attempt with:', { username, email, password });
-    // In a real app, you would make an API call here
-    // For now, navigate to role selection
-    navigate('/select-role');
+    try {
+      const response = await signup(username, email, password);
+      // AuthContext's signup simulation logs in user and sets isAuthenticated
+      // The useEffect above will handle redirection.
+      // If signup didn't log in, we'd navigate to /login here.
+      setSignupSuccess(true); // To show a success message before redirect by useEffect
+      console.log("Signup successful (simulated):", response);
+      // Navigation is handled by useEffect reacting to isAuthenticated change
+    } catch (err) {
+      // Error is set in AuthContext's signup function
+      console.error("Signup page error:", err);
+    }
   };
 
   return (
@@ -32,6 +70,16 @@ function SignupPage() {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow-xl rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
+            {error && (
+              <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
+                <p>{error}</p>
+              </div>
+            )}
+            {signupSuccess && !error && ( // Show success only if no error and signup attempt was made
+              <div className="p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
+                <p>Signup successful! Redirecting...</p>
+              </div>
+            )}
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                 Username
@@ -107,9 +155,10 @@ function SignupPage() {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                disabled={loading || signupSuccess} // Disable if loading or if successfully signed up (awaiting redirect)
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign up
+                {loading ? 'Signing up...' : 'Sign up'}
               </button>
             </div>
           </form>
