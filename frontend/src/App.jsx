@@ -47,17 +47,18 @@ const PmDashboardContent = () => <div className="p-4"><h1 className="text-2xl fo
 const AccountantDashboardContent = () => <div className="p-4"><h1 className="text-2xl font-bold mb-4">Accountant Dashboard Content</h1><p>Actual accountant components will go here.</p><Link to="/select-role" className="text-indigo-600 hover:underline mt-4 block">Back to Role Selection</Link></div>;
 
 // Sales POS page does not use DashboardLayout, so it's defined separately
-const SalesPosPage = () => <div className="p-4"><h1 className="text-xl font-semibold">Sales POS Page</h1><p>Sales POS specific content will be here.</p><Link to="/select-role" className="text-indigo-600 hover:underline mt-4 block">Back to Role Selection</Link></div>;
+// const SalesPosPage = () => <div className="p-4"><h1 className="text-xl font-semibold">Sales POS Page</h1><p>Sales POS specific content will be here.</p><Link to="/select-role" className="text-indigo-600 hover:underline mt-4 block">Back to Role Selection</Link></div>; // REMOVED PLACEHOLDER
 
 
 import PmDashboardPage, { pmNavItems, pmSidebarSubtitle } from './pages/pm/PmDashboardPage'; // Import new page and its nav config
 
 // Sample Nav Items for each role (will be moved to respective components later)
 const adminNavItems = [
-  { name: 'Dashboard', path: '/admin/dashboard' },
-  { name: 'Staff Management', path: '#' },
-  { name: 'App Settings', path: '#' },
-  { name: 'System Logs', path: '#' },
+  { name: 'Dashboard', path: '/admin/dashboard#overview' }, // Point to overview section
+  { name: 'Sales Analytics', path: '/admin/dashboard#sales-analytics' }, // New Link
+  { name: 'Staff Management', path: '/admin/dashboard#staff' },
+  { name: 'App Settings', path: '/admin/dashboard#settings' },
+  { name: 'System Logs', path: '/admin/dashboard#logs' },
   { name: 'Logout', path: '/select-role' },
 ];
 

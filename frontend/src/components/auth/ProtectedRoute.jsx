@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext.jsx'; // Added .jsx extension
 
 // children prop can be used if not using <Outlet /> for nested routes
 // For this setup, <Outlet /> is more idiomatic if ProtectedRoute wraps layout routes

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import React, { useState, useEffect } from 'react';
 import OverviewSection from '../../components/admin/OverviewSection';
 import QuickAccessSection from '../../components/admin/QuickAccessSection';
 import StaffManagementSection from '../../components/admin/StaffManagementSection';
 import AppSettingsSection from '../../components/admin/AppSettingsSection';
-import SystemLogsSection from '../../components/admin/SystemLogsSection'; // Import new component
+import SystemLogsSection from '../../components/admin/SystemLogsSection';
+import SalesAnalyticsSection from '../../components/admin/SalesAnalyticsSection'; // Import the new section
 
 
 function AdminDashboardPage() {
@@ -34,9 +34,11 @@ function AdminDashboardPage() {
 
       <OverviewSection overviewData={overviewData} />
       <QuickAccessSection />
+      {/* Sales Analytics Section - Placed before Staff Management for prominence */}
+      <div id="sales-analytics"><SalesAnalyticsSection /></div>
       <StaffManagementSection />
       <AppSettingsSection />
-      <SystemLogsSection /> {/* Use the new component */}
+      <SystemLogsSection />
 
       <footer className="text-center text-sm text-gray-500 mt-10">
         <p>&copy; {new Date().getFullYear()} BatiStock. All rights reserved.</p>
