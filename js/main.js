@@ -51,6 +51,24 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
+    const accountantInterface = `
+        <div class="dashboard">
+            <div class="panel">
+                <h2>Accountant Interface</h2>
+                <p>Views reports, exports data</p>
+            </div>
+        </div>
+    `;
+
+    const fieldAgentInterface = `
+        <div class="dashboard">
+            <div class="panel">
+                <h2>Field Agent Interface</h2>
+                <p>Mobile user in rural delivery or sales roles</p>
+            </div>
+        </div>
+    `;
+
     function showDashboard(role) {
         let dashboard;
         switch (role) {
@@ -62,6 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             case 'sales':
                 dashboard = salesInterface;
+                break;
+            case 'accountant':
+                dashboard = accountantInterface;
+                break;
+            case 'field-agent':
+                dashboard = fieldAgentInterface;
                 break;
             default:
                 window.location.href = 'login.html';
