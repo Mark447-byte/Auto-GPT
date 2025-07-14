@@ -1,31 +1,39 @@
 /* Basic Styles */
+:root {
+    --primary-color: #2c3e50; /* Midnight Blue */
+    --secondary-color: #3498db; /* Peter River Blue */
+    --accent-color: #e67e22; /* Carrot */
+    --background-color: #ecf0f1; /* Clouds */
+    --text-color: #34495e; /* Wet Asphalt */
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #f0f2f5; /* Light grey background */
-    color: #333;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 header {
-    background-color: #3949ab; /* Indigo */
+    background-color: var(--primary-color);
     color: white;
-    padding: 1rem 2rem;
+    padding: 1.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 header h1 {
     margin: 0;
 }
 
-nav button {
-    background-color: #ffab40; /* Amber */
-    color: #333;
+#logoutBtn {
+    background-color: var(--accent-color);
+    color: white;
     border: none;
     padding: 0.75rem 1.5rem;
     cursor: pointer;
@@ -35,20 +43,20 @@ nav button {
     transition: background-color 0.3s;
 }
 
-nav button:hover {
-    background-color: #ffd180; /* Lighter Amber */
+#logoutBtn:hover {
+    background-color: #d35400; /* Pumpkin */
 }
 
 main {
     flex: 1;
-    padding: 2rem;
+    padding: 3rem;
 }
 
 footer {
-    background-color: #3949ab; /* Indigo */
+    background-color: var(--primary-color);
     color: white;
     text-align: center;
-    padding: 1rem;
+    padding: 1.5rem;
     position: sticky;
     bottom: 0;
     width: 100%;
@@ -74,10 +82,10 @@ footer {
 
 .panel h2 {
     margin-top: 0;
-    color: #3949ab; /* Indigo */
-    border-bottom: 2px solid #ffab40; /* Amber */
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 /* Auth Page Styles */
@@ -99,9 +107,9 @@ footer {
 }
 
 .auth-form h2 {
-    color: #3949ab;
+    color: var(--primary-color);
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .form-group {
@@ -123,9 +131,9 @@ footer {
 
 .auth-button {
     width: 100%;
-    padding: 0.75rem;
-    background-color: #ffab40;
-    color: #333;
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    color: white;
     border: none;
     border-radius: 5px;
     font-weight: bold;
@@ -134,7 +142,7 @@ footer {
 }
 
 .auth-button:hover {
-    background-color: #ffd180;
+    background-color: #2980b9; /* Belize Hole */
 }
 
 .auth-form p {
@@ -143,7 +151,7 @@ footer {
 }
 
 .auth-form a {
-    color: #3949ab;
+    color: var(--secondary-color);
     text-decoration: none;
 }
 
@@ -159,8 +167,8 @@ footer {
 }
 
 .role-button {
-    padding: 1rem;
-    background-color: #3949ab;
+    padding: 1.5rem;
+    background-color: var(--secondary-color);
     color: white;
     border: none;
     border-radius: 5px;
@@ -170,5 +178,5 @@ footer {
 }
 
 .role-button:hover {
-    background-color: #5c6bc0;
+    background-color: #2980b9; /* Belize Hole */
 }

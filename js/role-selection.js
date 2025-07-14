@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const role = button.dataset.role;
             localStorage.setItem('userRole', role);
-            window.location.href = 'index.html';
+            window.location.href = `${role}.html`;
         });
     });
 });

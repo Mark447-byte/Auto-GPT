@@ -25,7 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             // In a real application, you would validate credentials here
             // For this example, we'll just redirect to the main app
-            window.location.href = 'index.html';
+            // We'll assume the user is an admin for now
+            localStorage.setItem('userRole', 'admin');
+            window.location.href = 'admin.html';
         });
     }
 });
