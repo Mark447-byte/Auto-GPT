@@ -27,6 +27,26 @@ header {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .menu-btn {
+        display: none;
+    }
+}
+
 header h1 {
     margin: 0;
 }
@@ -184,13 +204,19 @@ footer {
 /* Dashboard Layout */
 .dashboard-main {
     display: flex;
+    flex-direction: column;
 }
 
 .sidebar {
-    width: 250px;
+    display: none; /* Hidden by default on mobile */
+    width: 100%;
     background-color: var(--primary-color);
     color: white;
     padding: 2rem;
+}
+
+.sidebar.active {
+    display: block;
 }
 
 .sidebar nav ul {
@@ -215,6 +241,17 @@ footer {
 .content {
     flex: 1;
     padding: 2rem;
+}
+
+@media (min-width: 768px) {
+    .dashboard-main {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        display: block;
+        width: 250px;
+    }
 }
 
 .action-button {
