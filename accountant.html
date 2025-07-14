@@ -13,13 +13,27 @@
             <button id="logoutBtn">Logout</button>
         </nav>
     </header>
-    <main>
-        <div class="dashboard">
-            <div class="panel">
-                <h2>Accountant Interface</h2>
-                <p>Views reports, exports data</p>
+    <main class="dashboard-main">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#reports">Reports</a></li>
+                    <li><a href="#export-data">Export Data</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <section class="content">
+            <div id="reports" class="panel">
+                <h2>Reports</h2>
+                <button class="action-button">View Sales Report</button>
+                <button class="action-button">View Inventory Report</button>
             </div>
-        </div>
+            <div id="export-data" class="panel">
+                <h2>Export Data</h2>
+                <button class="action-button">Export as CSV</button>
+                <button class="action-button">Export as PDF</button>
+            </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2024 BatiStock. All rights reserved.</p>

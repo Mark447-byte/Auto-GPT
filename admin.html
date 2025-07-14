@@ -13,17 +13,47 @@
             <button id="logoutBtn">Logout</button>
         </nav>
     </header>
-    <main>
-        <div class="dashboard">
-            <div class="panel">
-                <h2>Admin Dashboard</h2>
-                <p>Overview Panels: Total Revenue, Projects, Inventory Status, Staff Activity</p>
-                <p>Quick Access: Add new branch, sync data, export full report</p>
-                <p>Staff Management: Create, assign, monitor roles</p>
-                <p>App Settings: Language, Currency, Tax, Permissions</p>
-                <p>System Logs: View transaction history, sync issues, backup logs</p>
+    <main class="dashboard-main">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#quick-access">Quick Access</a></li>
+                    <li><a href="#staff-management">Staff Management</a></li>
+                    <li><a href="#app-settings">App Settings</a></li>
+                    <li><a href="#system-logs">System Logs</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <section class="content">
+            <div id="overview" class="panel">
+                <h2>Overview</h2>
+                <p>Total Revenue, Projects, Inventory Status, Staff Activity</p>
             </div>
-        </div>
+            <div id="quick-access" class="panel">
+                <h2>Quick Access</h2>
+                <button class="action-button">Add New Branch</button>
+                <button class="action-button">Sync Data</button>
+                <button class="action-button">Export Full Report</button>
+            </div>
+            <div id="staff-management" class="panel">
+                <h2>Staff Management</h2>
+                <button class="action-button">Create User</button>
+                <button class="action-button">Assign Role</button>
+                <button class="action-button">Monitor Roles</button>
+            </div>
+            <div id="app-settings" class="panel">
+                <h2>App Settings</h2>
+                <button class="action-button">Language</button>
+                <button class="action-button">Currency</button>
+                <button class="action-button">Tax</button>
+                <button class="action-button">Permissions</button>
+            </div>
+            <div id="system-logs" class="panel">
+                <h2>System Logs</h2>
+                <p>View transaction history, sync issues, backup logs</p>
+            </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2024 BatiStock. All rights reserved.</p>

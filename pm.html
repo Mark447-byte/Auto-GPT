@@ -13,17 +13,44 @@
             <button id="logoutBtn">Logout</button>
         </nav>
     </header>
-    <main>
-        <div class="dashboard">
-            <div class="panel">
-                <h2>Project Manager Interface</h2>
-                <p>Projects Tab: View all ongoing projects with status indicators</p>
-                <p>Material Dashboard: Products allocated vs. used</p>
-                <p>Team Assignments: Staff assigned to each project, last login/action</p>
-                <p>Notifications: Material requests, deadlines, updates</p>
-                <p>Communication Board: Leave comments, upload files/photos</p>
+    <main class="dashboard-main">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#material-dashboard">Material Dashboard</a></li>
+                    <li><a href="#team-assignments">Team Assignments</a></li>
+                    <li><a href="#notifications">Notifications</a></li>
+                    <li><a href="#communication-board">Communication Board</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <section class="content">
+            <div id="projects" class="panel">
+                <h2>Projects</h2>
+                <button class="action-button">Create Project</button>
+                <button class="action-button">View Projects</button>
             </div>
-        </div>
+            <div id="material-dashboard" class="panel">
+                <h2>Material Dashboard</h2>
+                <button class="action-button">Allocate Materials</button>
+                <button class="action-button">View Allocations</button>
+            </div>
+            <div id="team-assignments" class="panel">
+                <h2>Team Assignments</h2>
+                <button class="action-button">Assign Team Member</button>
+                <button class="action-button">View Team</button>
+            </div>
+            <div id="notifications" class="panel">
+                <h2>Notifications</h2>
+                <button class="action-button">View Notifications</button>
+            </div>
+            <div id="communication-board" class="panel">
+                <h2>Communication Board</h2>
+                <button class="action-button">Add Comment</button>
+                <button class="action-button">Upload File</button>
+            </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2024 BatiStock. All rights reserved.</p>

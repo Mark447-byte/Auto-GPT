@@ -13,13 +13,27 @@
             <button id="logoutBtn">Logout</button>
         </nav>
     </header>
-    <main>
-        <div class="dashboard">
-            <div class="panel">
-                <h2>Field Agent Interface</h2>
-                <p>Mobile user in rural delivery or sales roles</p>
+    <main class="dashboard-main">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="#rural-delivery">Rural Delivery</a></li>
+                    <li><a href="#mobile-sales">Mobile Sales</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <section class="content">
+            <div id="rural-delivery" class="panel">
+                <h2>Rural Delivery</h2>
+                <button class="action-button">View Delivery Route</button>
+                <button class="action-button">Update Delivery Status</button>
             </div>
-        </div>
+            <div id="mobile-sales" class="panel">
+                <h2>Mobile Sales</h2>
+                <button class="action-button">New Mobile Sale</button>
+                <button class="action-button">View Mobile Sales</button>
+            </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2024 BatiStock. All rights reserved.</p>
