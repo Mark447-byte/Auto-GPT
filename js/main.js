@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const content = document.getElementById('content');
-    const adminBtn = document.getElementById('adminBtn');
-    const pmBtn = document.getElementById('pmBtn');
-    const salesBtn = document.getElementById('salesBtn');
+    const userRole = localStorage.getItem('userRole');
+
+    if (!userRole) {
+        window.location.href = 'login.html';
+        return;
+    }
 
     const adminDashboard = `
         <div class="dashboard">
@@ -48,24 +51,32 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    function showAdminDashboard() {
-        content.innerHTML = adminDashboard;
+    function showDashboard(role) {
+        let dashboard;
+        switch (role) {
+            case 'admin':
+                dashboard = adminDashboard;
+                break;
+            case 'pm':
+                dashboard = pmInterface;
+                break;
+            case 'sales':
+                dashboard = salesInterface;
+                break;
+            default:
+                window.location.href = 'login.html';
+                return;
+        }
+        content.innerHTML = dashboard;
     }
 
-    function showPmInterface() {
-        content.innerHTML = pmInterface;
+    showDashboard(userRole);
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('userRole');
+            window.location.href = 'login.html';
+        });
     }
-
-
-
-    function showSalesInterface() {
-        content.innerHTML = salesInterface;
-    }
-
-    adminBtn.addEventListener('click', showAdminDashboard);
-    pmBtn.addEventListener('click', showPmInterface);
-    salesBtn.addEventListener('click', showSalesInterface);
-
-    // Show admin dashboard by default
-    showAdminDashboard();
 });
