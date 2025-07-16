@@ -1,0 +1,3 @@
+Row 4 skipped: Invalid or missing data. Data: [nan 'Invalid Product' nan nan]
+Row 5 skipped: Invalid or missing data. Data: ['Steel' 'Iron Rod' -500.0 'ton']
+Row 6 skipped: Invalid or missing data. Data: ['Paint' 'Dulux' 15000.0 nan]
