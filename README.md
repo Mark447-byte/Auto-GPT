@@ -176,6 +176,34 @@ As an autonomous experiment, Auto-GPT may generate content or take actions that 
 
 By using Auto-GPT, you agree to indemnify, defend, and hold harmless the developers, contributors, and any affiliated parties from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising from your use of this software or your violation of these terms.
 
+# Smart Receipt Generator
+
+This is a Flask application that allows you to generate receipts for sales, customize their appearance, and send them to customers via WhatsApp.
+
+## Installation
+
+1.  Clone the repository:
+    ```
+    git clone <repository-url>
+    ```
+2.  Navigate to the project directory:
+    ```
+    cd <project-directory>
+    ```
+3.  Install the required dependencies:
+    ```
+    pip install -r requirements.txt
+    ```
+
+## Usage
+
+1.  Run the application:
+    ```
+    python app.py
+    ```
+2.  Open your browser and navigate to `http://127.0.0.1:5000/admin` to configure the receipt settings.
+3.  Navigate to `http://127.0.0.1:5000/sales` to create new sales and generate receipts.
+
 ## 🐦 Connect with Us on Twitter 
 
 Stay up-to-date with the latest news, updates, and insights about Auto-GPT by following our Twitter accounts. Engage with the developer and the AI's own account for interesting discussions, project updates, and more.

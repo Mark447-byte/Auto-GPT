@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Receipt Settings</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="company_name">Company Name:</label><br>
+        <input type="text" id="company_name" name="company_name" value="{{ settings.company_name if settings else '' }}"><br><br>
+
+        <label for="whatsapp_number">WhatsApp Number:</label><br>
+        <input type="text" id="whatsapp_number" name="whatsapp_number" value="{{ settings.whatsapp_number if settings else '' }}"><br><br>
+
+        <label for="header_image">Header Image:</label><br>
+        <input type="file" id="header_image" name="header_image"><br><br>
+        {% if settings and settings.header_image_url %}
+            <img src="{{ url_for('static', filename='uploads/' + settings.header_image_url.split('/')[-1]) }}" width="200">
+        {% endif %}
+        <br><br>
+
+        <label for="footer_image">Footer Image:</label><br>
+        <input type="file" id="footer_image" name="footer_image"><br><br>
+        {% if settings and settings.footer_image_url %}
+            <img src="{{ url_for('static', filename='uploads/' + settings.footer_image_url.split('/')[-1]) }}" width="200">
+        {% endif %}
+        <br><br>
+
+        <input type="submit" value="Save Settings">
+    </form>
+</body>
+</html>

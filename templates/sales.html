@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sales Panel</title>
+    <script>
+        function addProduct() {
+            var products = document.getElementById('products');
+            var newProduct = document.createElement('div');
+            newProduct.innerHTML = `
+                <label for="product_name">Product Name:</label>
+                <input type="text" name="product_name">
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity">
+                <label for="unit_price">Unit Price:</label>
+                <input type="number" name="unit_price" step="0.01">
+                <br><br>
+            `;
+            products.appendChild(newProduct);
+        }
+    </script>
+</head>
+<body>
+    <h1>Create Sale</h1>
+    <form method="POST">
+        <div id="products">
+            <div>
+                <label for="product_name">Product Name:</label>
+                <input type="text" name="product_name">
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity">
+                <label for="unit_price">Unit Price:</label>
+                <input type="number" name="unit_price" step="0.01">
+                <br><br>
+            </div>
+        </div>
+        <button type="button" onclick="addProduct()">Add Product</button>
+        <br><br>
+        <input type="submit" value="Create Sale">
+    </form>
+
+    <h1>Sales</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Sale Number</th>
+                <th>Total Amount</th>
+                <th>Receipt</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+            <tr>
+                <td>{{ sale.sale_number }}</td>
+                <td>{{ sale.total_amount }}</td>
+                <td><a href="{{ url_for('static', filename=sale.receipt_url.replace('static/', '')) }}">View Receipt</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

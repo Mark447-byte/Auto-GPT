@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+    <style>
+        body { font-family: sans-serif; }
+        .container { width: 80%; margin: 0 auto; }
+        .header, .footer { text-align: center; }
+        .header img, .footer img { max-width: 100%; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            {% if settings.header_image_url %}
+                <img src="{{ settings.header_image_url }}">
+            {% endif %}
+            <h1>{{ settings.company_name }}</h1>
+        </div>
+
+        <h2>Receipt #: {{ sale.sale_number }}</h2>
+        <p>Date: {{ sale.created_at.strftime('%d %B %Y') }}</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Qty</th>
+                    <th>Unit</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in sale.products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.unit_price }}</td>
+                    <td>{{ product.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>TOTAL: {{ sale.total_amount }}</h2>
+
+        <div class="footer">
+            {% if sale.barcode_url %}
+                <img src="{{ url_for('static', filename=sale.barcode_url.replace('static/', '')) }}" width="200">
+            {% endif %}
+            <br>
+            {% if settings.footer_image_url %}
+                <img src="{{ settings.footer_image_url }}">
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
