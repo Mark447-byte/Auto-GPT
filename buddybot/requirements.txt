@@ -1,0 +1,12 @@
+pyside6
+whispercpp
+llama-cpp-python
+pyttsx3
+pyaudio
+speechrecognition
+python-dotenv
+requests
+PyPDF2
+python-docx
+faiss-cpu
+sentence-transformers
