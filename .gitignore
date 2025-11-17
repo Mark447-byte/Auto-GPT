@@ -1,0 +1,6 @@
+venv/
+*.log
+buddybot/models/
+__pycache__/
+buddybot/memory/*.json
+buddybot/memory/*.bin
