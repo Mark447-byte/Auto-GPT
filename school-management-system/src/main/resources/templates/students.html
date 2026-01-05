@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>School Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Student List</h1>
+        <a th:href="@{/students/new}" class="btn btn-primary mb-3">Add Student</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.name}"></td>
+                    <td th:text="${student.email}"></td>
+                    <td th:text="${student.course}"></td>
+                    <td>
+                        <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-warning">Edit</a>
+                        <a th:href="@{/students/{id}/delete(id=${student.id})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
