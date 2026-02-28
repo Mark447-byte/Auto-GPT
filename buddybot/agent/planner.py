@@ -5,10 +5,15 @@ class Planner:
         self.llm_client = llm_client
 
     def plan(self, user_goal, context=""):
+        # Explicitly mention context in the prompt if it exists
+        context_prompt = ""
+        if context:
+            context_prompt = f"\nRecent Interaction History:\n{context}\nUse this history to understand the user's intent or follow-up questions."
+
         prompt = f"""
 You are BuddyBot, a local agentic assistant.
 User Goal: {user_goal}
-Context: {context}
+{context_prompt}
 
 Break down the user goal into a list of steps.
 Available tools:
@@ -20,11 +25,28 @@ Available tools:
 - complete_task(task_id)
 - execute_shell(command)
 
-Output only a JSON list of steps. Each step should have a 'description' and a 'tool' if applicable (with 'args').
-Example:
+Output ONLY a JSON list of steps. Do not include any other text or markdown formatting.
+Each step must have a 'description' and a 'tool' if applicable (with 'args').
+
+Example 1:
+Goal: "Tell me what files are in this folder"
 [
   {{"description": "List files in current directory", "tool": "list_files", "args": {{"directory": "."}}}}
 ]
+
+Example 2:
+Goal: "Remind me to buy milk"
+[
+  {{"description": "Add a task to buy milk", "tool": "add_task", "args": {{"content": "Buy milk"}}}}
+]
+
+Example 3:
+Goal: "Check the contents of secrets.txt"
+[
+  {{"description": "Read the secrets.txt file", "tool": "read_file", "args": {{"filepath": "secrets.txt"}}}}
+]
+
+Now, generate the steps for: "{user_goal}"
 """
         response = self.llm_client.generate(prompt)
         try:
@@ -32,7 +54,16 @@ Example:
             start = response.find('[')
             end = response.rfind(']') + 1
             if start != -1 and end != -1:
-                return json.loads(response[start:end])
-            return [{"description": "Error: LLM did not return a valid JSON list of steps.", "response": response}]
+                json_str = response[start:end]
+                return json.loads(json_str)
+
+            # If not found, try to clean up the response
+            cleaned_response = response.strip()
+            if cleaned_response.startswith('```json'):
+                cleaned_response = cleaned_response[7:]
+            if cleaned_response.endswith('```'):
+                cleaned_response = cleaned_response[:-3]
+
+            return json.loads(cleaned_response.strip())
         except Exception as e:
             return [{"description": f"Error parsing plan: {str(e)}", "response": response}]

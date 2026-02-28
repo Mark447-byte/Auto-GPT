@@ -4,11 +4,12 @@ from buddybot.tools.file_tools import list_files, read_file, write_file
 from buddybot.tools.shell_tools import execute_shell
 
 class AgentLoop:
-    def __init__(self, llm_client, task_tools, memory):
+    def __init__(self, llm_client, task_tools, long_term_memory, short_term_memory):
         self.planner = Planner(llm_client)
         self.reflector = Reflector(llm_client)
         self.task_tools = task_tools
-        self.memory = memory
+        self.long_term_memory = long_term_memory
+        self.short_term_memory = short_term_memory
         self.tools = {
             "list_files": list_files,
             "read_file": read_file,
@@ -21,11 +22,16 @@ class AgentLoop:
 
     def run(self, user_goal):
         print(f"BuddyBot: Planning for goal: {user_goal}")
-        plan = self.planner.plan(user_goal)
 
-        final_response = ""
+        # Retrieve context from short-term memory
+        context = self.short_term_memory.get_formatted_history()
+
+        plan = self.planner.plan(user_goal, context=context)
+
+        execution_details = ""
         for step in plan:
-            print(f"BuddyBot: Executing step: {step.get('description')}")
+            description = step.get('description', 'Unknown step')
+            print(f"BuddyBot: Executing step: {description}")
             tool_name = step.get('tool')
             args = step.get('args', {})
 
@@ -40,11 +46,17 @@ class AgentLoop:
             print(f"BuddyBot: Result: {result}")
 
             should_continue, reflection = self.reflector.reflect(step, result)
-            final_response += f"Step: {step.get('description')}\nResult: {result}\nReflection: {reflection}\n\n"
+            execution_details += f"Step: {description}\nResult: {result}\nReflection: {reflection}\n\n"
 
             if not should_continue:
                 print("BuddyBot: Stopping based on reflection.")
                 break
 
-        self.memory.store_interaction(user_goal, final_response)
-        return final_response
+        # Summarize the interaction for memory
+        summary = f"Goal: {user_goal}\n{execution_details}"
+
+        # Store in both memory layers
+        self.short_term_memory.add_interaction(user_goal, execution_details)
+        self.long_term_memory.store_interaction(user_goal, execution_details, summary=summary)
+
+        return execution_details

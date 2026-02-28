@@ -6,7 +6,14 @@ class AudioRecorder:
         self.max_seconds = max_seconds
         self.recognizer = sr.Recognizer()
 
-    def record_to_file(self, filename="buddybot/logs/temp_audio.wav"):
+    def record_to_file(self, filename=None):
+        if filename is None:
+            # Set default path relative to this file
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            filename = os.path.join(base_dir, "logs", "temp_audio.wav")
+
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+
         try:
             with sr.Microphone() as source:
                 print(f"BuddyBot: Listening (max {self.max_seconds}s)...")

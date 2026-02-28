@@ -8,9 +8,18 @@ Step executed: {step}
 Result: {result}
 
 Did the step succeed? Should the agent continue or stop?
-Respond with 'CONTINUE' or 'STOP' followed by a brief reason.
+Respond with ONE WORD: 'CONTINUE' or 'STOP'.
+Followed by a brief reason.
 """
         response = self.llm_client.generate(prompt)
-        if "STOP" in response.upper():
+        cleaned_response = response.strip().upper()
+
+        if cleaned_response.startswith("STOP"):
             return False, response
-        return True, response
+        elif cleaned_response.startswith("CONTINUE"):
+            return True, response
+
+        # Fallback for unexpected LLM output
+        if "CONTINUE" in cleaned_response:
+            return True, response
+        return False, response # Default to stop for safety

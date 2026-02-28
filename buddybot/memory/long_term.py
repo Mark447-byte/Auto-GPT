@@ -2,7 +2,12 @@ import sqlite3
 import os
 
 class LongTermMemory:
-    def __init__(self, db_path="buddybot/data/buddybot.db"):
+    def __init__(self, db_path=None):
+        if db_path is None:
+            # Set default path relative to this file
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            db_path = os.path.join(base_dir, "data", "buddybot.db")
+
         os.makedirs(os.path.dirname(db_path), exist_ok=True)
         self.db_path = db_path
         self._init_db()

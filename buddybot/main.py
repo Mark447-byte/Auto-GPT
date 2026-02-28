@@ -11,17 +11,27 @@ from buddybot.speech.audio_recorder import AudioRecorder
 from buddybot.speech.speech_to_text import SpeechToText
 from buddybot.input.voice_input import VoiceInput
 from buddybot.input.input_controller import InputController
+from buddybot.utils.system_check import run_all_checks
 
 def load_config():
-    config_path = "buddybot/config/settings.yaml"
+    # Calculate path relative to this file
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(base_dir, "config", "settings.yaml")
+
     if os.path.exists(config_path):
-        with open(config_path, 'r') as f:
-            return yaml.safe_load(f)
+        try:
+            with open(config_path, 'r') as f:
+                return yaml.safe_load(f)
+        except Exception as e:
+            print(f"Error reading config: {str(e)}")
     return {}
 
 def main():
     print("=== BuddyBot: Local Agentic Assistant ===")
     config = load_config()
+
+    # System checks
+    run_all_checks(config)
 
     # Initialize components
     llm_client = OllamaClient(
@@ -33,7 +43,8 @@ def main():
     short_term_mem = ShortTermMemory()
     task_tools = TaskTools(long_term_mem)
 
-    agent = AgentLoop(llm_client, task_tools, long_term_mem)
+    # Pass short_term_mem to AgentLoop
+    agent = AgentLoop(llm_client, task_tools, long_term_mem, short_term_mem)
 
     recorder = AudioRecorder(max_seconds=config.get('voice', {}).get('max_record_seconds', 10))
     stt = SpeechToText(
@@ -43,7 +54,7 @@ def main():
     voice_in = VoiceInput(recorder, stt)
     input_ctrl = InputController(voice_in)
 
-    print("BuddyBot is ready. Type 'exit' to quit.")
+    print("\nBuddyBot is ready. Type 'exit' to quit.")
 
     while True:
         try:
@@ -63,7 +74,7 @@ def main():
             print("\nBuddyBot: Goodbye!")
             break
         except Exception as e:
-            print(f"BuddyBot encountered an error: {str(e)}")
+            print(f"BuddyBot encountered a system error: {str(e)}")
 
 if __name__ == "__main__":
     main()
