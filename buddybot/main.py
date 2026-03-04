@@ -4,6 +4,7 @@ from buddybot.input.input_controller import InputController
 from buddybot.core.stt import SpeechToText
 from buddybot.core.llm import OllamaCLI
 from buddybot.core.tts import TextToSpeech
+from buddybot.utils.system_check import run_system_checks
 
 # Configure logging
 logging.basicConfig(
@@ -19,6 +20,9 @@ def main():
     print("========================================")
     print("   BuddyBot Phase 1: Local Assistant    ")
     print("========================================")
+
+    # Perform system health checks on startup
+    run_system_checks()
 
     # Initialize components
     stt_service = SpeechToText(max_seconds=10)
