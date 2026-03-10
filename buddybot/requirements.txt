@@ -1,0 +1,10 @@
+transformers
+torch
+SpeechRecognition
+PyAudio
+sounddevice
+pyttsx3
+pytest
+requests
+pyyaml
+psutil

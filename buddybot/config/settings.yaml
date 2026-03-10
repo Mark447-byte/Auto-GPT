@@ -1,0 +1,12 @@
+input_mode:
+  allow_text: true
+  allow_voice: true
+
+voice:
+  max_record_seconds: 10
+  transcription_mode: "online"   # or "offline"
+  language: "en-US"
+
+llm:
+  model: "phi3:mini"
+  api_url: "http://localhost:11434/api/generate"
