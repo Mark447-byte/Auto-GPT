@@ -3,6 +3,7 @@ import logging
 import speech_recognition as sr
 import pyttsx3
 import sys
+import platform
 
 logger = logging.getLogger(__name__)
 
@@ -11,88 +12,88 @@ def check_ollama():
     try:
         result = subprocess.run(["ollama", "--version"], capture_output=True, text=True)
         if result.returncode == 0:
-            logger.info(f"Ollama CLI found: {result.stdout.strip()}")
-            return True
+            return True, f"Found: {result.stdout.strip()}"
         else:
-            logger.error(f"Ollama CLI check failed with return code {result.returncode}.")
-            return False
+            return False, "Ollama CLI check failed. Ensure the service is running."
     except FileNotFoundError:
-        logger.error("Ollama CLI not found. Please install Ollama (https://ollama.com).")
-        return False
+        return False, "Ollama CLI not found. Install from https://ollama.com and add to PATH."
 
 def check_model(model_name="tinyllama"):
     """Checks if the specified model is available in Ollama."""
     try:
-        # PRD 5.3: Must call Ollama via CLI (ollama run)
-        # We can also use 'ollama list' to check for models
         result = subprocess.run(["ollama", "list"], capture_output=True, text=True)
         if result.returncode == 0:
             if model_name in result.stdout:
-                logger.info(f"Model '{model_name}' is available in Ollama.")
-                return True
+                return True, f"Model '{model_name}' is ready."
             else:
-                logger.error(f"Model '{model_name}' not found. Run 'ollama pull {model_name}' to download it.")
-                return False
+                return False, f"Model '{model_name}' not found. Run: 'ollama pull {model_name}'"
         else:
-            logger.error(f"Failed to list Ollama models. Code: {result.returncode}.")
-            return False
+            return False, "Failed to communicate with Ollama service."
     except FileNotFoundError:
-        logger.error("Ollama CLI not found while checking models.")
-        return False
+        return False, "Ollama CLI not found."
 
 def check_microphone():
     """Checks for available microphones."""
     try:
         mics = sr.Microphone.list_microphone_names()
         if mics:
-            logger.info(f"Microphone(s) detected: {len(mics)} device(s) found.")
-            return True
+            return True, f"{len(mics)} device(s) detected."
         else:
-            logger.error("No microphones detected. Voice input (V) will not work.")
-            return False
+            return False, "No microphones detected. Voice input (V) will fail. Check Privacy Settings."
     except Exception as e:
-        logger.error(f"Microphone access error: {str(e)}")
-        return False
+        if "PyAudio" in str(e):
+            fix = "Install PyAudio. Windows: 'pip install PyAudio'. Linux: 'sudo apt install python3-pyaudio'."
+            return False, f"PyAudio missing. {fix}"
+        return False, f"Microphone error: {str(e)}"
 
 def check_tts():
     """Checks if the TTS engine can be initialized."""
     try:
         engine = pyttsx3.init()
-        # Test basic property retrieval
-        rate = engine.getProperty('rate')
-        logger.info(f"TTS engine initialized successfully (default rate: {rate}).")
-        return True
+        engine.getProperty('rate')
+        return True, "Initialized successfully."
     except Exception as e:
-        logger.error(f"TTS initialization failed: {str(e)}")
-        return False
+        system = platform.system()
+        msg = f"TTS Error: {str(e)}."
+        if system == "Linux":
+            msg += " Install eSpeak: 'sudo apt install espeak-ng'."
+        elif system == "Windows":
+            msg += " Ensure Windows Speech API (SAPI5) is enabled."
+        return False, msg
 
 def run_system_checks():
     """Executes all system health checks and returns a summary."""
-    print("\n--- Running System Health Checks ---")
+    print("\n" + "="*40)
+    print("   BuddyBot System Health Check")
+    print("="*40)
 
-    status = {
-        "Ollama CLI": check_ollama(),
-        "TinyLlama Model": check_model(),
-        "Microphone Access": check_microphone(),
-        "TTS Engine": check_tts()
-    }
+    checks = [
+        ("Ollama CLI", check_ollama),
+        ("TinyLlama Model", check_model),
+        ("Microphone", check_microphone),
+        ("TTS Engine", check_tts)
+    ]
 
     all_ok = True
-    print("\nCheck Results:")
-    for check, result in status.items():
-        res_str = "[OK]" if result else "[FAIL]"
-        print(f"{check:20} : {res_str}")
-        if not result:
+    for name, func in checks:
+        success, message = func()
+        status = "[OK]" if success else "[FAIL]"
+        print(f"{name:20} : {status}")
+        if not success:
+            print(f"  -> Fix: {message}")
             all_ok = False
+        else:
+            print(f"  -> {message}")
 
+    print("="*40)
     if all_ok:
-        print("\nAll system checks passed! BuddyBot is ready for local deployment.")
+        print("BuddyBot is ready to run!")
     else:
-        print("\nWarning: Some system checks failed. BuddyBot may not function correctly.")
-        print("Please resolve the issues listed above for the best experience.")
+        print("Action required before BuddyBot can function fully.")
+    print("="*40 + "\n")
 
     return all_ok
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+    logging.basicConfig(level=logging.ERROR)
     run_system_checks()

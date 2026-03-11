@@ -1,59 +1,86 @@
 # BuddyBot Phase 1: Local Conversational Assistant
 
-BuddyBot is a lightweight, local-first conversational assistant optimized for Windows 11 systems with limited hardware (4GB RAM). It supports both text and push-to-talk voice input and provides offline responses via a local LLM and TTS.
+BuddyBot is a lightweight, local-first conversational assistant optimized for Windows 11 systems with limited hardware (4GB RAM).
 
-## Prerequisites
+## 🚀 Quick Start (Windows 11)
 
-1. **Python 3.10+**: Ensure Python is installed and added to your system's PATH.
-2. **Ollama**:
-   - Download and install Ollama from [ollama.com](https://ollama.com).
-   - Once installed, open a terminal and pull the required model:
-     ```bash
-     ollama pull tinyllama
-     ```
-3. **Microsoft Visual C++ Build Tools** (Windows only):
-   - Required for building some Python dependencies like `PyAudio`.
-   - Download from [visualstudio.microsoft.com/visual-cpp-build-tools/](https://visualstudio.microsoft.com/visual-cpp-build-tools/).
-4. **PortAudio** (Linux only):
-   - Required for `PyAudio`. Install via your package manager (e.g., `sudo apt install portaudio19-dev`).
+### 1. Install System Dependencies
+1. **Ollama**: Download and install from [ollama.com](https://ollama.com).
+2. **Microsoft Visual C++ Build Tools**: Required for `PyAudio`. Download from [here](https://visualstudio.microsoft.com/visual-cpp-build-tools/). Select "Desktop development with C++" during installation.
 
-## Setup Instructions
+### 2. Setup Ollama Model
+Open your terminal (PowerShell or CMD) and run:
+```powershell
+ollama pull tinyllama
+```
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd <repository-name>
-   ```
+### 3. Install BuddyBot
+```powershell
+# Clone the repository
+git clone <repository-url>
+cd <repository-name>
 
-2. **Install Python dependencies**:
-   It is recommended to use a virtual environment.
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r buddybot/requirements.txt
-   ```
+# Create a virtual environment
+python -m venv venv
+.\venv\Scripts\activate
 
-3. **Verify Installation**:
-   BuddyBot includes a system check utility to verify your environment.
-   ```bash
-   export PYTHONPATH=$PYTHONPATH:.  # On Windows: set PYTHONPATH=%PYTHONPATH%;.
-   python buddybot/utils/system_check.py
-   ```
+# Install requirements
+pip install -r buddybot/requirements.txt
+```
 
-## Usage
+### 4. Run Health Check
+Verify your environment is ready:
+```powershell
+$env:PYTHONPATH += ";."
+python buddybot/utils/system_check.py
+```
 
-Run the main application:
-```bash
+### 5. Launch BuddyBot
+```powershell
 python buddybot/main.py
 ```
 
-### Controls:
-- **T**: Enter text input via the terminal.
-- **V**: Activate voice recording (max 10 seconds).
-- **Q**: Quit BuddyBot.
+---
 
-## Troubleshooting
+## 🐧 Linux (Ubuntu/Debian)
 
-- **Ollama CLI not found**: Ensure Ollama is installed and that the terminal can access the `ollama` command.
-- **Microphone issues**: Check your system's privacy settings to ensure applications have permission to access the microphone.
-- **TTS Errors**: If you hear no sound, verify that your default audio output device is correctly set.
+### 1. Install System Dependencies
+```bash
+sudo apt update
+sudo apt install python3-pyaudio espeak-ng portaudio19-dev
+```
+
+### 2. Setup Ollama
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull tinyllama
+```
+
+### 3. Install & Run
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r buddybot/requirements.txt
+export PYTHONPATH=$PYTHONPATH:.
+python3 buddybot/main.py
+```
+
+---
+
+## 🛠 Operation & Controls
+
+BuddyBot operates in a simple loop:
+1. **Selection Menu**:
+   - Press **T** for Text: Type your query directly.
+   - Press **V** for Voice: Speak into your microphone (max 10 seconds).
+   - Press **Q** to Quit.
+2. **Thinking**: BuddyBot sends your input to the local `tinyllama` model.
+3. **Response**: The answer is printed to the terminal and spoken aloud via offline TTS.
+
+## ❓ Troubleshooting
+
+- **Microphone Error**:
+  - Windows: Go to *Settings > Privacy & security > Microphone* and ensure "Microphone access" and "Let desktop apps access your microphone" are ON.
+  - Linux: Ensure your user is in the `audio` group: `sudo usermod -aG audio $USER`.
+- **Ollama Error**: Ensure the Ollama tray icon is visible or run `ollama serve` in a separate terminal.
+- **No Sound**: Ensure `pyttsx3` is using the correct driver. On Linux, `espeak-ng` must be installed.
