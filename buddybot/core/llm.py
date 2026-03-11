@@ -29,7 +29,8 @@ class OllamaCLI:
                 logger.error(f"Ollama returned non-zero exit code {result.returncode}: {result.stderr}")
                 return f"Error: Ollama execution failed with code {result.returncode}."
 
-            return result.stdout.strip()
+            response = result.stdout.strip()
+            return response if response else "BuddyBot: I'm sorry, I couldn't generate a response."
 
         except subprocess.TimeoutExpired:
             logger.error(f"Ollama execution timed out after {self.timeout} seconds.")

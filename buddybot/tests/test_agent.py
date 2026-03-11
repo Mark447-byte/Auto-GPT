@@ -39,6 +39,19 @@ class TestBuddyBotPhase1(unittest.TestCase):
 
         self.assertIn("timed out", response)
 
+    @patch('subprocess.run')
+    def test_llm_generate_empty_response(self, mock_run):
+        # Mock empty stdout
+        mock_result = MagicMock()
+        mock_result.returncode = 0
+        mock_result.stdout = ""
+        mock_run.return_value = mock_result
+
+        llm = OllamaCLI()
+        response = llm.generate("Hi")
+
+        self.assertIn("I'm sorry", response)
+
     # 2. Test Input Controller
     def test_input_controller_text(self):
         # Mocking input() for T selection and then text entry
@@ -75,6 +88,17 @@ class TestBuddyBotPhase1(unittest.TestCase):
             self.assertEqual(result, "Fallback text")
 
     # 3. Test STT Wrapper
+    @patch('speech_recognition.Microphone')
+    @patch('speech_recognition.Recognizer')
+    def test_stt_mic_init_failure(self, mock_recognizer_class, mock_mic_class):
+        # Mock Microphone initialization failure
+        mock_mic_class.side_effect = OSError("No mic")
+
+        stt = SpeechToText()
+        result = stt.capture_and_transcribe()
+
+        self.assertIsNone(result)
+
     @patch('speech_recognition.Microphone')
     @patch('speech_recognition.Recognizer')
     def test_stt_capture_success(self, mock_recognizer_class, mock_mic_class):
