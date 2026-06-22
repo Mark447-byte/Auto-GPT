@@ -158,16 +158,24 @@
         </div>
     </footer>
 
-    <!-- AI Chat Assistant Mock -->
-    <div id="ai-chat" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
-        <button class="btn btn-primary" style="border-radius: 50%; width: 60px; height: 60px; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">🤖</button>
-    </div>
-
     <script src="js/main.js"></script>
-    <script>
-        document.querySelector('#ai-chat button').addEventListener('click', () => {
-            alert('UAI AI Assistant: Hello! How can I help you today with your investment or membership inquiries?');
-        });
-    </script>
+        <!-- AI Chat Assistant -->
+    <div id="chat-widget">
+        <button id="chat-button">🤖</button>
+        <div id="chat-window">
+            <div id="chat-header">
+                <span>UAI Assistant</span>
+                <span id="close-chat" style="cursor:pointer;">&times;</span>
+            </div>
+            <div id="chat-messages">
+                <div class="message ai-message">Hello! How can I assist you with United Agro Innovation today?</div>
+            </div>
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id="chat-send">➤</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/chat.js"></script>
 </body>
 </html>

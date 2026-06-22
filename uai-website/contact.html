@@ -90,5 +90,23 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <!-- AI Chat Assistant -->
+    <div id="chat-widget">
+        <button id="chat-button">🤖</button>
+        <div id="chat-window">
+            <div id="chat-header">
+                <span>UAI Assistant</span>
+                <span id="close-chat" style="cursor:pointer;">&times;</span>
+            </div>
+            <div id="chat-messages">
+                <div class="message ai-message">Hello! How can I assist you with United Agro Innovation today?</div>
+            </div>
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id="chat-send">➤</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/chat.js"></script>
 </body>
 </html>
