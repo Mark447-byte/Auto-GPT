@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects | UAI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .filter-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--primary-green);
+            background: white;
+            color: var(--primary-green);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .project-img {
+            height: 200px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+        }
+        .project-info {
+            padding: 20px;
+        }
+        .project-tag {
+            background: var(--bg-light);
+            color: var(--primary-green);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .progress-bar {
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
+            margin: 15px 0 5px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-green);
+        }
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            color: var(--text-light);
+        }
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">U<span>AI</span></div>
+                <div class="nav-toggle">☰</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="projects.html" class="active">Projects</a></li>
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="finance.html">Finance</a></li>
+                    <li><a href="blog.html">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="apply.html" class="btn btn-primary">Join Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="section-title">
+            <h2>Our Innovation Portfolio</h2>
+            <p>Driving growth across diverse sectors through strategic project development.</p>
+        </div>
+
+        <div class="filter-nav">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="agriculture">Agriculture</button>
+            <button class="filter-btn" data-filter="technology">Technology</button>
+            <button class="filter-btn" data-filter="energy">Renewable Energy</button>
+            <button class="filter-btn" data-filter="commerce">Commerce</button>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card" data-category="agriculture">
+                <div class="project-img">Project Image</div>
+                <div class="project-info">
+                    <span class="project-tag">Agriculture</span>
+                    <h3>Smart Irrigation Hub</h3>
+                    <p>Automated solar-powered irrigation system for smallholder farmers.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                    <div class="project-meta">
+                        <span>75% Complete</span>
+                        <span class="status-badge">In Progress</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>Budget: $50,000</span>
+                        <span>Team: 5 Members</span>
+                    </div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">Invest Now</a>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="technology">
+                <div class="project-img">Project Image</div>
+                <div class="project-info">
+                    <span class="project-tag">Technology</span>
+                    <h3>UAI Mobile Wallet</h3>
+                    <p>Financial inclusion platform for rural agricultural communities.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
+                    <div class="project-meta">
+                        <span>40% Complete</span>
+                        <span class="status-badge">Development</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>Budget: $120,000</span>
+                        <span>Team: 8 Members</span>
+                    </div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">Invest Now</a>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="energy">
+                <div class="project-img">Project Image</div>
+                <div class="project-info">
+                    <span class="project-tag">Renewable Energy</span>
+                    <h3>Village Solar Grid</h3>
+                    <p>Modular solar energy kits for off-grid residential communities.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+                    <div class="project-meta">
+                        <span>100% Complete</span>
+                        <span class="status-badge" style="background:#e8f5e9; color:#2e7d32;">Completed</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>Budget: $85,000</span>
+                        <span>Team: 4 Members</span>
+                    </div>
+                    <a href="#" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2024 United Agro Innovation (UAI). All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.filter-btn.active').classList.remove('active');
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                document.querySelectorAll('.project-card').forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

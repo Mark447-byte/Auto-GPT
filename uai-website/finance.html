@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance & Transparency | UAI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .finance-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .report-list {
+            list-style: none;
+        }
+        .report-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .report-item:last-child {
+            border-bottom: none;
+        }
+        .download-link {
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">U<span>AI</span></div>
+                <div class="nav-toggle">☰</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="finance.html" class="active">Finance</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="section-title">
+            <h2>Financial Transparency</h2>
+            <p>Our commitment to accountability and ethical financial management.</p>
+        </div>
+
+        <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div class="finance-card">
+                <h3>Financial Policies</h3>
+                <p>UAI adheres to International Financial Reporting Standards (IFRS) and maintains a strict zero-tolerance policy towards corruption and financial mismanagement.</p>
+                <a href="#" class="btn btn-outline" style="margin-top: 15px;">Read Policies</a>
+            </div>
+            <div class="finance-card">
+                <h3>Contribution Guidelines</h3>
+                <p>Monthly contributions are mandatory for all active members. These funds power our administrative operations and initial project seed funding.</p>
+                <ul>
+                    <li>Standard Member: $50/month</li>
+                    <li>Corporate Member: $200/month</li>
+                </ul>
+            </div>
+            <div class="finance-card">
+                <h3>Reserve Fund</h3>
+                <p>A minimum of 15% of all profits is allocated to the UAI Reserve Fund to ensure long-term stability and emergency project capital.</p>
+            </div>
+        </div>
+
+        <div class="finance-card" style="margin-top: 40px;">
+            <h3>Annual Reports & Statements</h3>
+            <div class="report-list">
+                <div class="report-item">
+                    <span>2023 Annual Financial Statement</span>
+                    <a href="#" class="download-link">Download PDF</a>
+                </div>
+                <div class="report-item">
+                    <span>Q1 2024 Transparency Report</span>
+                    <a href="#" class="download-link">Download PDF</a>
+                </div>
+                <div class="report-item">
+                    <span>Shareholder Profit Distribution Schedule 2023</span>
+                    <a href="#" class="download-link">Download PDF</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2024 United Agro Innovation (UAI). All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

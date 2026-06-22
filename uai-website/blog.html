@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Blog | UAI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .blog-img {
+            height: 180px;
+            background: #eee;
+        }
+        .blog-content {
+            padding: 20px;
+        }
+        .blog-date {
+            font-size: 0.8rem;
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">U<span>AI</span></div>
+                <div class="nav-toggle">☰</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="blog.html" class="active">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="section-title">
+            <h2>Organization News & Insights</h2>
+            <p>Stay updated with the latest from UAI and the global innovation landscape.</p>
+        </div>
+
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-img"></div>
+                <div class="blog-content">
+                    <span class="blog-date">June 15, 2024</span>
+                    <h3>UAI Partners with Global Tech Hub</h3>
+                    <p>New strategic partnership to accelerate technology adoption in rural agriculture.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600;">Read More &rarr;</a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-img"></div>
+                <div class="blog-content">
+                    <span class="blog-date">June 02, 2024</span>
+                    <h3>Successful Harvest at Project GreenField</h3>
+                    <p>Our pilot sustainable farming project achieves record yields this season.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600;">Read More &rarr;</a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-img"></div>
+                <div class="blog-content">
+                    <span class="blog-date">May 20, 2024</span>
+                    <h3>Why African Innovation is the Future</h3>
+                    <p>An in-depth look at the emerging trends in the continent's tech and agro sectors.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600;">Read More &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2024 United Agro Innovation (UAI). All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

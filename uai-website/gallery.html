@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | UAI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item {
+            position: relative;
+            height: 200px;
+            background: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(11, 122, 62, 0.8);
+            color: white;
+            padding: 10px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Lightbox */
+        #lightbox {
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        #lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border: 5px solid white;
+        }
+        #lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">U<span>AI</span></div>
+                <div class="nav-toggle">☰</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container">
+        <div class="section-title">
+            <h2>UAI in Action</h2>
+            <p>Capturing our milestones, projects, and team activities.</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item" data-src="assets/images/g1.jpg">
+                <div class="gallery-overlay">Training Program 2023</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/g2.jpg">
+                <div class="gallery-overlay">Project Site Visit</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/g3.jpg">
+                <div class="gallery-overlay">Board of Directors Meeting</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/g4.jpg">
+                <div class="gallery-overlay">Annual Innovation Summit</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/g5.jpg">
+                <div class="gallery-overlay">Agricultural Workshop</div>
+            </div>
+            <div class="gallery-item" data-src="assets/images/g6.jpg">
+                <div class="gallery-overlay">Community Outreach</div>
+            </div>
+        </div>
+    </section>
+
+    <div id="lightbox">
+        <span id="lightbox-close">&times;</span>
+        <img src="" alt="Enlarged Image">
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2024 United Agro Innovation (UAI). All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        const closeBtn = document.getElementById('lightbox-close');
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // In a real app, we'd use the data-src.
+                // For this demo, we'll just show a placeholder since images aren't uploaded.
+                lightboxImg.src = 'https://via.placeholder.com/800x600?text=' + encodeURIComponent(item.textContent.trim());
+                lightbox.style.display = 'flex';
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
