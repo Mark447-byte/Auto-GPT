@@ -16,16 +16,14 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            background: #050a08;
+            background: linear-gradient(135deg, #050a08 0%, #0B7A3E 100%);
             color: white;
-            perspective: 2000px;
         }
 
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(11, 122, 62, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 70%, rgba(198, 40, 40, 0.1) 0%, transparent 50%);
+            background: rgba(0, 0, 0, 0.4);
             z-index: 2;
         }
 
@@ -67,31 +65,28 @@
         .hero-content {
             z-index: 10;
             text-align: center;
-            transform-style: preserve-3d;
             max-width: 1100px;
         }
 
         .hero-content h1 {
-            font-size: clamp(3.5rem, 10vw, 7.5rem);
-            line-height: 0.85;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
             margin-bottom: 25px;
             text-transform: uppercase;
             font-weight: 800;
-            letter-spacing: -3px;
-            background: linear-gradient(180deg, #FFFFFF 30%, rgba(255,255,255,0.6) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            letter-spacing: -1px;
+            color: #FFFFFF;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .hero-tagline {
             font-size: 1.25rem;
-            font-weight: 500;
-            letter-spacing: 8px;
+            font-weight: 600;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 45px;
-            color: var(--primary-green);
-            text-shadow: 0 0 20px var(--primary-green-glow);
+            margin-bottom: 20px;
+            color: #4ade80; /* Brighter green for contrast */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .scroll-indicator {
@@ -246,7 +241,7 @@
         .footer-bottom { border-top: 1px solid #222; padding-top: 30px; text-align: center; color: #555; font-size: 0.9rem; }
     </style>
 </head>
-<body>
+<body class="home-page">
     <header id="main-header">
         <div class="container">
             <nav>
@@ -278,15 +273,16 @@
                 <div class="floating-orb orb-1"></div>
                 <div class="floating-orb orb-2"></div>
             </div>
-            <div class="container hero-content tilt-element">
+            <div class="container hero-content">
                 <div class="hero-tagline reveal active">Innovating Today, Building Tomorrow</div>
                 <h1 class="reveal active" style="transition-delay: 0.2s;">United Agro<br>Innovation</h1>
-                <p class="reveal active" style="transition-delay: 0.3s; font-size: 1.4rem; max-width: 700px; margin: 0 auto 50px; opacity: 0.8; font-weight: 300;">
+                <p class="reveal active" style="transition-delay: 0.3s; font-size: 1.4rem; max-width: 700px; margin: 0 auto 50px; color: #f0f0f0; font-weight: 400;">
                     Leading the frontier of African entrepreneurship through multi-sector innovation and high-impact strategic investments.
                 </p>
                 <div class="hero-btns reveal active" style="transition-delay: 0.4s;">
                     <a href="apply.html" class="btn btn-primary">Become a Member</a>
-                    <a href="projects.html" class="btn btn-outline" style="color: white; border-color: white; margin-left: 20px;">Explore Projects</a>
+                    <a href="projects.html" class="btn btn-outline" style="color: white; border-color: white; margin-left: 10px;">Explore Projects</a>
+                    <a href="shareholder.html" class="btn btn-outline" style="color: white; border-color: white; margin-left: 10px;">Invest With Us</a>
                 </div>
             </div>
             <div class="scroll-indicator">
@@ -351,11 +347,17 @@
         </section>
     </main>
 
-    <footer class="main-footer">
+        <footer class="main-footer">
         <div class="container footer-grid">
             <div class="footer-brand">
                 <h3>United Agro Innovation</h3>
                 <p>"Innovating Today, Building Tomorrow"</p>
+                <div class="social-links" style="margin-top: 20px; display: flex; gap: 15px;">
+                    <a href="#" style="color: #888; text-decoration: none;">FB</a>
+                    <a href="#" style="color: #888; text-decoration: none;">TW</a>
+                    <a href="#" style="color: #888; text-decoration: none;">LN</a>
+                    <a href="#" style="color: #888; text-decoration: none;">WA</a>
+                </div>
             </div>
             <div class="footer-links">
                 <h4>Quick Links</h4>
@@ -365,12 +367,23 @@
                     <li><a href="projects.html">Projects</a></li>
                     <li><a href="blog.html">News & Blog</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Portals</h4>
+                <ul>
+                    <li><a href="shareholder.html">Shareholder Dashboard</a></li>
+                    <li><a href="members.html">Member Portal</a></li>
+                    <li><a href="elections.html">Elections</a></li>
+                    <li><a href="admin.html">Admin Panel</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
                 <h4>Contact Info</h4>
                 <p>Email: info@uai-innovation.org</p>
                 <p>Phone: +237 600 000 000</p>
+                <p>Yaoundé, Cameroon</p>
             </div>
         </div>
         <div class="footer-bottom">
