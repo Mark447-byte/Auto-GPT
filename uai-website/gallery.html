@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | UAI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .gallery-item {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            background: #eee;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay {
+            position: absolute;
+            top:0; left:0; width:100%; height:100%;
+            background: rgba(11, 122, 62, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        /* Lightbox - Simple implementation */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-img { max-width: 90%; max-height: 80%; border: 5px solid white; }
+        .close-lightbox { position: absolute; top: 40px; right: 40px; color: white; font-size: 3rem; cursor: pointer; }
+    </style>
+</head>
+<body class="sub-page">
+    <header id="main-header">
+        <div class="container">
+            <nav>
+                <div class="logo">U<span>AI</span></div>
+                <div class="nav-controls">
+                    <span class="theme-toggle">🌙</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="finance.html">Finance</a></li>
+                    <li><a href="blog.html">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="apply.html" class="btn btn-primary">Join Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container" style="padding-top: 120px;">
+        <div class="section-title reveal">
+            <h2>UAI in Action</h2>
+            <p>Visual records of our events, project sites, and team collaborative efforts.</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=800" alt="Agriculture">
+                <div class="gallery-overlay"><h4>Agriculture Hub</h4></div>
+            </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" alt="Technology">
+                <div class="gallery-overlay"><h4>Tech Incubator</h4></div>
+            </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1509391366360-fe5bb6585828?auto=format&fit=crop&q=80&w=800" alt="Energy">
+                <div class="gallery-overlay"><h4>Solar Farm</h4></div>
+            </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.3s;">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=800" alt="Commerce">
+                <div class="gallery-overlay"><h4>Commerce Summit</h4></div>
+            </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.4s;">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800" alt="Real Estate">
+                <div class="gallery-overlay"><h4>Innovation Park</h4></div>
+            </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.5s;">
+                <img src="https://images.unsplash.com/photo-1507537297325-592f9b39353e?auto=format&fit=crop&q=80&w=800" alt="Team">
+                <div class="gallery-overlay"><h4>Team Activities</h4></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox" id="close-lightbox">&times;</span>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="Lightbox">
+    </div>
+
+        <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>United Agro Innovation</h3>
+                <p>"Innovating Today, Building Tomorrow"</p>
+                <div class="social-links" style="margin-top: 20px; display: flex; gap: 15px;">
+                    <a href="#" style="color: #888; text-decoration: none;">FB</a>
+                    <a href="#" style="color: #888; text-decoration: none;">TW</a>
+                    <a href="#" style="color: #888; text-decoration: none;">LN</a>
+                    <a href="#" style="color: #888; text-decoration: none;">WA</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="blog.html">News & Blog</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Portals</h4>
+                <ul>
+                    <li><a href="shareholder.html">Shareholder Dashboard</a></li>
+                    <li><a href="members.html">Member Portal</a></li>
+                    <li><a href="elections.html">Elections</a></li>
+                    <li><a href="admin.html">Admin Panel</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Info</h4>
+                <p>Email: info@uai-innovation.org</p>
+                <p>Phone: +237 600 000 000</p>
+                <p>Yaoundé, Cameroon</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 United Agro Innovation (UAI). All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/visuals.js"></script>
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeLightbox = document.getElementById('close-lightbox');
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const src = item.querySelector('img').src;
+                lightboxImg.src = src;
+                lightbox.classList.add('active');
+            });
+        });
+
+        closeLightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.classList.remove('active');
+        });
+    </script>
+
+    <!-- AI Chat Assistant -->
+    <div id="chat-widget">
+        <button id="chat-button">🤖</button>
+        <div id="chat-window">
+            <div id="chat-header">
+                <span>UAI Assistant</span>
+                <span id="close-chat" style="cursor:pointer;">&times;</span>
+            </div>
+            <div id="chat-messages">
+                <div class="message ai-message">Hello! How can I assist you with United Agro Innovation today?</div>
+            </div>
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id="chat-send">➤</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/chat.js"></script>
+
+</body>
+</html>

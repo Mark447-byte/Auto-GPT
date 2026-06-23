@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="United Agro Innovation (UAI) - Innovating Today, Building Tomorrow. Leading African multi-sector innovation and investment organization.">
+    <meta property="og:title" content="United Agro Innovation (UAI)">
+    <meta property="og:description" content="Empowering Entrepreneurs, Transforming Industries through sustainable innovation.">
+    <title>UAI | Innovating Today, Building Tomorrow</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .hero-3d {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #050a08 0%, #0B7A3E 100%);
+            color: white;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+
+        .hero-grid {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+            mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+        }
+
+        .hero-bg-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.3;
+        }
+
+        .orb-1 { width: 600px; height: 600px; background: var(--primary-green); top: -200px; left: -100px; animation: float 15s infinite; }
+        .orb-2 { width: 500px; height: 500px; background: var(--primary-red); bottom: -100px; right: -50px; animation: float 12s infinite reverse; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 100px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .hero-content {
+            z-index: 10;
+            text-align: center;
+            max-width: 1100px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: #FFFFFF;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero-tagline {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #4ade80; /* Brighter green for contrast */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.6;
+            z-index: 10;
+        }
+
+        .mouse {
+            width: 26px;
+            height: 42px;
+            border: 2px solid white;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .mouse::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            width: 4px;
+            height: 8px;
+            background: white;
+            border-radius: 2px;
+            transform: translateX(-50%);
+            animation: scroll-wheel 2s infinite;
+        }
+
+        @keyframes scroll-wheel {
+            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(15px); }
+        }
+
+        .stats-3d-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: -100px;
+            position: relative;
+            z-index: 20;
+        }
+
+        .stat-card-3d {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 50px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            transform-style: preserve-3d;
+        }
+
+        .stat-card-3d:hover {
+            transform: translateY(-15px) rotateX(10deg);
+            border-color: var(--primary-green);
+        }
+
+        .stat-card-3d h3 {
+            font-size: 3.5rem;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+            transform: translateZ(30px);
+        }
+
+        .sector-section {
+            background: var(--primary-white);
+            padding: 150px 0;
+        }
+
+        .sector-3d-card {
+            background: var(--bg-light);
+            border-radius: 30px;
+            overflow: hidden;
+            height: 450px;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+            transform-style: preserve-3d;
+        }
+
+        .sector-3d-card .content {
+            position: absolute;
+            bottom: 0;
+            padding: 40px;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            transition: var(--transition);
+            transform: translateZ(20px);
+        }
+
+        .sector-3d-card:hover .content {
+            transform: translateZ(50px) translateY(-20px);
+        }
+
+        .sector-3d-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+
+        .sector-3d-card:hover img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .parallax-text {
+            font-size: 10rem;
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 3.5rem; }
+            .parallax-text { font-size: 5rem; }
+        }
+
+        .main-footer {
+            background: #0a0a0a;
+            color: white;
+            padding: 80px 0 30px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .footer-brand h3 { color: var(--primary-green); margin-bottom: 15px; }
+        .footer-links h4 { margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: #888; text-decoration: none; transition: var(--transition); }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid #222; padding-top: 30px; text-align: center; color: #555; font-size: 0.9rem; }
+    </style>
+</head>
+<body class="home-page">
+    <header id="main-header">
+        <div class="container">
+            <nav>
+                <div class="logo">U<span>AI</span></div>
+                <div class="nav-controls">
+                    <span class="theme-toggle" title="Toggle Dark Mode">🌙</span>
+                    <span class="lang-toggle" title="Switch Language">FR</span>
+                    <div class="nav-toggle">☰</div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="finance.html">Finance</a></li>
+                    <li><a href="blog.html">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="apply.html" class="btn btn-primary">Join Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-3d">
+            <div class="hero-grid"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-bg-elements">
+                <div class="floating-orb orb-1"></div>
+                <div class="floating-orb orb-2"></div>
+            </div>
+            <div class="container hero-content">
+                <div class="hero-tagline reveal active">Innovating Today, Building Tomorrow</div>
+                <h1 class="reveal active" style="transition-delay: 0.2s;">United Agro<br>Innovation</h1>
+                <p class="reveal active" style="transition-delay: 0.3s; font-size: 1.4rem; max-width: 700px; margin: 0 auto 50px; color: #f0f0f0; font-weight: 400;">
+                    Leading the frontier of African entrepreneurship through multi-sector innovation and high-impact strategic investments.
+                </p>
+                <div class="hero-btns reveal active" style="transition-delay: 0.4s;">
+                    <a href="apply.html" class="btn btn-primary">Become a Member</a>
+                    <a href="projects.html" class="btn btn-outline" style="color: white; border-color: white; margin-left: 10px;">Explore Projects</a>
+                    <a href="shareholder.html" class="btn btn-outline" style="color: white; border-color: white; margin-left: 10px;">Invest With Us</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse"></div>
+                <span style="font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;">Explore UAI</span>
+            </div>
+            <div class="parallax-text">UAI EXCELLENCE</div>
+        </section>
+
+        <section class="container" style="margin-bottom: 100px;">
+            <div class="stats-3d-grid">
+                <div class="stat-card-3d reveal">
+                    <h3>1.2k+</h3>
+                    <p>Global Members</p>
+                </div>
+                <div class="stat-card-3d reveal" style="transition-delay: 0.1s;">
+                    <h3>$2.4M</h3>
+                    <p>Assets Managed</p>
+                </div>
+                <div class="stat-card-3d reveal" style="transition-delay: 0.2s;">
+                    <h3>08</h3>
+                    <p>Strategic Projects</p>
+                </div>
+                <div class="stat-card-3d reveal" style="transition-delay: 0.3s;">
+                    <h3>100%</h3>
+                    <p>Transparency</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="sector-section">
+            <div class="container">
+                <div class="section-title reveal">
+                    <h2>Strategic Sectors</h2>
+                    <p>We invest in high-growth industries that drive structural transformation and sustainable development across the continent.</p>
+                </div>
+
+                <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+                    <div class="sector-3d-card tilt-element reveal">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=800" alt="Agriculture">
+                        <div class="content">
+                            <h3>Agriculture</h3>
+                            <p>Modernizing farming through agritech and sustainable supply chains.</p>
+                        </div>
+                    </div>
+                    <div class="sector-3d-card tilt-element reveal" style="transition-delay: 0.1s;">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" alt="Technology">
+                        <div class="content">
+                            <h3>Technology</h3>
+                            <p>Developing digital infrastructure and fintech solutions for Africa.</p>
+                        </div>
+                    </div>
+                    <div class="sector-3d-card tilt-element reveal" style="transition-delay: 0.2s;">
+                        <img src="https://images.unsplash.com/photo-1466611653911-954ff2131604?auto=format&fit=crop&q=80&w=800" alt="Energy">
+                        <div class="content">
+                            <h3>Renewable Energy</h3>
+                            <p>Powering industrialization with clean, sustainable energy solutions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>United Agro Innovation</h3>
+                <p>"Innovating Today, Building Tomorrow"</p>
+                <div class="social-links" style="margin-top: 20px; display: flex; gap: 15px;">
+                    <a href="#" style="color: #888; text-decoration: none;">FB</a>
+                    <a href="#" style="color: #888; text-decoration: none;">TW</a>
+                    <a href="#" style="color: #888; text-decoration: none;">LN</a>
+                    <a href="#" style="color: #888; text-decoration: none;">WA</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="blog.html">News & Blog</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Portals</h4>
+                <ul>
+                    <li><a href="shareholder.html">Shareholder Dashboard</a></li>
+                    <li><a href="members.html">Member Portal</a></li>
+                    <li><a href="elections.html">Elections</a></li>
+                    <li><a href="admin.html">Admin Panel</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Info</h4>
+                <p>Email: info@uai-innovation.org</p>
+                <p>Phone: +237 600 000 000</p>
+                <p>Yaoundé, Cameroon</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 United Agro Innovation (UAI). All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/visuals.js"></script>
+
+    <!-- AI Chat Assistant -->
+    <div id="chat-widget">
+        <button id="chat-button">🤖</button>
+        <div id="chat-window">
+            <div id="chat-header">
+                <span>UAI Assistant</span>
+                <span id="close-chat" style="cursor:pointer;">&times;</span>
+            </div>
+            <div id="chat-messages">
+                <div class="message ai-message">Hello! How can I assist you with United Agro Innovation today?</div>
+            </div>
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id="chat-send">➤</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/chat.js"></script>
+
+</body>
+</html>

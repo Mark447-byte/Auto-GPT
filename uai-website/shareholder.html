@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shareholder Dashboard | UAI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .portal-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+        .portal-sidebar {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+        }
+        .portal-content {
+            padding: 40px;
+            background: var(--bg-light);
+        }
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .sidebar-nav a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #bdc3c7;
+            border-radius: 8px;
+            transition: var(--transition);
+            display: block;
+        }
+        .sidebar-nav a.active, .sidebar-nav a:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+        .stat-box h4 { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; margin-bottom: 10px; }
+        .stat-box h2 { font-size: 1.8rem; color: var(--text-dark); }
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            min-height: 400px;
+        }
+        .chart-mockup {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+            padding-top: 50px;
+        }
+        .bar {
+            flex: 1;
+            background: var(--primary-green);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+        }
+        .bar::before {
+            content: attr(data-label);
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body class="sub-page">
+    <header id="main-header">
+        <div class="container">
+            <nav>
+                <div class="logo">U<span>AI</span> Portal</div>
+                <div class="nav-controls">
+                    <span class="theme-toggle">🌙</span>
+                    <div style="display: flex; align-items:center; gap: 10px; background: white; padding: 5px 15px; border-radius: 25px;">
+                        <span style="font-size: 0.8rem; font-weight: 600;">John Doe</span>
+                        <div style="width:30px; height:30px; background: #eee; border-radius: 50%;"></div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="portal-container">
+        <aside class="portal-sidebar">
+            <ul class="sidebar-nav">
+                <li><a href="members.html">Overview</a></li>
+                <li><a href="#" class="active">My Shares</a></li>
+                <li><a href="#">Contributions</a></li>
+                <li><a href="#">Investment Reports</a></li>
+                <li><a href="#">Transfer Shares</a></li>
+                <li><a href="#">Settings</a></li>
+                <li style="margin-top: 100px;"><a href="index.html">Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="portal-content">
+            <div style="margin-bottom: 30px;">
+                <h2>Shareholder Dashboard</h2>
+                <p>Welcome back, John Doe. Your portfolio is performing well.</p>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-box reveal">
+                    <h4>Total Equity Units</h4>
+                    <h2>4,250</h2>
+                    <span style="color: var(--primary-green); font-size: 0.7rem;">↑ 12% from last quarter</span>
+                </div>
+                <div class="stat-box reveal" style="transition-delay: 0.1s;">
+                    <h4>Portfolio Valuation</h4>
+                    <h2>$21,250.00</h2>
+                    <span style="color: var(--text-light); font-size: 0.7rem;">Market Price: $5.00/Unit</span>
+                </div>
+                <div class="stat-box reveal" style="transition-delay: 0.2s;">
+                    <h4>Cumulative Dividends</h4>
+                    <h2 style="color: var(--primary-red);">$1,840.50</h2>
+                    <span style="color: var(--primary-green); font-size: 0.7rem;">Available for withdrawal</span>
+                </div>
+                <div class="stat-box reveal" style="transition-delay: 0.3s;">
+                    <h4>Voting Eligibility</h4>
+                    <h2>Qualified</h2>
+                    <span style="color: var(--text-light); font-size: 0.7rem;">Next Vote: Aug 01, 2024</span>
+                </div>
+            </div>
+
+            <div class="chart-container reveal">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3>Portfolio Performance</h3>
+                    <select style="padding: 5px 10px; border-radius: 4px; border: 1px solid #ddd;">
+                        <option>Last 6 Months</option>
+                        <option>Last Year</option>
+                    </select>
+                </div>
+                <div class="chart-mockup">
+                    <div class="bar" style="height: 50%;" data-label="JAN"></div>
+                    <div class="bar" style="height: 65%;" data-label="FEB"></div>
+                    <div class="bar" style="height: 45%;" data-label="MAR"></div>
+                    <div class="bar" style="height: 80%;" data-label="APR"></div>
+                    <div class="bar" style="height: 90%;" data-label="MAY"></div>
+                    <div class="bar" style="height: 100%; background: var(--primary-red);" data-label="JUN"></div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
+                <div class="stat-box reveal">
+                    <h3>Recent Transactions</h3>
+                    <table style="width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 0.9rem;">
+                        <tr style="border-bottom: 1px solid #eee; text-align: left; color: #888;">
+                            <th style="padding: 10px 0;">Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 15px 0;">2024-05-15</td>
+                            <td>Monthly Contribution</td>
+                            <td>$50.00</td>
+                            <td style="color: var(--primary-green);">Success</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 15px 0;">2024-04-10</td>
+                            <td>Share Purchase (500 units)</td>
+                            <td>$2,500.00</td>
+                            <td style="color: var(--primary-green);">Success</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 0;">2023-12-31</td>
+                            <td>Annual Dividend Payout</td>
+                            <td>$320.00</td>
+                            <td style="color: var(--primary-green);">Success</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="stat-box reveal" style="transition-delay: 0.1s;">
+                    <h3>Quick Actions</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                        <button class="btn btn-primary">Buy Shares</button>
+                        <button class="btn btn-outline">Pay Contribution</button>
+                        <button class="btn" style="background: var(--primary-red); color: white;">Download Certificate</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/visuals.js"></script>
+
+    <!-- AI Chat Assistant -->
+    <div id="chat-widget">
+        <button id="chat-button">🤖</button>
+        <div id="chat-window">
+            <div id="chat-header">
+                <span>UAI Assistant</span>
+                <span id="close-chat" style="cursor:pointer;">&times;</span>
+            </div>
+            <div id="chat-messages">
+                <div class="message ai-message">Hello! How can I assist you with United Agro Innovation today?</div>
+            </div>
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id="chat-send">➤</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/chat.js"></script>
+
+</body>
+</html>

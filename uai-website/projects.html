@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects | UAI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .filter-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--primary-green);
+            background: white;
+            color: var(--primary-green);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+        .project-img {
+            height: 200px;
+            background: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+        .project-content {
+            padding: 25px;
+        }
+        .project-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .progress-container {
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            margin: 20px 0 10px;
+        }
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-green);
+            border-radius: 4px;
+        }
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body class="sub-page">
+    <header id="main-header">
+        <div class="container">
+            <nav>
+                <div class="logo">U<span>AI</span></div>
+                <div class="nav-controls">
+                    <span class="theme-toggle" title="Toggle Dark Mode">🌙</span>
+                    <span class="lang-toggle" title="Switch Language">FR</span>
+                    <div class="nav-toggle">☰</div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="finance.html">Finance</a></li>
+                    <li><a href="blog.html">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="apply.html" class="btn btn-primary">Join Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container" style="padding-top: 120px;">
+        <div class="section-title reveal">
+            <h2>Innovation Portfolio</h2>
+            <p>Strategic projects driving transformation across key economic sectors.</p>
+        </div>
+
+        <div class="filter-nav reveal">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="agri">Agriculture</button>
+            <button class="filter-btn" data-filter="tech">Technology</button>
+            <button class="filter-btn" data-filter="edu">Education</button>
+            <button class="filter-btn" data-filter="comm">Commerce</button>
+            <button class="filter-btn" data-filter="energy">Energy</button>
+            <button class="filter-btn" data-filter="estate">Real Estate</button>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card reveal" data-category="agri">
+                <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="project-content">
+                    <span class="project-tag">Agriculture</span>
+                    <h3>Smart Irrigation Hub</h3>
+                    <p>IoT-enabled irrigation systems for small-scale vegetable farmers in the North-West region.</p>
+                    <div class="progress-container"><div class="progress-bar" style="width: 75%;"></div></div>
+                    <div style="font-size: 0.8rem; display: flex; justify-content: space-between;">
+                        <span>75% Complete</span>
+                        <span class="status-badge">In Execution</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>Budget: $50,000</span>
+                        <span>Team: 5 Members</span>
+                    </div>
+                    <a href="apply.html" class="btn btn-outline" style="width: 100%; margin-top: 20px; text-align: center;">View Opportunities</a>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card reveal" data-category="tech" style="transition-delay: 0.1s;">
+                <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="project-content">
+                    <span class="project-tag">Technology</span>
+                    <h3>UAI Pay - FinTech</h3>
+                    <p>A decentralized payment gateway for regional merchants to accept cross-border mobile money.</p>
+                    <div class="progress-container"><div class="progress-bar" style="width: 40%;"></div></div>
+                    <div style="font-size: 0.8rem; display: flex; justify-content: space-between;">
+                        <span>40% Complete</span>
+                        <span class="status-badge">Alpha Stage</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>Budget: $250,000</span>
+                        <span>Team: 8 Members</span>
+                    </div>
+                    <a href="apply.html" class="btn btn-outline" style="width: 100%; margin-top: 20px; text-align: center;">Invest Now</a>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card reveal" data-category="energy" style="transition-delay: 0.2s;">
+                <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1509391366360-fe5bb6585828?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="project-content">
+                    <span class="project-tag">Renewable Energy</span>
+                    <h3>Solar Mini-Grid</h3>
+                    <p>Providing sustainable 24/7 power to rural commercial centers via standardized mini-grid systems.</p>
+                    <div class="progress-container"><div class="progress-bar" style="width: 90%;"></div></div>
+                    <div style="font-size: 0.8rem; display: flex; justify-content: space-between;">
+                        <span>90% Complete</span>
+                        <span class="status-badge">Commissioning</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>Budget: $1.2M</span>
+                        <span>Team: 12 Members</span>
+                    </div>
+                    <a href="apply.html" class="btn btn-outline" style="width: 100%; margin-top: 20px; text-align: center;">View Details</a>
+                </div>
+            </div>
+
+            <!-- Project 4 (Education) -->
+            <div class="project-card reveal" data-category="edu">
+                <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="project-content">
+                    <span class="project-tag">Education</span>
+                    <h3>SkillHub Academy</h3>
+                    <p>Vocational training center focused on coding, digital marketing, and agritech management.</p>
+                    <div class="progress-container"><div class="progress-bar" style="width: 25%;"></div></div>
+                    <div style="font-size: 0.8rem; display: flex; justify-content: space-between;">
+                        <span>25% Complete</span>
+                        <span class="status-badge">Planning</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>Budget: $120,000</span>
+                        <span>Team: 4 Members</span>
+                    </div>
+                    <a href="apply.html" class="btn btn-outline" style="width: 100%; margin-top: 20px; text-align: center;">View Opportunities</a>
+                </div>
+            </div>
+
+            <!-- Project 5 (Commerce) -->
+            <div class="project-card reveal" data-category="comm">
+                <div class="project-img" style="background-image: url('https://images.unsplash.com/photo-1534452286304-a814d8a9ad7d?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="project-content">
+                    <span class="project-tag">Commerce</span>
+                    <h3>Regional Trade Plaza</h3>
+                    <p>Modernized logistics and wholesale hub for facilitating intra-regional trade of agro-products.</p>
+                    <div class="progress-container"><div class="progress-bar" style="width: 15%;"></div></div>
+                    <div style="font-size: 0.8rem; display: flex; justify-content: space-between;">
+                        <span>15% Complete</span>
+                        <span class="status-badge">Feasibility</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>Budget: $3.5M</span>
+                        <span>Team: 6 Members</span>
+                    </div>
+                    <a href="apply.html" class="btn btn-outline" style="width: 100%; margin-top: 20px; text-align: center;">Invest Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>United Agro Innovation</h3>
+                <p>"Innovating Today, Building Tomorrow"</p>
+                <div class="social-links" style="margin-top: 20px; display: flex; gap: 15px;">
+                    <a href="#" style="color: #888; text-decoration: none;">FB</a>
+                    <a href="#" style="color: #888; text-decoration: none;">TW</a>
+                    <a href="#" style="color: #888; text-decoration: none;">LN</a>
+                    <a href="#" style="color: #888; text-decoration: none;">WA</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="blog.html">News & Blog</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Portals</h4>
+                <ul>
+                    <li><a href="shareholder.html">Shareholder Dashboard</a></li>
+                    <li><a href="members.html">Member Portal</a></li>
+                    <li><a href="elections.html">Elections</a></li>
+                    <li><a href="admin.html">Admin Panel</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Info</h4>
+                <p>Email: info@uai-innovation.org</p>
+                <p>Phone: +237 600 000 000</p>
+                <p>Yaoundé, Cameroon</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 United Agro Innovation (UAI). All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/visuals.js"></script>
+    <script>
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.filter-btn.active').classList.remove('active');
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                document.querySelectorAll('.project-card').forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- AI Chat Assistant -->
+    <div id="chat-widget">
+        <button id="chat-button">🤖</button>
+        <div id="chat-window">
+            <div id="chat-header">
+                <span>UAI Assistant</span>
+                <span id="close-chat" style="cursor:pointer;">&times;</span>
+            </div>
+            <div id="chat-messages">
+                <div class="message ai-message">Hello! How can I assist you with United Agro Innovation today?</div>
+            </div>
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id="chat-send">➤</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/chat.js"></script>
+
+</body>
+</html>

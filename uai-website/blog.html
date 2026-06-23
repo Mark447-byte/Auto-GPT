@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Blog | UAI</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        .blog-img {
+            height: 250px;
+            background: #eee;
+            background-size: cover;
+            background-position: center;
+        }
+        .blog-content { padding: 30px; }
+        .blog-date { font-size: 0.8rem; color: #888; margin-bottom: 10px; display: block; }
+        .blog-tag { color: var(--primary-green); font-weight: 700; text-transform: uppercase; font-size: 0.75rem; }
+    </style>
+</head>
+<body class="sub-page">
+    <header id="main-header">
+        <div class="container">
+            <nav>
+                <div class="logo">U<span>AI</span></div>
+                <div class="nav-controls">
+                    <span class="theme-toggle">🌙</span>
+                    <div class="nav-toggle">☰</div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="finance.html">Finance</a></li>
+                    <li><a href="blog.html">News</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="apply.html" class="btn btn-primary">Join Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container" style="padding-top: 120px;">
+        <div class="section-title reveal">
+            <h2>UAI Newsroom</h2>
+            <p>Stay updated with our latest project milestones and innovation insights.</p>
+        </div>
+
+        <div class="blog-grid">
+            <article class="blog-card reveal">
+                <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800')"></div>
+                <div class="blog-content">
+                    <span class="blog-tag">Innovation</span>
+                    <span class="blog-date">May 20, 2024</span>
+                    <h3>The Future of African Agritech</h3>
+                    <p>Exploring how IoT and decentralized power are transforming smallholder farming productivity.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600; text-decoration: none; margin-top: 15px; display: inline-block;">Read Full Story →</a>
+                </div>
+            </article>
+
+            <article class="blog-card reveal" style="transition-delay: 0.1s;">
+                <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=800')"></div>
+                <div class="blog-content">
+                    <span class="blog-tag">Investment</span>
+                    <span class="blog-date">May 12, 2024</span>
+                    <h3>Strategic Investment Opportunities</h3>
+                    <p>UAI announces new equity rounds for renewable energy projects in the CEMAC region.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600; text-decoration: none; margin-top: 15px; display: inline-block;">Explore Reports →</a>
+                </div>
+            </article>
+
+            <article class="blog-card reveal" style="transition-delay: 0.2s;">
+                <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c7377ec486b8?auto=format&fit=crop&q=80&w=800')"></div>
+                <div class="blog-content">
+                    <span class="blog-tag">Events</span>
+                    <span class="blog-date">April 28, 2024</span>
+                    <h3>UAI Annual Leadership Summit</h3>
+                    <p>Recap of our flagship event bringing together 500+ innovators and global investors.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600; text-decoration: none; margin-top: 15px; display: inline-block;">Watch Replay →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+        <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>United Agro Innovation</h3>
+                <p>"Innovating Today, Building Tomorrow"</p>
+                <div class="social-links" style="margin-top: 20px; display: flex; gap: 15px;">
+                    <a href="#" style="color: #888; text-decoration: none;">FB</a>
+                    <a href="#" style="color: #888; text-decoration: none;">TW</a>
+                    <a href="#" style="color: #888; text-decoration: none;">LN</a>
+                    <a href="#" style="color: #888; text-decoration: none;">WA</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="blog.html">News & Blog</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Portals</h4>
+                <ul>
+                    <li><a href="shareholder.html">Shareholder Dashboard</a></li>
+                    <li><a href="members.html">Member Portal</a></li>
+                    <li><a href="elections.html">Elections</a></li>
+                    <li><a href="admin.html">Admin Panel</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Info</h4>
+                <p>Email: info@uai-innovation.org</p>
+                <p>Phone: +237 600 000 000</p>
+                <p>Yaoundé, Cameroon</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 United Agro Innovation (UAI). All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/visuals.js"></script>
+
+    <!-- AI Chat Assistant -->
+    <div id="chat-widget">
+        <button id="chat-button">🤖</button>
+        <div id="chat-window">
+            <div id="chat-header">
+                <span>UAI Assistant</span>
+                <span id="close-chat" style="cursor:pointer;">&times;</span>
+            </div>
+            <div id="chat-messages">
+                <div class="message ai-message">Hello! How can I assist you with United Agro Innovation today?</div>
+            </div>
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button id="chat-send">➤</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/chat.js"></script>
+
+</body>
+</html>
