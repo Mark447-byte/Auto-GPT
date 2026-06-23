@@ -58,6 +58,12 @@
         .orb-1 { width: 600px; height: 600px; background: var(--primary-green); top: -200px; left: -100px; animation: float 15s infinite; }
         .orb-2 { width: 500px; height: 500px; background: var(--primary-red); bottom: -100px; right: -50px; animation: float 12s infinite reverse; }
 
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 100px); }
+            100% { transform: translate(0, 0); }
+        }
+
         .hero-content {
             z-index: 10;
             text-align: center;
@@ -219,6 +225,25 @@
             .hero-content h1 { font-size: 3.5rem; }
             .parallax-text { font-size: 5rem; }
         }
+
+        .main-footer {
+            background: #0a0a0a;
+            color: white;
+            padding: 80px 0 30px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .footer-brand h3 { color: var(--primary-green); margin-bottom: 15px; }
+        .footer-links h4 { margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: #888; text-decoration: none; transition: var(--transition); }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid #222; padding-top: 30px; text-align: center; color: #555; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -262,7 +287,6 @@
                 <div class="hero-btns reveal active" style="transition-delay: 0.4s;">
                     <a href="apply.html" class="btn btn-primary">Become a Member</a>
                     <a href="projects.html" class="btn btn-outline" style="color: white; border-color: white; margin-left: 20px;">Explore Projects</a>
-                    <a href="finance.html" class="btn" style="color: #ccc; font-size: 0.9rem; text-decoration: underline;">Invest with Us</a>
                 </div>
             </div>
             <div class="scroll-indicator">
@@ -325,40 +349,6 @@
                 </div>
             </div>
         </section>
-
-        <section style="background: var(--bg-light); position: relative; overflow: hidden;">
-            <div class="container">
-                <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
-                    <div class="reveal">
-                        <h2 style="font-size: 3.5rem; margin-bottom: 30px;">Innovating Today,<br><span style="color: var(--primary-green);">Building Tomorrow</span></h2>
-                        <p style="font-size: 1.2rem; margin-bottom: 40px;">UAI is more than an investment firm. We are a development engine powered by the collective ambition of our members and the brilliance of African entrepreneurs.</p>
-                        <div class="hero-btns">
-                            <a href="about.html" class="btn btn-primary">Learn Our Story</a>
-                        </div>
-                    </div>
-                    <div class="perspective reveal" style="transition-delay: 0.2s;">
-                        <div class="glass" style="padding: 60px; border-radius: 40px; transform: rotateY(-20deg) rotateX(10deg); box-shadow: var(--shadow-lg);">
-                            <h4 style="margin-bottom: 20px; color: var(--primary-green);">Our Performance</h4>
-                            <div style="height: 4px; background: #eee; border-radius: 2px; margin-bottom: 30px;">
-                                <div style="width: 85%; height: 100%; background: var(--primary-green); border-radius: 2px;"></div>
-                            </div>
-                            <p style="font-size: 0.9rem; opacity: 0.8;">Year-on-year growth in member equity and project success rates.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta-section" style="background: var(--primary-green); color: white; text-align: center; border-radius: 60px 60px 0 0;">
-            <div class="container reveal">
-                <h2 style="color: white; font-size: 4rem; margin-bottom: 20px;">Ready to Invest?</h2>
-                <p style="font-size: 1.5rem; opacity: 0.9; margin-bottom: 50px;">Join the movement that is building the future of African innovation.</p>
-                <div class="hero-btns" style="justify-content: center;">
-                    <a href="apply.html" class="btn" style="background: white; color: var(--primary-green);">Join UAI Network</a>
-                    <a href="contact.html" class="btn btn-outline" style="border-color: white; color: white;">Speak to Advisor</a>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="main-footer">
@@ -375,7 +365,6 @@
                     <li><a href="projects.html">Projects</a></li>
                     <li><a href="blog.html">News & Blog</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="elections.html">Elections</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
@@ -385,14 +374,14 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2024 United Agro Innovation (UAI). All rights reserved.</p>
-            </div>
+            <p>&copy; 2024 United Agro Innovation (UAI). All rights reserved.</p>
         </div>
     </footer>
 
     <script src="js/main.js"></script>
     <script src="js/visuals.js"></script>
+
+    <!-- AI Chat Assistant -->
     <div id="chat-widget">
         <button id="chat-button">🤖</button>
         <div id="chat-window">
@@ -410,5 +399,6 @@
         </div>
     </div>
     <script src="js/chat.js"></script>
+
 </body>
 </html>

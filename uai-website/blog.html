@@ -8,40 +8,40 @@
     <style>
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
         }
         .blog-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
         }
         .blog-img {
-            height: 180px;
+            height: 250px;
             background: #eee;
+            background-size: cover;
+            background-position: center;
         }
-        .blog-content {
-            padding: 20px;
-        }
-        .blog-date {
-            font-size: 0.8rem;
-            color: var(--primary-green);
-            font-weight: 600;
-        }
+        .blog-content { padding: 30px; }
+        .blog-date { font-size: 0.8rem; color: #888; margin-bottom: 10px; display: block; }
+        .blog-tag { color: var(--primary-green); font-weight: 700; text-transform: uppercase; font-size: 0.75rem; }
     </style>
 </head>
 <body>
-        <header id="main-header">
+    <header id="main-header">
         <div class="container">
             <nav>
                 <div class="logo">U<span>AI</span></div>
                 <div class="nav-controls">
-                    <span class="theme-toggle" title="Toggle Dark Mode">🌙</span>
-                    <span class="lang-toggle" title="Switch Language">FR</span>
+                    <span class="theme-toggle">🌙</span>
                     <div class="nav-toggle">☰</div>
                 </div>
-
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
@@ -52,94 +52,61 @@
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="apply.html" class="btn btn-primary">Join Us</a></li>
                 </ul>
-
             </nav>
         </div>
     </header>
 
-    <section class="container">
-        <div class="section-title">
-            <h2>Organization News & Insights</h2>
-            <p>Stay updated with the latest from UAI and the global innovation landscape.</p>
+    <section class="container" style="padding-top: 120px;">
+        <div class="section-title reveal">
+            <h2>UAI Newsroom</h2>
+            <p>Stay updated with our latest project milestones and innovation insights.</p>
         </div>
 
         <div class="blog-grid">
-            <div class="blog-card reveal">
-                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
+            <article class="blog-card reveal">
+                <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800')"></div>
                 <div class="blog-content">
-                    <span class="blog-date">June 15, 2024</span>
-                    <h3>UAI Partners with Global Silicon Hub</h3>
-                    <p>We are thrilled to announce a multi-year technical partnership to integrate blockchain and AI into our agricultural supply chains, ensuring total traceability.</p>
-                    <a href="#" style="color: var(--primary-red); font-weight: 600; display: inline-block; margin-top: 10px;">Read Full Release &rarr;</a>
-                </div>
-            </div>
-
-            <div class="blog-card reveal" style="transition-delay: 0.1s;">
-                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
-                <div class="blog-content">
-                    <span class="blog-date">June 02, 2024</span>
-                    <h3>Record Yields at Project GreenField</h3>
-                    <p>Our pilot smart-farm in the Central Region has outperformed all traditional benchmarks, achieving a 42% increase in maize production through precision data analytics.</p>
-                    <a href="#" style="color: var(--primary-red); font-weight: 600; display: inline-block; margin-top: 10px;">View Case Study &rarr;</a>
-                </div>
-            </div>
-
-            <div class="blog-card reveal" style="transition-delay: 0.2s;">
-                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
-                <div class="blog-content">
+                    <span class="blog-tag">Innovation</span>
                     <span class="blog-date">May 20, 2024</span>
-                    <h3>Investment Trends: The African Tech Decade</h3>
-                    <p>UAI's research division releases its latest White Paper on why African venture capital is entering its most productive cycle in history.</p>
-                    <a href="#" style="color: var(--primary-red); font-weight: 600; display: inline-block; margin-top: 10px;">Download White Paper &rarr;</a>
+                    <h3>The Future of African Agritech</h3>
+                    <p>Exploring how IoT and decentralized power are transforming smallholder farming productivity.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600; text-decoration: none; margin-top: 15px; display: inline-block;">Read Full Story →</a>
                 </div>
-            </div>
+            </article>
 
-            <div class="blog-card reveal">
-                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1466611653911-954ff2131604?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
+            <article class="blog-card reveal" style="transition-delay: 0.1s;">
+                <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=800')"></div>
                 <div class="blog-content">
-                    <span class="blog-date">May 05, 2024</span>
-                    <h3>Solar Expansion in Rural Regions</h3>
-                    <p>Our Renewable Energy division has successfully deployed 50 additional micro-grids, providing clean energy to over 200 small-scale industrial processing centers.</p>
-                    <a href="#" style="color: var(--primary-red); font-weight: 600; display: inline-block; margin-top: 10px;">Read More &rarr;</a>
+                    <span class="blog-tag">Investment</span>
+                    <span class="blog-date">May 12, 2024</span>
+                    <h3>Strategic Investment Opportunities</h3>
+                    <p>UAI announces new equity rounds for renewable energy projects in the CEMAC region.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600; text-decoration: none; margin-top: 15px; display: inline-block;">Explore Reports →</a>
                 </div>
-            </div>
+            </article>
+
+            <article class="blog-card reveal" style="transition-delay: 0.2s;">
+                <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c7377ec486b8?auto=format&fit=crop&q=80&w=800')"></div>
+                <div class="blog-content">
+                    <span class="blog-tag">Events</span>
+                    <span class="blog-date">April 28, 2024</span>
+                    <h3>UAI Annual Leadership Summit</h3>
+                    <p>Recap of our flagship event bringing together 500+ innovators and global investors.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600; text-decoration: none; margin-top: 15px; display: inline-block;">Watch Replay →</a>
+                </div>
+            </article>
         </div>
     </section>
 
-
-    <footer class="main-footer">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <h3>United Agro Innovation</h3>
-                <p>"Innovating Today, Building Tomorrow"</p>
-            </div>
-            <div class="footer-links">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="blog.html">News & Blog</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="elections.html">Elections</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h4>Contact Info</h4>
-                <p>Email: info@uai-innovation.org</p>
-                <p>Phone: +237 600 000 000</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2024 United Agro Innovation (UAI). All rights reserved.</p>
-            </div>
+    <footer class="main-footer" style="background: #0a0a0a; color: white; padding: 60px 0 30px; margin-top: 100px;">
+        <div class="container" style="text-align: center;">
+            <p>&copy; 2024 UAI. All rights reserved.</p>
         </div>
     </footer>
 
-
     <script src="js/main.js"></script>
     <script src="js/visuals.js"></script>
+
     <!-- AI Chat Assistant -->
     <div id="chat-widget">
         <button id="chat-button">🤖</button>
@@ -158,5 +125,6 @@
         </div>
     </div>
     <script src="js/chat.js"></script>
+
 </body>
 </html>

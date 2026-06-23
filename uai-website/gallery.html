@@ -8,16 +8,16 @@
     <style>
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
         .gallery-item {
-            position: relative;
-            height: 200px;
-            background: #eee;
-            border-radius: 8px;
+            height: 300px;
+            border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
+            position: relative;
+            background: #eee;
         }
         .gallery-item img {
             width: 100%;
@@ -25,63 +25,43 @@
             object-fit: cover;
             transition: var(--transition);
         }
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
+        .gallery-item:hover img { transform: scale(1.1); }
         .gallery-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(11, 122, 62, 0.8);
+            top:0; left:0; width:100%; height:100%;
+            background: rgba(11, 122, 62, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            padding: 10px;
             opacity: 0;
             transition: var(--transition);
         }
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
 
-        /* Lightbox */
-        #lightbox {
-            position: fixed;
-            z-index: 2000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
+        /* Lightbox - Simple implementation */
+        .lightbox {
             display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
             align-items: center;
             justify-content: center;
         }
-        #lightbox img {
-            max-width: 90%;
-            max-height: 80%;
-            border: 5px solid white;
-        }
-        #lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
-        }
+        .lightbox.active { display: flex; }
+        .lightbox-img { max-width: 90%; max-height: 80%; border: 5px solid white; }
+        .close-lightbox { position: absolute; top: 40px; right: 40px; color: white; font-size: 3rem; cursor: pointer; }
     </style>
 </head>
 <body>
-        <header id="main-header">
+    <header id="main-header">
         <div class="container">
             <nav>
                 <div class="logo">U<span>AI</span></div>
                 <div class="nav-controls">
-                    <span class="theme-toggle" title="Toggle Dark Mode">🌙</span>
-                    <span class="lang-toggle" title="Switch Language">FR</span>
-                    <div class="nav-toggle">☰</div>
+                    <span class="theme-toggle">🌙</span>
                 </div>
-
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
@@ -92,126 +72,79 @@
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="apply.html" class="btn btn-primary">Join Us</a></li>
                 </ul>
-
             </nav>
         </div>
     </header>
 
-    <section class="container" style="padding-top: 150px;">
+    <section class="container" style="padding-top: 120px;">
         <div class="section-title reveal">
-            <h2>Institutional Milestones</h2>
-            <p>A visual record of our strategic interventions and community development projects across the continent.</p>
+            <h2>UAI in Action</h2>
+            <p>Visual records of our events, project sites, and team collaborative efforts.</p>
         </div>
 
         <div class="gallery-grid">
-            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800">
-                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800" alt="Solar Project">
-                <div class="gallery-overlay">
-                    <strong>CleanPower Launch</strong>
-                    <p>Commissioning of the first rural micro-grid.</p>
-                </div>
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=800" alt="Agriculture">
+                <div class="gallery-overlay"><h4>Agriculture Hub</h4></div>
             </div>
-            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1530836361253-efad5d718e35?auto=format&fit=crop&q=80&w=800" style="transition-delay: 0.1s;">
-                <img src="https://images.unsplash.com/photo-1530836361253-efad5d718e35?auto=format&fit=crop&q=80&w=800" alt="Tech Summit">
-                <div class="gallery-overlay">
-                    <strong>Digital Africa Summit</strong>
-                    <p>UAI delegates presenting at the 2023 tech conference.</p>
-                </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" alt="Technology">
+                <div class="gallery-overlay"><h4>Tech Incubator</h4></div>
             </div>
-            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=800" style="transition-delay: 0.2s;">
-                <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=800" alt="Smart Farming">
-                <div class="gallery-overlay">
-                    <strong>GreenField Pilot</strong>
-                    <p>Testing the automated irrigation hub in real conditions.</p>
-                </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1509391366360-fe5bb6585828?auto=format&fit=crop&q=80&w=800" alt="Energy">
+                <div class="gallery-overlay"><h4>Solar Farm</h4></div>
             </div>
-            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=800">
-                <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=800" alt="Board Meeting">
-                <div class="gallery-overlay">
-                    <strong>Governance Review</strong>
-                    <p>Board of Directors meeting, Q4 2023 Strategy Session.</p>
-                </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.3s;">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=800" alt="Commerce">
+                <div class="gallery-overlay"><h4>Commerce Summit</h4></div>
             </div>
-            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1540350394557-8d14678e7f91?auto=format&fit=crop&q=80&w=800" style="transition-delay: 0.1s;">
-                <img src="https://images.unsplash.com/photo-1540350394557-8d14678e7f91?auto=format&fit=crop&q=80&w=800" alt="Logistics">
-                <div class="gallery-overlay">
-                    <strong>Agro-Trade Corridor</strong>
-                    <p>Establishing the logistics hub for international export.</p>
-                </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.4s;">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800" alt="Real Estate">
+                <div class="gallery-overlay"><h4>Innovation Park</h4></div>
             </div>
-            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&q=80&w=800" style="transition-delay: 0.2s;">
-                <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&q=80&w=800" alt="Coding">
-                <div class="gallery-overlay">
-                    <strong>Tech Academy</strong>
-                    <p>Students participating in our first digital skills bootcamp.</p>
-                </div>
+            <div class="gallery-item reveal" style="transition-delay: 0.5s;">
+                <img src="https://images.unsplash.com/photo-1507537297325-592f9b39353e?auto=format&fit=crop&q=80&w=800" alt="Team">
+                <div class="gallery-overlay"><h4>Team Activities</h4></div>
             </div>
         </div>
     </section>
 
-    <div id="lightbox">
-        <span id="lightbox-close">&times;</span>
-        <img src="" alt="Enlarged Image">
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox" id="close-lightbox">&times;</span>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="Lightbox">
     </div>
 
-
-    <footer class="main-footer">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <h3>United Agro Innovation</h3>
-                <p>"Innovating Today, Building Tomorrow"</p>
-            </div>
-            <div class="footer-links">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="blog.html">News & Blog</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="elections.html">Elections</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h4>Contact Info</h4>
-                <p>Email: info@uai-innovation.org</p>
-                <p>Phone: +237 600 000 000</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2024 United Agro Innovation (UAI). All rights reserved.</p>
-            </div>
+    <footer class="main-footer" style="background: #0a0a0a; color: white; padding: 60px 0 30px; margin-top: 100px;">
+        <div class="container" style="text-align: center;">
+            <p>&copy; 2024 UAI. All rights reserved.</p>
         </div>
     </footer>
-
 
     <script src="js/main.js"></script>
     <script src="js/visuals.js"></script>
     <script>
         const lightbox = document.getElementById('lightbox');
-        const lightboxImg = lightbox.querySelector('img');
-        const closeBtn = document.getElementById('lightbox-close');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeLightbox = document.getElementById('close-lightbox');
 
         document.querySelectorAll('.gallery-item').forEach(item => {
             item.addEventListener('click', () => {
-                // In a real app, we'd use the data-src.
-                // For this demo, we'll just show a placeholder since images aren't uploaded.
-                lightboxImg.src = 'https://via.placeholder.com/800x600?text=' + encodeURIComponent(item.textContent.trim());
-                lightbox.style.display = 'flex';
+                const src = item.querySelector('img').src;
+                lightboxImg.src = src;
+                lightbox.classList.add('active');
             });
         });
 
-        closeBtn.addEventListener('click', () => {
-            lightbox.style.display = 'none';
+        closeLightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
         });
 
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.style.display = 'none';
-            }
+            if (e.target === lightbox) lightbox.classList.remove('active');
         });
     </script>
+
     <!-- AI Chat Assistant -->
     <div id="chat-widget">
         <button id="chat-button">🤖</button>
@@ -230,5 +163,6 @@
         </div>
     </div>
     <script src="js/chat.js"></script>
+
 </body>
 </html>
