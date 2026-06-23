@@ -6,95 +6,163 @@
     <meta name="description" content="United Agro Innovation (UAI) - Innovating Today, Building Tomorrow. Leading African multi-sector innovation and investment organization.">
     <meta property="og:title" content="United Agro Innovation (UAI)">
     <meta property="og:description" content="Empowering Entrepreneurs, Transforming Industries through sustainable innovation.">
-    <title>United Agro Innovation (UAI) | Innovating Today, Building Tomorrow</title>
+    <title>UAI | Innovating Today, Building Tomorrow</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
-        .hero {
-            background: linear-gradient(rgba(11, 122, 62, 0.8), rgba(11, 122, 62, 0.8)), url('assets/images/hero-bg.jpg') center/cover no-repeat;
-            height: 90vh;
+        .hero-3d {
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            color: var(--primary-white);
-        }
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            animation: fadeInDown 1s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .hero-content p {
-            font-size: 1.8rem;
-            margin-bottom: 40px;
-            animation: fadeInUp 1s ease;
-            font-weight: 300;
-        }
-        .hero-btns {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .stats-banner {
-            background: var(--primary-green);
-            color: white;
-            padding: 40px 0;
-            margin-top: -60px;
             position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1a4d2e 0%, #0a0f0d 100%);
+            color: white;
+            perspective: 2000px;
+        }
+
+        .hero-bg-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        .orb-1 { width: 400px; height: 400px; background: var(--primary-green); top: -100px; left: -100px; animation: float 10s infinite; }
+        .orb-2 { width: 300px; height: 300px; background: var(--primary-red); bottom: -50px; right: -50px; animation: float 8s infinite reverse; }
+
+        .hero-content {
             z-index: 10;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .stats-grid-home {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             text-align: center;
-            gap: 20px;
+            transform-style: preserve-3d;
+            transform: translateZ(100px);
         }
-        .stat-item h3 { font-size: 2.5rem; margin-bottom: 5px; }
-        .stat-item p { text-transform: uppercase; font-size: 0.9rem; opacity: 0.9; }
 
-        .sector-grid {
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.9;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: -2px;
+            background: linear-gradient(to bottom, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            opacity: 0.8;
+        }
+
+        .stats-3d-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
-            margin-top: 40px;
+            margin-top: -100px;
+            position: relative;
+            z-index: 20;
         }
-        .sector-card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+
+        .stat-card-3d {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 50px 30px;
+            border-radius: 20px;
             text-align: center;
-            border-bottom: 5px solid transparent;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-lg);
             transition: var(--transition);
+            transform-style: preserve-3d;
         }
-        .sector-card:hover {
-            transform: translateY(-10px);
-            border-bottom-color: var(--primary-green);
-        }
-        .sector-card i { font-size: 3rem; color: var(--primary-green); margin-bottom: 20px; display: block; }
 
-        .cta-section {
+        .stat-card-3d:hover {
+            transform: translateY(-15px) rotateX(10deg);
+            border-color: var(--primary-green);
+        }
+
+        .stat-card-3d h3 {
+            font-size: 3.5rem;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+            transform: translateZ(30px);
+        }
+
+        .sector-section {
+            background: var(--primary-white);
+            padding: 150px 0;
+        }
+
+        .sector-3d-card {
             background: var(--bg-light);
-            text-align: center;
-            padding: 80px 0;
+            border-radius: 30px;
+            overflow: hidden;
+            height: 450px;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+            transform-style: preserve-3d;
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .sector-3d-card .content {
+            position: absolute;
+            bottom: 0;
+            padding: 40px;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            transition: var(--transition);
+            transform: translateZ(20px);
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .sector-3d-card:hover .content {
+            transform: translateZ(50px) translateY(-20px);
+        }
+
+        .sector-3d-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+
+        .sector-3d-card:hover img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        .parallax-text {
+            font-size: 10rem;
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 3.5rem; }
+            .parallax-text { font-size: 5rem; }
         }
     </style>
 </head>
 <body>
-        <header>
+    <header id="main-header">
         <div class="container">
             <nav>
                 <div class="logo">U<span>AI</span></div>
@@ -103,7 +171,6 @@
                     <span class="lang-toggle" title="Switch Language">FR</span>
                     <div class="nav-toggle">☰</div>
                 </div>
-
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
@@ -114,119 +181,115 @@
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="apply.html" class="btn btn-primary">Join Us</a></li>
                 </ul>
-
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="container hero-content">
-                <h1>United Agro Innovation</h1>
-                <p>"Innovating Today, Building Tomorrow"</p>
-                <div class="hero-btns">
-                    <a href="apply.html" class="btn btn-secondary">Become a Member</a>
-                    <a href="projects.html" class="btn btn-primary">Explore Projects</a>
-                    <a href="shareholder.html" class="btn btn-outline" style="border-color: white; color: white;">Invest With Us</a>
+        <section class="hero-3d">
+            <div class="hero-bg-elements">
+                <div class="floating-orb orb-1"></div>
+                <div class="floating-orb orb-2"></div>
+            </div>
+            <div class="container hero-content tilt-element">
+                <div class="hero-tagline reveal active">Building the Future of Africa</div>
+                <h1 class="reveal active" style="transition-delay: 0.2s;">United Agro<br>Innovation</h1>
+                <div class="hero-btns reveal active" style="transition-delay: 0.4s; margin-top: 40px;">
+                    <a href="apply.html" class="btn btn-primary">Become a Member</a>
+                    <a href="projects.html" class="btn btn-outline" style="color: white; border-color: white;">Explore Projects</a>
+                </div>
+            </div>
+            <div class="parallax-text">INNOVATION HUB</div>
+        </section>
+
+        <section class="container" style="margin-bottom: 100px;">
+            <div class="stats-3d-grid">
+                <div class="stat-card-3d reveal">
+                    <h3>1.2k+</h3>
+                    <p>Global Members</p>
+                </div>
+                <div class="stat-card-3d reveal" style="transition-delay: 0.1s;">
+                    <h3>$2.4M</h3>
+                    <p>Assets Managed</p>
+                </div>
+                <div class="stat-card-3d reveal" style="transition-delay: 0.2s;">
+                    <h3>08</h3>
+                    <p>Strategic Projects</p>
+                </div>
+                <div class="stat-card-3d reveal" style="transition-delay: 0.3s;">
+                    <h3>100%</h3>
+                    <p>Transparency</p>
                 </div>
             </div>
         </section>
 
-        <section class="container">
-            <div class="stats-banner">
-                <div class="stats-grid-home">
-                    <div class="stat-item">
-                        <h3>1,240</h3>
-                        <p>Active Members</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>8</h3>
-                        <p>Current Projects</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>$2.4M</h3>
-                        <p>Total Assets</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>100%</h3>
-                        <p>Transparency</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="container">
-            <div class="section-title">
-                <h2>Our Strategic Sectors</h2>
-                <p>UAI operates across six key industries to drive sustainable development.</p>
-            </div>
-            <div class="sector-grid">
-                <div class="sector-card">
-                    <h3>Agriculture</h3>
-                    <p>Revolutionizing food systems through smart irrigation and sustainable farming techniques.</p>
-                </div>
-                <div class="sector-card">
-                    <h3>Technology</h3>
-                    <p>Building fintech and agritech solutions that empower local communities and businesses.</p>
-                </div>
-                <div class="sector-card">
-                    <h3>Education</h3>
-                    <p>Training the next generation of African innovators and skilled entrepreneurs.</p>
-                </div>
-                <div class="sector-card">
-                    <h3>Commerce</h3>
-                    <p>Facilitating trade and establishing robust supply chains for regional growth.</p>
-                </div>
-                <div class="sector-card">
-                    <h3>Real Estate</h3>
-                    <p>Developing modern, sustainable infrastructure for residential and commercial use.</p>
-                </div>
-                <div class="sector-card">
-                    <h3>Renewable Energy</h3>
-                    <p>Powering the future with solar grids and clean energy innovation.</p>
-                </div>
-            </div>
-        </section>
-
-        <section style="background-color: var(--bg-light);">
+        <section class="sector-section">
             <div class="container">
-                <div class="section-title">
-                    <h2>Our Core Values</h2>
-                    <p>The principles that guide every decision and project at UAI.</p>
+                <div class="section-title reveal">
+                    <h2>Strategic Sectors</h2>
+                    <p>We invest in high-growth industries that drive structural transformation and sustainable development across the continent.</p>
                 </div>
-                <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                    <div style="text-align:center; padding: 20px;">
-                        <h4 style="color:var(--primary-green);">Integrity</h4>
-                        <p style="font-size: 0.9rem;">Doing the right thing, always.</p>
+
+                <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+                    <div class="sector-3d-card tilt-element reveal">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=800" alt="Agriculture">
+                        <div class="content">
+                            <h3>Agriculture</h3>
+                            <p>Modernizing farming through agritech and sustainable supply chains.</p>
+                        </div>
                     </div>
-                    <div style="text-align:center; padding: 20px;">
-                        <h4 style="color:var(--primary-green);">Innovation</h4>
-                        <p style="font-size: 0.9rem;">Constant improvement and creativity.</p>
+                    <div class="sector-3d-card tilt-element reveal" style="transition-delay: 0.1s;">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" alt="Technology">
+                        <div class="content">
+                            <h3>Technology</h3>
+                            <p>Developing digital infrastructure and fintech solutions for Africa.</p>
+                        </div>
                     </div>
-                    <div style="text-align:center; padding: 20px;">
-                        <h4 style="color:var(--primary-green);">Transparency</h4>
-                        <p style="font-size: 0.9rem;">Open books, clear communication.</p>
-                    </div>
-                    <div style="text-align:center; padding: 20px;">
-                        <h4 style="color:var(--primary-green);">Accountability</h4>
-                        <p style="font-size: 0.9rem;">Ownership of our results.</p>
+                    <div class="sector-3d-card tilt-element reveal" style="transition-delay: 0.2s;">
+                        <img src="https://images.unsplash.com/photo-1466611653911-954ff2131604?auto=format&fit=crop&q=80&w=800" alt="Energy">
+                        <div class="content">
+                            <h3>Renewable Energy</h3>
+                            <p>Powering industrialization with clean, sustainable energy solutions.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="cta-section">
+        <section style="background: var(--bg-light); position: relative; overflow: hidden;">
             <div class="container">
-                <h2>Ready to Build Tomorrow?</h2>
-                <p style="margin: 20px 0 40px;">Join UAI today as a member or strategic investor.</p>
-                <div class="hero-btns">
-                    <a href="apply.html" class="btn btn-primary">Apply Now</a>
-                    <a href="contact.html" class="btn btn-outline">Talk to an Advisor</a>
+                <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+                    <div class="reveal">
+                        <h2 style="font-size: 3.5rem; margin-bottom: 30px;">Innovating Today,<br><span style="color: var(--primary-green);">Building Tomorrow</span></h2>
+                        <p style="font-size: 1.2rem; margin-bottom: 40px;">UAI is more than an investment firm. We are a development engine powered by the collective ambition of our members and the brilliance of African entrepreneurs.</p>
+                        <div class="hero-btns">
+                            <a href="about.html" class="btn btn-primary">Learn Our Story</a>
+                        </div>
+                    </div>
+                    <div class="perspective reveal" style="transition-delay: 0.2s;">
+                        <div class="glass" style="padding: 60px; border-radius: 40px; transform: rotateY(-20deg) rotateX(10deg); box-shadow: var(--shadow-lg);">
+                            <h4 style="margin-bottom: 20px; color: var(--primary-green);">Our Performance</h4>
+                            <div style="height: 4px; background: #eee; border-radius: 2px; margin-bottom: 30px;">
+                                <div style="width: 85%; height: 100%; background: var(--primary-green); border-radius: 2px;"></div>
+                            </div>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Year-on-year growth in member equity and project success rates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section" style="background: var(--primary-green); color: white; text-align: center; border-radius: 60px 60px 0 0;">
+            <div class="container reveal">
+                <h2 style="color: white; font-size: 4rem; margin-bottom: 20px;">Ready to Invest?</h2>
+                <p style="font-size: 1.5rem; opacity: 0.9; margin-bottom: 50px;">Join the movement that is building the future of African innovation.</p>
+                <div class="hero-btns" style="justify-content: center;">
+                    <a href="apply.html" class="btn" style="background: white; color: var(--primary-green);">Join UAI Network</a>
+                    <a href="contact.html" class="btn btn-outline" style="border-color: white; color: white;">Speak to Advisor</a>
                 </div>
             </div>
         </section>
     </main>
-
 
     <footer class="main-footer">
         <div class="container footer-grid">
@@ -258,9 +321,8 @@
         </div>
     </footer>
 
-
     <script src="js/main.js"></script>
-        <!-- AI Chat Assistant -->
+    <script src="js/visuals.js"></script>
     <div id="chat-widget">
         <button id="chat-button">🤖</button>
         <div id="chat-window">
