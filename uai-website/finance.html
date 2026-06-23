@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-        <header>
+        <header id="main-header">
         <div class="container">
             <nav>
                 <div class="logo">U<span>AI</span></div>
@@ -59,44 +59,72 @@
     </header>
 
     <section class="container">
-        <div class="section-title">
-            <h2>Financial Transparency</h2>
-            <p>Our commitment to accountability and ethical financial management.</p>
+        <div class="section-title reveal">
+            <h2>Institutional Finance & Transparency</h2>
+            <p>UAI operates on a foundation of radical transparency, ensuring that every contribution and investment is leveraged for maximum social and economic impact.</p>
         </div>
 
-        <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-            <div class="finance-card">
-                <h3>Financial Policies</h3>
-                <p>UAI adheres to International Financial Reporting Standards (IFRS) and maintains a strict zero-tolerance policy towards corruption and financial mismanagement.</p>
-                <a href="#" class="btn btn-outline" style="margin-top: 15px;">Read Policies</a>
+        <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+            <div class="finance-card reveal">
+                <h3 style="color: var(--primary-green); margin-bottom: 20px;">Governance & Ethics</h3>
+                <p style="margin-bottom: 15px;">Our financial framework is audited annually by independent third-party firms to ensure compliance with International Financial Reporting Standards (IFRS). We maintain a strict zero-tolerance policy regarding fiscal mismanagement.</p>
+                <p><strong>Anti-Money Laundering (AML):</strong> UAI implements rigorous "Know Your Customer" (KYC) protocols for all significant investment transfers.</p>
+                <a href="#" class="btn btn-outline" style="margin-top: 25px; width: 100%; text-align: center;">View Ethical Charter</a>
             </div>
-            <div class="finance-card">
-                <h3>Contribution Guidelines</h3>
-                <p>Monthly contributions are mandatory for all active members. These funds power our administrative operations and initial project seed funding.</p>
-                <ul>
-                    <li>Standard Member: $50/month</li>
-                    <li>Corporate Member: $200/month</li>
-                </ul>
+
+            <div class="finance-card reveal" style="transition-delay: 0.1s;">
+                <h3 style="color: var(--primary-green); margin-bottom: 20px;">Member Contributions</h3>
+                <p style="margin-bottom: 20px;">Strategic contributions are the lifeblood of our operational stability, enabling us to maintain institutional independence.</p>
+                <div style="background: var(--bg-light); padding: 20px; border-radius: 15px;">
+                    <ul style="display: flex; flex-direction: column; gap: 10px;">
+                        <li style="display: flex; justify-content: space-between;"><span>Individual Tier</span> <strong>$50/mo</strong></li>
+                        <li style="display: flex; justify-content: space-between;"><span>Premium Tier</span> <strong>$120/mo</strong></li>
+                        <li style="display: flex; justify-content: space-between;"><span>Corporate Partner</span> <strong>$500/mo</strong></li>
+                    </ul>
+                </div>
+                <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.7;">Contributions are tax-deductible in participating jurisdictions.</p>
             </div>
-            <div class="finance-card">
-                <h3>Reserve Fund</h3>
-                <p>A minimum of 15% of all profits is allocated to the UAI Reserve Fund to ensure long-term stability and emergency project capital.</p>
+
+            <div class="finance-card reveal" style="transition-delay: 0.2s;">
+                <h3 style="color: var(--primary-green); margin-bottom: 20px;">Reserve & Stability</h3>
+                <p style="margin-bottom: 15px;">The <strong>UAI Sovereign Fund</strong> acts as a shock absorber for our projects. We reinvest 20% of all gross annual profits back into this fund.</p>
+                <div class="perspective" style="margin-top: 20px;">
+                    <div class="glass" style="padding: 20px; border-radius: 15px; border-left: 5px solid var(--primary-red);">
+                        <span style="font-size: 0.8rem; text-transform: uppercase;">Current Reserve Status</span>
+                        <h4 style="font-size: 1.5rem; margin: 5px 0;">$1.42M USD</h4>
+                        <p style="font-size: 0.75rem;">Liquidity Ratio: 4.2x</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="finance-card" style="margin-top: 40px;">
-            <h3>Annual Reports & Statements</h3>
+        <div class="finance-card reveal" style="margin-top: 60px; padding: 50px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px;">
+                <h3>Annual Reports & Audit Statements</h3>
+                <div class="btn-group">
+                    <button class="btn btn-primary btn-sm" style="padding: 8px 20px; font-size: 0.8rem;">Subscribe to Reports</button>
+                </div>
+            </div>
             <div class="report-list">
                 <div class="report-item">
-                    <span>2023 Annual Financial Statement</span>
+                    <div>
+                        <strong style="display: block;">Fiscal Year 2023 - Comprehensive Audit</strong>
+                        <span style="font-size: 0.8rem; opacity: 0.6;">Published March 2024 • 4.2 MB</span>
+                    </div>
                     <a href="#" class="download-link">Download PDF</a>
                 </div>
                 <div class="report-item">
-                    <span>Q1 2024 Transparency Report</span>
+                    <div>
+                        <strong style="display: block;">Impact Investment Transparency Report (Q1 2024)</strong>
+                        <span style="font-size: 0.8rem; opacity: 0.6;">Published April 2024 • 1.8 MB</span>
+                    </div>
                     <a href="#" class="download-link">Download PDF</a>
                 </div>
                 <div class="report-item">
-                    <span>Shareholder Profit Distribution Schedule 2023</span>
+                    <div>
+                        <strong style="display: block;">Dividend Distribution & Shareholder Equity Report</strong>
+                        <span style="font-size: 0.8rem; opacity: 0.6;">Published Jan 2024 • 2.5 MB</span>
+                    </div>
                     <a href="#" class="download-link">Download PDF</a>
                 </div>
             </div>
@@ -136,6 +164,7 @@
 
 
     <script src="js/main.js"></script>
+    <script src="js/visuals.js"></script>
     <!-- AI Chat Assistant -->
     <div id="chat-widget">
         <button id="chat-button">🤖</button>

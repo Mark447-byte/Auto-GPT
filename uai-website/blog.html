@@ -32,7 +32,7 @@
     </style>
 </head>
 <body>
-        <header>
+        <header id="main-header">
         <div class="container">
             <nav>
                 <div class="logo">U<span>AI</span></div>
@@ -64,33 +64,43 @@
         </div>
 
         <div class="blog-grid">
-            <div class="blog-card">
-                <div class="blog-img"></div>
+            <div class="blog-card reveal">
+                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
                 <div class="blog-content">
                     <span class="blog-date">June 15, 2024</span>
-                    <h3>UAI Partners with Global Tech Hub</h3>
-                    <p>New strategic partnership to accelerate technology adoption in rural agriculture.</p>
-                    <a href="#" style="color: var(--primary-red); font-weight: 600;">Read More &rarr;</a>
+                    <h3>UAI Partners with Global Silicon Hub</h3>
+                    <p>We are thrilled to announce a multi-year technical partnership to integrate blockchain and AI into our agricultural supply chains, ensuring total traceability.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600; display: inline-block; margin-top: 10px;">Read Full Release &rarr;</a>
                 </div>
             </div>
 
-            <div class="blog-card">
-                <div class="blog-img"></div>
+            <div class="blog-card reveal" style="transition-delay: 0.1s;">
+                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1500673922987-e212871fec22?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
                 <div class="blog-content">
                     <span class="blog-date">June 02, 2024</span>
-                    <h3>Successful Harvest at Project GreenField</h3>
-                    <p>Our pilot sustainable farming project achieves record yields this season.</p>
-                    <a href="#" style="color: var(--primary-red); font-weight: 600;">Read More &rarr;</a>
+                    <h3>Record Yields at Project GreenField</h3>
+                    <p>Our pilot smart-farm in the Central Region has outperformed all traditional benchmarks, achieving a 42% increase in maize production through precision data analytics.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600; display: inline-block; margin-top: 10px;">View Case Study &rarr;</a>
                 </div>
             </div>
 
-            <div class="blog-card">
-                <div class="blog-img"></div>
+            <div class="blog-card reveal" style="transition-delay: 0.2s;">
+                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
                 <div class="blog-content">
                     <span class="blog-date">May 20, 2024</span>
-                    <h3>Why African Innovation is the Future</h3>
-                    <p>An in-depth look at the emerging trends in the continent's tech and agro sectors.</p>
-                    <a href="#" style="color: var(--primary-red); font-weight: 600;">Read More &rarr;</a>
+                    <h3>Investment Trends: The African Tech Decade</h3>
+                    <p>UAI's research division releases its latest White Paper on why African venture capital is entering its most productive cycle in history.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600; display: inline-block; margin-top: 10px;">Download White Paper &rarr;</a>
+                </div>
+            </div>
+
+            <div class="blog-card reveal">
+                <div class="blog-img" style="background: url('https://images.unsplash.com/photo-1466611653911-954ff2131604?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
+                <div class="blog-content">
+                    <span class="blog-date">May 05, 2024</span>
+                    <h3>Solar Expansion in Rural Regions</h3>
+                    <p>Our Renewable Energy division has successfully deployed 50 additional micro-grids, providing clean energy to over 200 small-scale industrial processing centers.</p>
+                    <a href="#" style="color: var(--primary-red); font-weight: 600; display: inline-block; margin-top: 10px;">Read More &rarr;</a>
                 </div>
             </div>
         </div>
@@ -129,6 +139,7 @@
 
 
     <script src="js/main.js"></script>
+    <script src="js/visuals.js"></script>
     <!-- AI Chat Assistant -->
     <div id="chat-widget">
         <button id="chat-button">🤖</button>

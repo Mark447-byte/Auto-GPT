@@ -88,7 +88,7 @@
     </style>
 </head>
 <body>
-        <header>
+        <header id="main-header">
         <div class="container">
             <nav>
                 <div class="logo">U<span>AI</span></div>
@@ -128,12 +128,13 @@
         </div>
 
         <div class="projects-grid">
-            <div class="project-card" data-category="agriculture">
-                <div class="project-img">Project Image</div>
+            <!-- Project 1: Agriculture -->
+            <div class="project-card reveal" data-category="agriculture">
+                <div class="project-img" style="background: url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
                 <div class="project-info">
                     <span class="project-tag">Agriculture</span>
                     <h3>Smart Irrigation Hub</h3>
-                    <p>Automated solar-powered irrigation system for smallholder farmers.</p>
+                    <p>A solar-powered IoT network that optimizes water usage for vegetable farmers, increasing yield by 35%.</p>
                     <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
                     <div class="project-meta">
                         <span>75% Complete</span>
@@ -141,47 +142,109 @@
                     </div>
                     <div class="project-meta">
                         <span>Budget: $50,000</span>
-                        <span>Team: 5 Members</span>
+                        <span>ROI: 18% Annually</span>
                     </div>
-                    <a href="#" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">Invest Now</a>
+                    <a href="apply.html" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">Join Investment</a>
                 </div>
             </div>
 
-            <div class="project-card" data-category="technology">
-                <div class="project-img">Project Image</div>
+            <!-- Project 2: Tech -->
+            <div class="project-card reveal" data-category="technology" style="transition-delay: 0.1s;">
+                <div class="project-img" style="background: url('https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
                 <div class="project-info">
                     <span class="project-tag">Technology</span>
-                    <h3>UAI Mobile Wallet</h3>
-                    <p>Financial inclusion platform for rural agricultural communities.</p>
+                    <h3>UAI Pay - FinTech</h3>
+                    <p>A decentralized payment gateway enabling cross-border trade for African SMEs without banking fees.</p>
                     <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
                     <div class="project-meta">
                         <span>40% Complete</span>
-                        <span class="status-badge">Development</span>
+                        <span class="status-badge">Alpha Stage</span>
                     </div>
                     <div class="project-meta">
-                        <span>Budget: $120,000</span>
-                        <span>Team: 8 Members</span>
+                        <span>Budget: $250,000</span>
+                        <span>Target Users: 100k</span>
                     </div>
-                    <a href="#" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">Invest Now</a>
+                    <a href="apply.html" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">Invest Now</a>
                 </div>
             </div>
 
-            <div class="project-card" data-category="energy">
-                <div class="project-img">Project Image</div>
+            <!-- Project 3: Energy -->
+            <div class="project-card reveal" data-category="energy" style="transition-delay: 0.2s;">
+                <div class="project-img" style="background: url('https://images.unsplash.com/photo-1509391366360-fe5bb6585828?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
                 <div class="project-info">
                     <span class="project-tag">Renewable Energy</span>
-                    <h3>Village Solar Grid</h3>
-                    <p>Modular solar energy kits for off-grid residential communities.</p>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+                    <h3>CleanPower MicroGrid</h3>
+                    <p>Standardized mini-grid systems providing reliable 24/7 power to industrial zones in underserved regions.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
                     <div class="project-meta">
-                        <span>100% Complete</span>
-                        <span class="status-badge" style="background:#e8f5e9; color:#2e7d32;">Completed</span>
+                        <span>90% Complete</span>
+                        <span class="status-badge">Commissioning</span>
                     </div>
                     <div class="project-meta">
-                        <span>Budget: $85,000</span>
-                        <span>Team: 4 Members</span>
+                        <span>Budget: $1.2M</span>
+                        <span>Impact: 5k Homes</span>
                     </div>
-                    <a href="#" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">View Details</a>
+                    <a href="apply.html" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">Stake Ownership</a>
+                </div>
+            </div>
+
+            <!-- Project 4: Commerce -->
+            <div class="project-card reveal" data-category="commerce">
+                <div class="project-img" style="background: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
+                <div class="project-info">
+                    <span class="project-tag">Commerce</span>
+                    <h3>Global Trade Portal</h3>
+                    <p>Connecting African producers directly with European and Asian distributors via a blockchain-verified marketplace.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 15%;"></div></div>
+                    <div class="project-meta">
+                        <span>15% Complete</span>
+                        <span class="status-badge">Planning</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>Budget: $300,000</span>
+                        <span>Scale: International</span>
+                    </div>
+                    <a href="apply.html" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">Register Interest</a>
+                </div>
+            </div>
+
+            <!-- Project 5: Education -->
+            <div class="project-card reveal" data-category="technology" style="transition-delay: 0.1s;">
+                <div class="project-img" style="background: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
+                <div class="project-info">
+                    <span class="project-tag">Education</span>
+                    <h3>Future Leaders Academy</h3>
+                    <p>Online vocational training platform focusing on high-demand digital skills and entrepreneurship.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div>
+                    <div class="project-meta">
+                        <span>60% Complete</span>
+                        <span class="status-badge">Beta Launch</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>Budget: $100,000</span>
+                        <span>Courses: 12 Modules</span>
+                    </div>
+                    <a href="apply.html" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">Support Education</a>
+                </div>
+            </div>
+
+            <!-- Project 6: Real Estate -->
+            <div class="project-card reveal" data-category="commerce" style="transition-delay: 0.2s;">
+                <div class="project-img" style="background: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=600'); background-size: cover;"></div>
+                <div class="project-info">
+                    <span class="project-tag">Real Estate</span>
+                    <h3>UAI Innovation Park</h3>
+                    <p>A multi-functional workspace and incubator for tech startups and manufacturing labs.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 30%;"></div></div>
+                    <div class="project-meta">
+                        <span>30% Complete</span>
+                        <span class="status-badge">Construction</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>Budget: $5M</span>
+                        <span>Space: 10k Sqm</span>
+                    </div>
+                    <a href="apply.html" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">Invest in Property</a>
                 </div>
             </div>
         </div>
@@ -220,6 +283,7 @@
 
 
     <script src="js/main.js"></script>
+    <script src="js/visuals.js"></script>
     <script>
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {

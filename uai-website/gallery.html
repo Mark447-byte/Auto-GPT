@@ -72,7 +72,7 @@
     </style>
 </head>
 <body>
-        <header>
+        <header id="main-header">
         <div class="container">
             <nav>
                 <div class="logo">U<span>AI</span></div>
@@ -97,30 +97,54 @@
         </div>
     </header>
 
-    <section class="container">
-        <div class="section-title">
-            <h2>UAI in Action</h2>
-            <p>Capturing our milestones, projects, and team activities.</p>
+    <section class="container" style="padding-top: 150px;">
+        <div class="section-title reveal">
+            <h2>Institutional Milestones</h2>
+            <p>A visual record of our strategic interventions and community development projects across the continent.</p>
         </div>
 
         <div class="gallery-grid">
-            <div class="gallery-item" data-src="assets/images/g1.jpg">
-                <div class="gallery-overlay">Training Program 2023</div>
+            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800">
+                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800" alt="Solar Project">
+                <div class="gallery-overlay">
+                    <strong>CleanPower Launch</strong>
+                    <p>Commissioning of the first rural micro-grid.</p>
+                </div>
             </div>
-            <div class="gallery-item" data-src="assets/images/g2.jpg">
-                <div class="gallery-overlay">Project Site Visit</div>
+            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1530836361253-efad5d718e35?auto=format&fit=crop&q=80&w=800" style="transition-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1530836361253-efad5d718e35?auto=format&fit=crop&q=80&w=800" alt="Tech Summit">
+                <div class="gallery-overlay">
+                    <strong>Digital Africa Summit</strong>
+                    <p>UAI delegates presenting at the 2023 tech conference.</p>
+                </div>
             </div>
-            <div class="gallery-item" data-src="assets/images/g3.jpg">
-                <div class="gallery-overlay">Board of Directors Meeting</div>
+            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=800" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&q=80&w=800" alt="Smart Farming">
+                <div class="gallery-overlay">
+                    <strong>GreenField Pilot</strong>
+                    <p>Testing the automated irrigation hub in real conditions.</p>
+                </div>
             </div>
-            <div class="gallery-item" data-src="assets/images/g4.jpg">
-                <div class="gallery-overlay">Annual Innovation Summit</div>
+            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=800">
+                <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=800" alt="Board Meeting">
+                <div class="gallery-overlay">
+                    <strong>Governance Review</strong>
+                    <p>Board of Directors meeting, Q4 2023 Strategy Session.</p>
+                </div>
             </div>
-            <div class="gallery-item" data-src="assets/images/g5.jpg">
-                <div class="gallery-overlay">Agricultural Workshop</div>
+            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1540350394557-8d14678e7f91?auto=format&fit=crop&q=80&w=800" style="transition-delay: 0.1s;">
+                <img src="https://images.unsplash.com/photo-1540350394557-8d14678e7f91?auto=format&fit=crop&q=80&w=800" alt="Logistics">
+                <div class="gallery-overlay">
+                    <strong>Agro-Trade Corridor</strong>
+                    <p>Establishing the logistics hub for international export.</p>
+                </div>
             </div>
-            <div class="gallery-item" data-src="assets/images/g6.jpg">
-                <div class="gallery-overlay">Community Outreach</div>
+            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&q=80&w=800" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&q=80&w=800" alt="Coding">
+                <div class="gallery-overlay">
+                    <strong>Tech Academy</strong>
+                    <p>Students participating in our first digital skills bootcamp.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -163,6 +187,7 @@
 
 
     <script src="js/main.js"></script>
+    <script src="js/visuals.js"></script>
     <script>
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = lightbox.querySelector('img');

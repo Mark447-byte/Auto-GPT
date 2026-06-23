@@ -92,7 +92,7 @@
     </style>
 </head>
 <body>
-        <header>
+        <header id="main-header">
         <div class="container">
             <nav>
                 <div class="logo">U<span>AI</span></div>
@@ -117,27 +117,39 @@
         </div>
     </header>
 
-    <div class="about-header">
+    <div class="about-header" style="background: linear-gradient(rgba(11, 122, 62, 0.9), rgba(11, 122, 62, 0.9)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200'); background-size: cover; background-position: center;">
         <div class="container">
-            <h1>About United Agro Innovation</h1>
-            <p>Empowering Entrepreneurs, Transforming Industries</p>
+            <h1 class="reveal active">About United Agro Innovation</h1>
+            <p class="reveal active" style="transition-delay: 0.1s;">Forging the path of sustainable African industrialization since 2020.</p>
         </div>
     </div>
 
     <section class="container">
-        <div class="section-title">
-            <h2>Who We Are</h2>
-            <p>UAI is a multi-sector innovation, investment, entrepreneurship, agriculture, technology, and project development organization dedicated to African excellence and global impact.</p>
-        </div>
+        <div class="grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 80px; align-items: center;">
+            <div class="reveal">
+                <div class="section-title" style="text-align: left; margin-bottom: 30px;">
+                    <h2 style="font-size: 3rem;">Who We Are</h2>
+                </div>
+                <p style="font-size: 1.1rem; margin-bottom: 25px;">United Agro Innovation (UAI) is a sophisticated multi-sector innovation, investment, and project development engine. We operate at the intersection of traditional industry and digital transformation, focusing on sectors that provide the highest leverage for structural change in Africa.</p>
+                <p style="font-size: 1.1rem; margin-bottom: 25px;">Our model is built on the concept of "Collective Capitalization"—pooling the resources, expertise, and ambitions of African professionals and global investors to build world-class enterprises. From smart-farming clusters in the hinterlands to fintech-driven trade corridors, UAI is the catalyst for the next generation of African success stories.</p>
 
-        <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px;">
-            <div>
-                <h3>Our Vision</h3>
-                <p>To be the premier global hub for sustainable innovation and high-impact investments that redefine Africa's role in the global economy.</p>
+                <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px;">
+                    <div>
+                        <h3 style="color: var(--primary-green); margin-bottom: 15px;">Our Vision</h3>
+                        <p>To be the premier global hub for sustainable innovation and high-impact investments that redefine Africa's role in the global economy by 2030.</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary-green); margin-bottom: 15px;">Our Mission</h3>
+                        <p>To identify, de-risk, and scale innovative projects across agriculture, technology, and renewable energy through strategic leadership and transparent governance.</p>
+                    </div>
+                </div>
             </div>
-            <div>
-                <h3>Our Mission</h3>
-                <p>To identify, develop, and scale innovative projects across agriculture, technology, and commerce through collaborative investment and strategic leadership.</p>
+            <div class="reveal perspective" style="transition-delay: 0.2s;">
+                <div class="glass" style="padding: 40px; border-radius: 30px; border: 1px solid var(--primary-green);">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800" alt="UAI Team" style="border-radius: 20px; margin-bottom: 25px;">
+                    <h4 style="margin-bottom: 10px;">Investor Ready</h4>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">We maintain a rigorous institutional-grade investment framework to ensure maximum transparency and value for our stakeholders.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -160,18 +172,26 @@
 
     <section class="container">
         <div class="section-title">
-            <h2>Organization Structure</h2>
+            <h2>Institutional Leadership</h2>
+            <p>Our governance structure is designed to foster accountability and long-term strategic stability.</p>
         </div>
-        <div class="structure-list">
-            <ul>
-                <li><strong>Board of Directors</strong> - Governance & Strategy</li>
-                <li><strong>President</strong> - Executive Leadership</li>
-                <li><strong>Vice President</strong> - Operations Management</li>
-                <li><strong>Secretary General</strong> - Administration</li>
-                <li><strong>Treasurer</strong> - Financial Oversight</li>
-                <li><strong>Auditor</strong> - Compliance & Internal Audit</li>
-                <li><strong>Project Coordinator</strong> - Execution & Delivery</li>
-            </ul>
+        <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div class="glass reveal" style="padding: 30px; border-radius: 20px; text-align: center;">
+                <h4 style="color: var(--primary-green);">Board of Directors</h4>
+                <p style="font-size: 0.9rem;">Consists of seasoned veterans in finance, law, and engineering who provide the primary strategic oversight for UAI's global operations.</p>
+            </div>
+            <div class="glass reveal" style="padding: 30px; border-radius: 20px; text-align: center; transition-delay: 0.1s;">
+                <h4 style="color: var(--primary-green);">Executive Presidency</h4>
+                <p style="font-size: 0.9rem;">The President and Vice President lead the day-to-day strategic execution, ensuring that our mission is translated into measurable results.</p>
+            </div>
+            <div class="glass reveal" style="padding: 30px; border-radius: 20px; text-align: center; transition-delay: 0.2s;">
+                <h4 style="color: var(--primary-green);">Secretariat General</h4>
+                <p style="font-size: 0.9rem;">Coordinates the complex administrative and communication threads that link our global members to our local project sites.</p>
+            </div>
+            <div class="glass reveal" style="padding: 30px; border-radius: 20px; text-align: center; transition-delay: 0.3s;">
+                <h4 style="color: var(--primary-green);">Treasury & Audit</h4>
+                <p style="font-size: 0.9rem;">A dual-layer financial control system (Treasurer & Auditor) ensures every cent contributed is tracked, optimized, and reported.</p>
+            </div>
         </div>
     </section>
 
@@ -242,6 +262,7 @@
 
 
     <script src="js/main.js"></script>
+    <script src="js/visuals.js"></script>
     <!-- AI Chat Assistant -->
     <div id="chat-widget">
         <button id="chat-button">🤖</button>
